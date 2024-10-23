@@ -7,6 +7,7 @@ export class Root extends BaseElement {
     super('div', [styles.wrapper]);
 
     const header = new Header();
+    console.log(header.navItemAmount);
     this.append(header);
   }
 

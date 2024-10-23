@@ -3,7 +3,7 @@ export class BaseElement {
     this._elem = document.createElement(tag);
     this._elem.classList.add(...cssClasses);
     this.setAttributes(attributes);
-    this._elem.innerHtml = innerContent;
+    this._elem.innerHTML = innerContent;
   }
 
   append(...children) {

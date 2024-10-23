@@ -1,7 +1,43 @@
+@import '../../../styles/_mixins.scss';
+
 .header {
   width: 100%;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-  height: 10px;
+  padding: 12px 82px;
+}
+
+.logo {
+  display: flex;
+  padding: 8px 20px;
+  gap: 8.7px;
+  align-items: center;
+}
+
+.logoDivImg {
+  object-fit: cover;
+}
+
+.logoImg {
+  object-fit: cover;
+  width: 100%;
+}
+
+.logoText {
+  @include action_small;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.navItem {
+  @include action_small;
+  list-style-type: none;
+  padding: 12px 20.4px;
+  cursor: pointer;
 }

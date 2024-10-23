@@ -21,6 +21,7 @@
 
 @mixin header1 {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 32px;
   line-height: 150%;
   text-transform: uppercase;
@@ -28,6 +29,7 @@
 
 @mixin header2 {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 24px;
   line-height: 152%;
   letter-spacing: 16%;
@@ -36,6 +38,7 @@
 
 @mixin header3 {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 16px;
   line-height: 152%;
   letter-spacing: 8%;
@@ -44,6 +47,7 @@
 
 @mixin header4 {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 12px;
   line-height: 130%;
   letter-spacing: 5%;
@@ -58,6 +62,7 @@
 
 @mixin action_large {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 24px;
   line-height: 152%;
   letter-spacing: 16%;
@@ -66,9 +71,10 @@
 
 @mixin action_small {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 12px;
   line-height: 130%;
-  letter-spacing: 5%;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
@@ -81,6 +87,7 @@
 
 @mixin slider {
   font-family: Montserrat-SemiBold, sans-serif;
+  font-weight: 600;
   font-size: 80px;
   text-transform: uppercase;
 }
