@@ -1,18 +1,12 @@
 @import '../../../styles/_mixins.scss';
 @import '../../../styles/_variables.scss';
 
-a {
-  color: inherit;
-  text-decoration: none;
-  // cursor: default;
-}
-
 .header {
   width: 100%;
   background-color: $static-white;
   display: flex;
   justify-content: space-between;
-  padding: 12px 82px;
+  padding: 10.8px 82px;
 }
 
 .logo {

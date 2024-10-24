@@ -1,1 +1,11 @@
 @import url(../../node_modules/modern-normalize/modern-normalize.css);
+
+button {
+  background-color: transparent;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,79 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.sliderSection {
+  background: url(../../../img/bg-snow.png);
+  background-position: center;
+  background-size: cover;
+  background-color: $primary;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.gratitude {
+  @include caption;
+  color: $static-white;
+  margin-bottom: 20px;
+
+  p {
+    @include header2;
+    margin-top: 12px;
+  }
+}
+
+.sliderContainer {
+}
+
+.sliderItems {
+  padding-left: 82px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.sliderImgs {
+  width: 200px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.sliderText {
+  @include slider;
+  color: $static-white;
+}
+
+.sliderControls {
+  display: flex;
+  gap: 20px;
+  padding: 0 82px;
+  justify-content: flex-end;
+}
+
+.sliderButton {
+  border: 1px $static-white solid;
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  &:hover:not(:disabled) {
+    background-color: $static-white;
+
+    svg path {
+      stroke: $primary;
+    }
+  }
+
+  &:disabled path,
+  &:disabled {
+    user-select: none;
+    opacity: 0.4;
+    cursor: default;
+  }
+}
