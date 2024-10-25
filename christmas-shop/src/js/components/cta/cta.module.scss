@@ -1,0 +1,64 @@
+@use '../../../styles/mixins.scss';
+@use '../../../styles/variables.scss';
+
+.ctaSection {
+  padding: 60px 0;
+  background: url(../../../img/bg-snow.png), url('../../../img/bg-forest.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.ctaContent {
+  padding: 120px 507px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  color: variables.$static-white;
+  text-align: center;
+}
+
+.question {
+  @include mixins.header2;
+}
+
+.ctaLink {
+  @include mixins.buttonLink;
+}
+
+.timerText {
+  @include mixins.caption;
+}
+
+.timerBlock {
+  margin-top: -12px;
+  padding: 9px 12px;
+  display: flex;
+  background-color: variables.$static-white-40;
+  border-radius: 20px;
+}
+
+.timerItem {
+  position: relative;
+  width: 80px;
+}
+
+.timerItem:not(:last-child)::after {
+  content: '';
+  width: 1px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  right: 0;
+  background-color: variables.$static-white-40;
+}
+
+.timerNumber {
+  @include mixins.header2;
+  margin-bottom: -2px;
+}
+
+.timerWord {
+  @include mixins.header4;
+}

@@ -19,3 +19,11 @@ h6 {
   margin: 0;
   font-weight: inherit;
 }
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin: 0;
+}

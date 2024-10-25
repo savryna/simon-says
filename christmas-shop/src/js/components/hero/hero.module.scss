@@ -1,5 +1,5 @@
-@import '../../../styles/_variables.scss';
-@import '../../../styles/_mixins.scss';
+@use '../../../styles/variables.scss';
+@use '../../../styles/mixins.scss';
 
 p {
   margin: 0;
@@ -21,26 +21,15 @@ p {
 
 .congratulationTop,
 .congratulationBottom {
-  @include caption;
-  color: $static-white;
+  @include mixins.caption;
+  color: variables.$static-white;
 }
 
 .congratulationMiddle {
-  @include header1;
-  color: $static-white;
+  @include mixins.header1;
+  color: variables.$static-white;
 }
 
 .heroLink {
-  @include action_small;
-  padding: 20px 32px;
-  color: $static-white;
-  background-color: $dark;
-  border-radius: 20px;
-  transition: all 0.3s ease-in;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
-
-  &:hover {
-    background-color: $static-white;
-    color: $dark;
-  }
+  @include mixins.buttonLink;
 }
