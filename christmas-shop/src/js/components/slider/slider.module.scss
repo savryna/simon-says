@@ -2,11 +2,7 @@
 @import '../../../styles/mixins.scss';
 
 .sliderSection {
-  background: url(../../../img/bg-snow.png);
-  background-position: center;
-  background-size: cover;
-  background-color: $primary;
-  text-align: center;
+  @include snowBack;
   padding: 60px 0;
 }
 

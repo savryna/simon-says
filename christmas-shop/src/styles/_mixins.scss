@@ -46,7 +46,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 152%;
-  letter-spacing: 8%;
+  letter-spacing: 1.28px;
   text-transform: uppercase;
 }
 
@@ -55,7 +55,7 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 130%;
-  letter-spacing: 5%;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
@@ -95,4 +95,11 @@
   font-weight: 600;
   font-size: 80px;
   text-transform: uppercase;
+}
+
+@mixin snowBack {
+  background: url(../../../img/bg-snow.png);
+  background-position: center;
+  background-size: cover;
+  text-align: center;
 }

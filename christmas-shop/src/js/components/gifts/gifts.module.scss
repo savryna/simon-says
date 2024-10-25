@@ -1,0 +1,72 @@
+@use '../../../styles/_mixins.scss' as *;
+@use '../../../styles/_variables.scss' as *;
+
+.giftsSection {
+  @include snowBack;
+  padding: 60px 82px;
+  text-align: center;
+  color: $static-white;
+}
+
+.giftsTitle {
+  @include caption;
+  margin-bottom: 15px;
+}
+
+.giftsDescription {
+  @include header2;
+  margin-bottom: 16px;
+}
+
+.cards {
+  display: flex;
+  gap: 12px;
+}
+
+.card {
+  border-radius: 20px;
+  background-color: $content-bg;
+  display: flex;
+  flex-direction: column;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  &:hover .cardHeader {
+    color: $primary;
+  }
+}
+
+.cardImg {
+  width: 100%;
+  object-fit: contain;
+}
+
+.cardText {
+  flex: 1;
+  background-color: $static-white;
+  border-radius: 20px;
+  padding: 19px 20px;
+  text-align: left;
+}
+
+.cardTag {
+  @include header4;
+  margin-bottom: 10px;
+}
+
+.forWork {
+  color: $tag-purple;
+}
+
+.forHealt {
+  color: $tag-green;
+}
+
+.forHarmony {
+  color: $tag-pink;
+}
+
+.cardHeader {
+  @include header3;
+  color: $dark;
+  transition: all 0.3s ease;
+}
