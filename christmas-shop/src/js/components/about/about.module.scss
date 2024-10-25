@@ -12,6 +12,7 @@
   background-color: $static-white;
   display: flex;
   border-radius: 20px;
+  text-align: left;
 }
 
 .aboutDescriptionBlock {
@@ -21,6 +22,7 @@
 
 .descriptionTitle {
   @include caption;
+  color: $primary;
   margin-bottom: 20px;
 }
 
