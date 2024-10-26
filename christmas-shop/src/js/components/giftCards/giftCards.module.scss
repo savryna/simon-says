@@ -1,0 +1,50 @@
+@use '../../../styles/mixins.scss';
+@use '../../../styles/variables.scss';
+
+.giftCardsSection {
+  padding: 60px 82px;
+  text-align: center;
+}
+
+.title {
+  @include mixins.header1;
+
+  color: variables.$static-white;
+  margin-bottom: 20px;
+}
+
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.tabItem {
+  padding: 11px 15px;
+  border-radius: 12px;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  transition: all 0.3s ease;
+
+  .tabButton {
+    @include mixins.action_small;
+
+    color: variables.$static-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  }
+
+  &:hover,
+  &.active {
+    background-color: variables.$static-white-40;
+  }
+}
+
+.tabItem.active {
+  cursor: default;
+  & .tabButton {
+    cursor: default;
+  }
+}
