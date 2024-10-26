@@ -15,7 +15,7 @@ export class Header extends BaseElement {
     const logo = new BaseElement('a', [styles.logo], { href: './index.html' });
     const logoDivImg = new BaseElement('div', [styles.logoDivImg]);
     const logoImg = new BaseElement('img', [styles.logoImg], {
-      src: 'src/img/svg/snowflake.svg',
+      src: '/img/svg/snowflake.svg',
     });
     const logoText = new BaseElement(
       'span',

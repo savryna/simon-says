@@ -1,23 +1,23 @@
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
+@use '../../../styles/variables.scss';
+@use '../../../styles/mixins.scss';
 
 .sliderSection {
-  @include snowBack;
+  @include mixins.snowBack;
+
   padding: 60px 0;
 }
 
 .gratitude {
-  @include caption;
-  color: $static-white;
+  @include mixins.caption;
+
+  color: variables.$static-white;
   margin-bottom: 20px;
 
   p {
-    @include header2;
+    @include mixins.header2;
+
     margin-top: 12px;
   }
-}
-
-.sliderContainer {
 }
 
 .sliderItems {
@@ -37,8 +37,9 @@
 }
 
 .sliderText {
-  @include slider;
-  color: $static-white;
+  @include mixins.slider;
+
+  color: variables.$static-white;
 }
 
 .sliderControls {
@@ -49,7 +50,7 @@
 }
 
 .sliderButton {
-  border: 1px $static-white solid;
+  border: 1px variables.$static-white solid;
   border-radius: 20px;
   padding: 15px;
   display: flex;
@@ -58,18 +59,18 @@
   transition: all 0.3s ease;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
 
-  &:hover:not(:disabled) {
-    background-color: $static-white;
-
-    svg path {
-      stroke: $primary;
-    }
-  }
-
   &:disabled path,
   &:disabled {
     user-select: none;
     opacity: 0.4;
     cursor: default;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: variables.$static-white;
+
+    svg path {
+      stroke: variables.$primary;
+    }
   }
 }

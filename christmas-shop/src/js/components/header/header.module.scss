@@ -1,9 +1,9 @@
-@import '../../../styles/_mixins.scss';
-@import '../../../styles/_variables.scss';
+@use '../../../styles/_mixins.scss';
+@use '../../../styles/_variables.scss';
 
 .header {
   width: 100%;
-  background-color: $static-white;
+  background-color: variables.$static-white;
   display: flex;
   justify-content: space-between;
   padding: 10.8px 82px;
@@ -17,12 +17,18 @@
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
   transition: all 0.3s ease;
 
+  .logoText {
+    @include mixins.action_small;
+
+    transition: all 0.3s ease;
+  }
+
   &:hover {
-    background-color: $primary10;
+    background-color: variables.$primary10;
     border-radius: 12px;
 
     .logoText {
-      color: $primary;
+      color: variables.$primary;
     }
   }
 }
@@ -36,11 +42,6 @@
   width: 100%;
 }
 
-.logoText {
-  @include action_small;
-  transition: all 0.3s ease;
-}
-
 .navList {
   height: 100%;
   margin: 0;
@@ -51,7 +52,8 @@
 }
 
 .navItem {
-  @include action_small;
+  @include mixins.action_small;
+
   list-style-type: none;
 
   .navLink {
@@ -61,10 +63,10 @@
   }
 
   &:hover {
-    color: $primary;
+    color: variables.$primary;
 
     .navLink {
-      background-color: $primary10;
+      background-color: variables.$primary10;
       border-radius: 12px;
     }
   }

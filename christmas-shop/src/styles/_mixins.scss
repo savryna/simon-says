@@ -1,28 +1,27 @@
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
 @use './variables.scss';
 
 @font-face {
   font-family: Montserrat-Regular;
   font-weight: normal;
   font-style: normal;
-  src: url('fonts/montserrat/Montserrat-Regular.woff'),
-    url('fonts/montserrat/Montserrat-Regular.ttf');
+  src: url('/fonts/montserrat/Montserrat-Regular.ttf'),
+    url('/fonts/montserrat/Montserrat-Regular.woff');
 }
 
 @font-face {
   font-family: Montserrat-SemiBold;
   font-weight: 600;
   font-style: normal;
-  src: url('fonts/montserrat/Montserrat-SemiBold.woff'),
-    url('fonts/montserrat/Montserrat-SemiBold.ttf');
+  src: url('/fonts/montserrat/Montserrat-SemiBold.ttf'),
+    url('/fonts/montserrat/Montserrat-SemiBold.woff');
 }
 
 @font-face {
   font-family: Allura;
   font-weight: normal;
   font-style: normal;
-  src: url('fonts/allura/Allura-Regular.woff'),
-    url('fonts/allura/Allura-Regular.ttf');
+  src: url('/fonts/allura/Allura-Regular.ttf'),
+    url('/fonts/allura/Allura-Regular.woff');
 }
 
 @mixin header1 {
@@ -100,7 +99,7 @@
 }
 
 @mixin snowBack {
-  background: url(../../../img/bg-snow.png);
+  background: url('../../../img/bg-snow.png');
   background-position: center;
   background-size: cover;
   text-align: center;
@@ -108,6 +107,7 @@
 
 @mixin buttonLink {
   @include action_small;
+
   padding: 20px 32px;
   color: variables.$static-white;
   background-color: variables.$dark;

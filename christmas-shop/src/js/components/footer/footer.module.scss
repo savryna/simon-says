@@ -26,6 +26,18 @@
   flex: 1;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
 
+  .contactsTextLink {
+    @include mixins.action_large;
+
+    transition: all 0.3s ease;
+  }
+
+  .contactDescription {
+    @include mixins.header3;
+
+    transition: all 0.3s ease;
+  }
+
   &:hover {
     .contactsTextLink,
     .contactDescription {
@@ -37,16 +49,6 @@
 .contactImgs {
   width: 80px;
   aspect-ratio: 1 / 1;
-}
-
-.contactsTextLink {
-  @include mixins.action_large;
-  transition: all 0.3s ease;
-}
-
-.contactDescription {
-  @include mixins.header3;
-  transition: all 0.3s ease;
 }
 
 .socialNetworksBlock {
@@ -64,6 +66,7 @@
   justify-content: center;
   align-items: center;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
   svg path {
     transition: all 0.3s ease;
   }
@@ -75,12 +78,14 @@
 
 .copyrightElement {
   @include mixins.paragraph;
+
   color: variables.$dark;
   margin-bottom: 12px;
 }
 
 .rssLink {
   @include mixins.caption;
+
   color: variables.$dark;
   transition: all 0.3s ease;
 

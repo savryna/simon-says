@@ -4,8 +4,9 @@
 p {
   margin: 0;
 }
+
 .hero {
-  background: url('./img/bg-ball.png');
+  background: url('../../../img/bg-ball.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,11 +23,13 @@ p {
 .congratulationTop,
 .congratulationBottom {
   @include mixins.caption;
+
   color: variables.$static-white;
 }
 
 .congratulationMiddle {
   @include mixins.header1;
+
   color: variables.$static-white;
 }
 

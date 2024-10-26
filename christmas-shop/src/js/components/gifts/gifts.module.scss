@@ -3,6 +3,7 @@
 
 .giftsSection {
   @include snowBack;
+
   padding: 60px 82px;
   text-align: center;
   color: $static-white;
@@ -10,11 +11,13 @@
 
 .giftsTitle {
   @include caption;
+
   margin-bottom: 15px;
 }
 
 .giftsDescription {
   @include header2;
+
   margin-bottom: 16px;
 }
 
@@ -29,6 +32,13 @@
   display: flex;
   flex-direction: column;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  .cardHeader {
+    @include header3;
+
+    color: $dark;
+    transition: all 0.3s ease;
+  }
 
   &:hover .cardHeader {
     color: $primary;
@@ -50,6 +60,7 @@
 
 .cardTag {
   @include header4;
+
   margin-bottom: 10px;
 }
 
@@ -63,10 +74,4 @@
 
 .forHarmony {
   color: $tag-pink;
-}
-
-.cardHeader {
-  @include header3;
-  color: $dark;
-  transition: all 0.3s ease;
 }

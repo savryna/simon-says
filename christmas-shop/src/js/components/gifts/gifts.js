@@ -4,25 +4,25 @@ import styles from './gifts.module.scss';
 export class GiftsElement extends BaseElement {
   cardsContent = [
     {
-      src: 'src/img/gift-for-work.png',
+      src: '/img/gift-for-work.png',
       tag: 'for work',
       title: 'Console.log Guru',
       tagStyle: 'forWork',
     },
     {
-      src: 'src/img/gift-for-health.png',
+      src: '/img/gift-for-health.png',
       tag: 'for health',
       title: 'Hydration Bot',
       tagStyle: 'forHealt',
     },
     {
-      src: 'src/img/gift-for-work.png',
+      src: '/img/gift-for-work.png',
       tag: 'for work',
       title: 'Merge Master',
       tagStyle: 'forWork',
     },
     {
-      src: 'src/img/gift-for-harmony.png',
+      src: '/img/gift-for-harmony.png',
       tag: 'for harmony',
       title: 'Spontaneous Coding Philosopher',
       tagStyle: 'forHarmony',
