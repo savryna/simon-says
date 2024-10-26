@@ -1,6 +1,7 @@
 import { BaseElement } from '../../common/baseElem.js';
 import { Header } from '../header/header.js';
 import { Main } from '../main/main.js';
+import { Footer } from '../footer/footer.js';
 import styles from './wrapper.module.scss';
 
 export class Root extends BaseElement {
@@ -8,8 +9,10 @@ export class Root extends BaseElement {
     super('div', [styles.wrapper]);
 
     const header = new Header();
-    const hero = new Main();
-    this.append(header, hero);
+    const main = new Main();
+    const footer = new Footer();
+
+    this.append(header, main, footer);
   }
 
   init() {

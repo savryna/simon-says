@@ -1,0 +1,90 @@
+@use '../../../styles/mixins.scss';
+@use '../../../styles/variables.scss';
+
+.footer {
+  background-color: variables.$static-white;
+  padding: 60px 82px;
+  text-align: center;
+}
+
+.contactLinksContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 58px;
+}
+
+.linkCard {
+  background-color: variables.$content-bg;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 20px;
+  flex: 1;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  &:hover {
+    .contactsTextLink,
+    .contactDescription {
+      color: variables.$primary;
+    }
+  }
+}
+
+.contactImgs {
+  width: 80px;
+  aspect-ratio: 1 / 1;
+}
+
+.contactsTextLink {
+  @include mixins.action_large;
+  transition: all 0.3s ease;
+}
+
+.contactDescription {
+  @include mixins.header3;
+  transition: all 0.3s ease;
+}
+
+.socialNetworksBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  svg path {
+    transition: all 0.3s ease;
+  }
+
+  &:hover svg path {
+    stroke: variables.$primary;
+  }
+}
+
+.copyrightElement {
+  @include mixins.paragraph;
+  color: variables.$dark;
+  margin-bottom: 12px;
+}
+
+.rssLink {
+  @include mixins.caption;
+  color: variables.$dark;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: variables.$primary;
+  }
+}
