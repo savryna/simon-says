@@ -59,7 +59,7 @@ export class GiftCards extends BaseElement {
     super('section', [styles.giftCardsSection]);
 
     const title = new BaseElement(
-      'h1',
+      'p',
       [styles.title],
       {},
       'Achieve health,<br> harmony, and<br> inner strength',

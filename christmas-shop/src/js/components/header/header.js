@@ -17,12 +17,7 @@ export class Header extends BaseElement {
     const logoImg = new BaseElement('img', [styles.logoImg], {
       src: '/img/svg/snowflake.svg',
     });
-    const logoText = new BaseElement(
-      'span',
-      [styles.logoText],
-      {},
-      'the gifts',
-    );
+    const logoText = new BaseElement('h1', [styles.logoText], {}, 'the gifts');
     const navigation = new BaseElement('nav', []);
     const navList = new BaseElement('ul', [styles.navList]);
     const navLink = Array.from(
