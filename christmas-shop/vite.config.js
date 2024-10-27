@@ -1,17 +1,17 @@
-// /* global __dirname */
-// import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
-// export default defineConfig({
-//   base: '',
-//   build: {
-//   },
-// });
-
-export default {
+export default defineConfig({
   base: './',
   publicDir: 'public',
   build: {
     minify: false,
     sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        nested: resolve(__dirname, 'gifts.html'),
+      },
+    },
   },
-};
+});
