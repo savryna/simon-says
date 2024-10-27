@@ -13,9 +13,10 @@ export class GiftCards extends BaseElement {
         'Shortcut Cheater',
         'Merge Master',
       ],
+      styleTag: 'forWork',
     },
     health: {
-      srcImg: '/img/g/gift-for-health.png',
+      srcImg: '/img/gift-for-health.png',
       tag: 'for health',
       innerText: [
         'Step Master',
@@ -23,10 +24,11 @@ export class GiftCards extends BaseElement {
         'Snack Resister',
         'Hydration Bot',
       ],
+      styleTag: 'forHealth',
     },
 
     harmony: {
-      srcImg: '/img/g/gift-for-harmony.png',
+      srcImg: '/img/gift-for-harmony.png',
       tag: 'for harmony',
       innerText: [
         'Bug Acceptance Guru',
@@ -34,6 +36,7 @@ export class GiftCards extends BaseElement {
         'Joy Charger',
         'Spontaneous Coding Philosopher',
       ],
+      styleTag: 'forHarmony',
     },
   };
 
@@ -68,16 +71,74 @@ export class GiftCards extends BaseElement {
       (_, idx) =>
         new BaseElement('button', [styles.tabButton], {}, this.tabInner[idx]),
     );
-    const tabItem = Array.from(
-      { length: this.tabInner.length },
-      (_, idx) => new BaseElement('li', [styles.tabItem], {}),
-    );
-    tabItem[0].addClasses([styles.active]);
+    const tabItem = Array.from({ length: this.tabInner.length }, (tab, idx) => {
+      if (idx === 0) {
+        return new BaseElement('li', [styles.tabItem, styles.active], {});
+      }
+      return new BaseElement('li', [styles.tabItem], {});
+    });
 
+    const cardsContainer = new BaseElement('div', [styles.cardsContainer]);
+    const cardsArticle = Array.from(
+      { length: this.layoutCardQueue.length },
+      (_, idx) => new BaseElement('article', [styles.cardArticle]),
+    );
+    const cardsImg = Array.from(
+      { length: this.layoutCardQueue.length },
+      (_, idx) =>
+        new BaseElement('img', [styles.cardImg], {
+          src: this.layoutCardQueue[idx].srcImg,
+          alt: 'gift image',
+        }),
+    );
+    const cardsDescription = Array.from(
+      { length: this.layoutCardQueue.length },
+      (_, idx) => new BaseElement('div', [styles.cardDescription]),
+    );
+    const cardsTag = Array.from(
+      { length: this.layoutCardQueue.length },
+      (_, idx) =>
+        new BaseElement(
+          'p',
+          [styles.cardTag, styles[this.layoutCardQueue[idx].styleTag]],
+          {},
+          this.layoutCardQueue[idx].tag,
+        ),
+    );
+    const cardsInnerText = Array.from(
+      { length: this.layoutCardQueue.length },
+      (_, idx) =>
+        new BaseElement(
+          'p',
+          [styles.cardInnerText],
+          {},
+          this.addCardInnerText(idx),
+        ),
+    );
+
+    cardsArticle.forEach((article, idx) =>
+      article.append(cardsImg[idx], cardsDescription[idx]),
+    );
+    // cardsArticle.append(...cardsImg);
+    cardsContainer.append(...cardsArticle);
+    cardsDescription.forEach((description, idx) =>
+      description.append(cardsTag[idx], cardsInnerText[idx]),
+    );
     tabItem.forEach((li, idx) => li.append(tabsButton[idx]));
     tabsContainer.append(...tabItem);
-    this.append(title, tabsContainer);
+    this.append(title, tabsContainer, cardsContainer);
+  }
 
-    console.log(this.cardsContent.work);
+  addCardInnerText(idx) {
+    const objIndexFromTag = {};
+    const arrInnerText = [];
+    this.layoutCardQueue.forEach((queueCardContent) => {
+      objIndexFromTag[queueCardContent.tag] =
+        objIndexFromTag[queueCardContent.tag] + 1 || 0;
+      arrInnerText.push(
+        queueCardContent.innerText[objIndexFromTag[queueCardContent.tag]],
+      );
+    });
+    return arrInnerText[idx];
   }
 }
