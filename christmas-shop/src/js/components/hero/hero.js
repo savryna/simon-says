@@ -5,6 +5,8 @@ export class Hero extends BaseElement {
   constructor() {
     super('section', [styles.hero]);
 
+    const containerContent = new BaseElement('div', [styles.containerContent]);
+
     const congratulationTop = new BaseElement(
       'p',
       [styles.congratulationTop],
@@ -33,11 +35,12 @@ export class Hero extends BaseElement {
       'Explore Magical Gifts',
     );
 
-    this.append(
+    containerContent.append(
       congratulationTop,
       congratulationMiddle,
       toGiftsPage,
       congratulationBottom,
     );
+    this.append(containerContent);
   }
 }

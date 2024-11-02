@@ -134,3 +134,45 @@
     }
   }
 }
+
+.burgerButton {
+  padding: 7px 10px;
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  hr {
+    width: 20px;
+    background-color: variables.$dark;
+    transform: rotate(0);
+    transition: all 0.3s ease;
+  }
+
+  &.active {
+    hr {
+      position: absolute;
+    }
+    hr:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    hr:nth-child(2) {
+      transform: rotate(-45deg);
+    }
+  }
+
+  @media screen and (width <= 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      background-color: variables.$primary10;
+      border-radius: 12px;
+    }
+  }
+}

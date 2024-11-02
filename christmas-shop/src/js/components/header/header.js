@@ -32,6 +32,7 @@ export class Header extends BaseElement {
         ),
     );
     this.navLink = navLink;
+
     const navItem = Array.from(
       { length: this.navLinks.length },
       (_, idx) => new BaseElement('li', [styles.navItem]),
@@ -39,11 +40,15 @@ export class Header extends BaseElement {
 
     navItem.forEach((item, idx) => item.append(navLink[idx]));
 
+    const burgerButton = new BaseElement('div', [styles.burgerButton]);
+    const hr = Array.from({ length: 2 }, () => new BaseElement('hr'));
+
+    burgerButton.append(...hr);
     logoDivImg.append(logoImg);
     logo.append(logoDivImg, logoText);
     navList.append(...navItem);
     navigation.append(navList);
-    this.append(logo, navigation);
+    this.append(logo, navigation, burgerButton);
   }
 
   activeClassNav() {
