@@ -21,12 +21,16 @@
 }
 
 .sliderItems {
-  padding-left: 82px;
+  padding-left: 5.69vw;
   display: flex;
   gap: 20px;
   align-items: center;
   overflow: hidden;
   margin-bottom: 20px;
+
+  @media screen and (width <= 768px) {
+    padding-left: 1.04vw;
+  }
 }
 
 .sliderImgs {
