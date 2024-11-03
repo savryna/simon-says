@@ -7,6 +7,18 @@
   padding: 60px 82px;
   text-align: center;
   color: $static-white;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 60px 5.69vw;
+    }
+  }
+
+  @media screen and (width <= 768px) {
+    & {
+      padding: 60px 7.8125vw;
+    }
+  }
 }
 
 .giftsTitle {
@@ -23,10 +35,14 @@
 
 .cards {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
 }
 
 .card {
+  max-width: 310px;
+  min-height: 342px;
   border-radius: 20px;
   background-color: $content-bg;
   display: flex;
