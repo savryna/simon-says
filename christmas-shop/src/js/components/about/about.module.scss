@@ -4,7 +4,11 @@
 .aboutSection {
   @include mixins.snowBack;
 
-  padding: 60px 5.69vw;
+  padding: 60px 82px;
+
+  @media screen and (width <= 1440px) {
+    padding: 60px 5.69vw;
+  }
 
   @media screen and (width <= 768px) {
     & {
@@ -32,9 +36,13 @@
 
 .aboutDescriptionBlock {
   // padding: 160px 152px 160px 60px;
-  padding: 11.1vw 0;
+  padding: 160px 0;
   flex-basis: 50%;
   max-width: 426px;
+
+  @media screen and (width <= 1440px) {
+    padding: 11.1vw 0;
+  }
 
   @media screen and (width <= 768px) {
     padding: 106px 0;

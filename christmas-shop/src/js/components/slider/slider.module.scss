@@ -21,13 +21,16 @@
 }
 
 .sliderItems {
-  padding-left: 5.69vw;
+  padding-left: 82px;
   display: flex;
   gap: 20px;
   align-items: center;
   overflow: hidden;
   margin-bottom: 20px;
 
+  @media screen and (width <= 1440px) {
+    padding-left: 5.69vw;
+  }
   @media screen and (width <= 768px) {
     padding-left: 1.04vw;
   }
