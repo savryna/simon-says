@@ -8,11 +8,14 @@
   // background-repeat: no-repeat;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom 0;
+  display: flex;
+  justify-content: center;
 }
 
 .ctaContent {
-  padding: 120px 507px;
+  padding: 120px 0;
+  max-width: 426px;
   display: flex;
   flex-direction: column;
   gap: 20px;
