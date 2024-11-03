@@ -5,12 +5,30 @@
   background-color: variables.$static-white;
   padding: 60px 82px;
   text-align: center;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 60px 5.69vw;
+    }
+  }
+
+  @media screen and (width <= 768px) {
+    & {
+      padding: 60px 1.04vw;
+    }
+  }
 }
 
 .contactLinksContainer {
   display: flex;
   gap: 12px;
   margin-bottom: 58px;
+
+  @media screen and (width <= 1160px) {
+    & {
+      flex-direction: column;
+    }
+  }
 }
 
 .linkCard {
