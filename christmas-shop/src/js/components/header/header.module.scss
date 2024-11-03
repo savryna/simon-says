@@ -6,7 +6,13 @@
   background-color: variables.$static-white;
   display: flex;
   justify-content: space-between;
-  padding: 10.8px 5.69vw;
+  padding: 10.8px 82px;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 10.8px 5.69vw;
+    }
+  }
 
   @media screen and (width <= 768px) {
     & {
@@ -84,7 +90,7 @@
 
   .navLink {
     cursor: url('../../../img/svg/pointinghand.svg'), pointer;
-    padding: 12px 20.4px;
+    // padding: 12px 20.4px;
     // transition: all 0.3s ease;
 
     &.active span {
@@ -95,7 +101,7 @@
     }
 
     span {
-      padding: 12px 20px;
+      padding: 12px 20.4px;
       transition: all 0.3s ease-in-out;
     }
   }
