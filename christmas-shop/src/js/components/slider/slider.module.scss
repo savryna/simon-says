@@ -55,6 +55,17 @@
   gap: 20px;
   padding: 0 82px;
   justify-content: flex-end;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 0 5.69vw;
+    }
+  }
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 0 8px;
+    }
+  }
 }
 
 .sliderButton {
