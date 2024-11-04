@@ -11,13 +11,14 @@
   @include mixins.caption;
 
   color: variables.$static-white;
+  margin-bottom: 13px;
+}
+
+.gratitudeBottom {
+  @include mixins.header2;
+  color: variables.$static-white;
+  margin-left: 4px;
   margin-bottom: 20px;
-
-  span {
-    @include mixins.header2;
-
-    margin-top: 12px;
-  }
 }
 
 .sliderItems {

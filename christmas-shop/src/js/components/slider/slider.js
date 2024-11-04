@@ -23,7 +23,13 @@ export class Slider extends BaseElement {
       'h2',
       [styles.gratitude],
       {},
-      'Become Happier!<br><span>in the new 2025</span>',
+      'Become Happier!',
+    );
+    const gratitudeBottom = new BaseElement(
+      'div',
+      [styles.gratitudeBottom],
+      {},
+      '<span>in the new 2025</span>',
     );
 
     const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
@@ -102,7 +108,7 @@ export class Slider extends BaseElement {
     sliderControls.append(arrowLeft, arrowRight);
     sliderItems.append(...sliderArray);
     sliderContainer.append(sliderItems, sliderControls);
-    this.append(gratitude, sliderContainer);
+    this.append(gratitude, gratitudeBottom, sliderContainer);
   }
 }
 
