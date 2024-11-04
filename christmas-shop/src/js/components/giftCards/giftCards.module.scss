@@ -4,11 +4,32 @@
 .giftCardsSection {
   padding: 60px 82px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 60px 1.69vw;
+    }
+  }
+  @media screen and (width <= 768px) {
+    & {
+      padding: 60px 7.8125vw;
+    }
+  }
+
+  @media screen and (width <= 565px) {
+    & {
+      padding: 60px 2.1vw;
+    }
+  }
 }
 
 .title {
   @include mixins.header1;
 
+  max-width: 430px;
   color: variables.$static-white;
   margin-bottom: 20px;
 }
@@ -19,6 +40,12 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 20px;
+
+  @media screen and (width <= 400px) {
+    & {
+      gap: 0;
+    }
+  }
 }
 
 .tabItem {
@@ -26,6 +53,12 @@
   border-radius: 12px;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
   transition: all 0.3s ease;
+
+  @media screen and (width <= 500px) {
+    & {
+      padding: 11px 3px;
+    }
+  }
 
   .tabButton {
     @include mixins.action_small;
@@ -54,6 +87,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
 }
 
 .cardArticle {
