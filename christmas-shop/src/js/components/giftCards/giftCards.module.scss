@@ -16,12 +16,13 @@
   @media screen and (width <= 768px) {
     & {
       padding: 60px 7.8125vw;
+      margin-bottom: 2px;
     }
   }
 
   @media screen and (width <= 565px) {
     & {
-      padding: 60px 2.1vw;
+      padding: 60px 13px;
     }
   }
 }
@@ -56,7 +57,7 @@
 
   @media screen and (width <= 500px) {
     & {
-      padding: 11px 3px;
+      padding: 11px 2px;
     }
   }
 
