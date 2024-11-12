@@ -135,7 +135,7 @@
 }
 
 .burgerButton {
-  padding: 7px 10px;
+  padding: 13.3px 10px 7px;
   display: none;
   position: relative;
   width: 40px;
@@ -167,7 +167,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 7.8px;
 
     &:hover {
       background-color: variables.$primary10;
