@@ -34,15 +34,6 @@
 
     transition: all 0.3s ease;
   }
-
-  &:hover {
-    background-color: variables.$primary10;
-    border-radius: 12px;
-
-    .logoText {
-      color: variables.$primary;
-    }
-  }
 }
 
 .logoDivImg {
