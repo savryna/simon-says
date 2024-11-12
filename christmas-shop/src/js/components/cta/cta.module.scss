@@ -14,7 +14,7 @@
 }
 
 .ctaContent {
-  padding: 120px 0;
+  padding: 121px 0;
   max-width: 426px;
   display: flex;
   flex-direction: column;
@@ -62,8 +62,6 @@
 
 .timerNumber {
   @include mixins.header2;
-
-  margin-bottom: -2px;
 }
 
 .timerWord {

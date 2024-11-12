@@ -4,13 +4,13 @@
 .giftsSection {
   @include snowBack;
 
-  padding: 60px 82px;
+  padding: 58px 82px;
   text-align: center;
   color: $static-white;
 
   @media screen and (width <= 1440px) {
     & {
-      padding: 60px 5.69vw;
+      padding: 58px 5.69vw;
     }
   }
 
