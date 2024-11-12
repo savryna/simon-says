@@ -1,7 +1,6 @@
 export class BaseElement {
   constructor(tag, cssClasses = [], attributes = {}, innerContent = '') {
     this._elem = document.createElement(tag);
-    // this._elem.classList.add(...cssClasses);
     this.addClasses(cssClasses);
     this.setAttributes(attributes);
     this._elem.innerHTML = innerContent;
@@ -9,6 +8,11 @@ export class BaseElement {
 
   addClasses(cssClasses) {
     this._elem.classList.add(...cssClasses);
+  }
+
+  removeAttributes(attributes) {
+    attributes.forEach((atr) => this._elem.removeAttribute(atr));
+    // this._elem.removeAttribute(...attributes);
   }
 
   append(...children) {

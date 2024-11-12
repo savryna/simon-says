@@ -53,5 +53,6 @@ export class Header extends BaseElement {
 
   activeClassNav() {
     this.navLink[0].addClasses([styles.active]);
+    this.navLink[0].removeAttributes(['href']);
   }
 }
