@@ -41,9 +41,9 @@ export class Header extends BaseElement {
     navItem.forEach((item, idx) => item.append(navLink[idx]));
 
     const burgerButton = new BaseElement('div', [styles.burgerButton]);
-    const hr = Array.from({ length: 2 }, () => new BaseElement('hr'));
+    // const hr = Array.from({ length: 2 }, () => new BaseElement('hr'));
 
-    burgerButton.append(...hr);
+    // burgerButton.append(...hr);
     logoDivImg.append(logoImg);
     logo.append(logoDivImg, logoText);
     navList.append(...navItem);

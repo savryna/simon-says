@@ -135,29 +135,43 @@
 }
 
 .burgerButton {
-  padding: 13.3px 10px 7px;
   display: none;
   position: relative;
   width: 40px;
   height: 40px;
   transition: all 0.3s ease;
+  position: relative;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
 
-  hr {
+  &::after {
+    content: '';
     width: 20px;
+    height: 1px;
     background-color: variables.$dark;
     transform: rotate(0);
     transition: all 0.3s ease;
+    position: absolute;
+    top: 26px;
+  }
+  &::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background-color: variables.$dark;
+    transform: rotate(0);
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 19px;
   }
 
-  &.active {
-    hr {
-      position: absolute;
-    }
-    hr:nth-child(1) {
+  // &.active {
+  &:active {
+    &::before {
+      top: auto;
       transform: rotate(45deg);
     }
-    hr:nth-child(2) {
+    &::after {
+      top: auto;
       transform: rotate(-45deg);
     }
   }
@@ -167,11 +181,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 7.8px;
-
-    &:hover {
-      background-color: variables.$primary10;
-      border-radius: 12px;
-    }
   }
 }

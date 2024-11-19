@@ -14,7 +14,7 @@
 
   @media screen and (width <= 768px) {
     & {
-      padding: 58px 1.04vw;
+      padding: 58px 8px;
     }
   }
   // @media screen and (width <= 500px) {
@@ -27,7 +27,7 @@
 .contactLinksContainer {
   display: flex;
   gap: 12px;
-  margin-bottom: 58px;
+  margin-bottom: 59px;
 
   @media screen and (width <= 1160px) {
     & {
