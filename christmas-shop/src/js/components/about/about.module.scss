@@ -91,7 +91,12 @@
 .aboutImg {
   flex-basis: 50%;
   border-radius: 20px;
-  background: url('../../../img/santa.png');
+  // background: url('../../../img/santa.png');
+  background: image-set(
+    url('../../../img/santa.avif') type('image/avif'),
+    url('../../../img/santa.webp') type('image/webp'),
+    url('../../../img/santa.png') type('image/png')
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

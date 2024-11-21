@@ -2,6 +2,13 @@
 @use '../../../styles/variables.scss';
 
 .giftCardsSection {
+  background: image-set(
+    url('../../../img/bg-garland.avif') type('image/avif'),
+    url('../../../img/bg-garland.webp') type('image/webp'),
+    url('../../../img/bg-garland.png') type('image/png')
+  );
+  background-repeat: no-repeat;
+  background-size: contain;
   padding: 60px 82px;
   text-align: center;
   display: flex;

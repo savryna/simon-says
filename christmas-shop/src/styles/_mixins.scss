@@ -99,10 +99,22 @@
 }
 
 @mixin snowBack {
-  background: url('../../../img/bg-snow.png');
+  background-image: image-set(
+    url('../../../img/bg-snow.avif') type('image/avif'),
+    url('../../../img/bg-snow.webp') type('image/webp'),
+    url('../../../img/bg-snow.png') type('image/png')
+  );
   background-position: center;
   background-size: cover;
   text-align: center;
+
+  @media screen and (width <= 768px) {
+    background-image: image-set(
+      url('../../../img/bg-snow-1400.avif') type('image/avif'),
+      url('../../../img/bg-snow-1400.webp') type('image/webp'),
+      url('../../../img/bg-snow-1400.png') type('image/png')
+    );
+  }
 }
 
 @mixin buttonLink {

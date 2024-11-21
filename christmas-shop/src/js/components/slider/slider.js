@@ -8,6 +8,12 @@ export class Slider extends BaseElement {
     './img/christmas-tree-ball.png',
     './img/fairytale-house.png',
   ];
+  sliderSrcPath = [
+    './img/snowman',
+    './img/christmas-trees',
+    './img/christmas-tree-ball',
+    './img/fairytale-house',
+  ];
   sliderText = ['live', 'create', 'love', 'dream'];
   sliderAlts = [
     'snowman image',
@@ -15,6 +21,7 @@ export class Slider extends BaseElement {
     'christmas tree ball image',
     'fairytale house image',
   ];
+  imgExtension = ['avif', 'webp', 'png'];
 
   constructor() {
     super('section', [styles.sliderSection]);
@@ -41,7 +48,29 @@ export class Slider extends BaseElement {
         new BaseElement('img', [styles.sliderImgs], {
           src: this.sliderSrc[idx],
           alt: this.sliderAlts[idx],
+          loading: 'lazy',
         }),
+    );
+
+    const pictureElems = Array.from(
+      { length: this.sliderSrc.length },
+      () => new BaseElement('picture'),
+    );
+    const sourceElems = Array.from(
+      { length: this.sliderSrc.length },
+      (_, idxSources) =>
+        Array.from(
+          { length: this.imgExtension.length },
+          (_, idxSource) =>
+            new BaseElement('source', [], {
+              type: `image/${this.imgExtension[idxSource]}`,
+              srcset: `${this.sliderSrcPath[idxSources]}.${this.imgExtension[idxSource]}`,
+            }),
+        ),
+    );
+    console.log(sourceElems);
+    pictureElems.forEach((picture, idxPicture) =>
+      picture.append(...sourceElems[idxPicture], imgElems[idxPicture]),
     );
 
     const textElems = Array.from(
@@ -56,7 +85,7 @@ export class Slider extends BaseElement {
       },
       (_, idx) => {
         if (idx % 2) {
-          return imgElems[(idx - 1) / 2];
+          return pictureElems[(idx - 1) / 2];
         }
         return textElems[idx / 2];
       },

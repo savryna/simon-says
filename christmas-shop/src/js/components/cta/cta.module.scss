@@ -3,7 +3,17 @@
 
 .ctaSection {
   padding: 60px 0;
-  background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
+  // background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
+  background: image-set(
+      url('../../../img/bg-snow.avif') type('image/avif'),
+      url('../../../img/bg-snow.webp') type('image/webp'),
+      url('../../../img/bg-snow.png') type('image/png')
+    ),
+    image-set(
+      url('../../../img/bg-forest.avif') type('image/avif'),
+      url('../../../img/bg-forest.webp') type('image/webp'),
+      url('../../../img/bg-forest.png') type('image/png')
+    );
   // background-size: contain;
   // background-repeat: no-repeat;
   background-size: cover;

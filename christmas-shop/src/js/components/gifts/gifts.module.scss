@@ -2,8 +2,7 @@
 @use '../../../styles/_variables.scss' as *;
 
 .giftsSection {
-  @include snowBack;
-
+  background-position: top, center;
   padding: 58px 82px;
   text-align: center;
   color: $static-white;
@@ -44,6 +43,13 @@
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
+
+  @media screen and (width < 1440px) {
+    & {
+      max-width: 632px;
+      margin: 0 auto;
+    }
+  }
 }
 
 .card {
