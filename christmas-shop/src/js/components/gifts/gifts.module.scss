@@ -5,25 +5,19 @@
   @include snowBack;
 
   background-position: top, center;
-  padding: 56px 5.69vw 60px;
+  padding: 56px 0 60px;
   text-align: center;
   color: $static-white;
 
-  // @media screen and (width < 1440px) {
-  //   & {
-  //     padding: 60px 5.69vw;
-  //   }
-  // }
-
   @media screen and (width <= 768px) {
     & {
-      padding: 60px 7.8125vw;
+      padding: 56px 0 60px;
     }
   }
 
   @media screen and (width <= 400px) {
     & {
-      padding: 60px 4.7125vw;
+      padding: 58px 0 60px;
     }
   }
 }
@@ -42,7 +36,6 @@
 
 .cards {
   display: flex;
-  flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
 
@@ -52,9 +45,14 @@
       margin: 0 auto;
     }
   }
+
+  @media screen and (width <= 1300px) {
+    flex-wrap: wrap;
+  }
 }
 
 .card {
+  min-width: 310px;
   max-width: 310px;
   height: 342px;
   border-radius: 20px;

@@ -14,14 +14,14 @@
 
   @media screen and (width <= 768px) {
     & {
-      padding: 58px 8px;
+      padding: 61px 8px;
     }
   }
-  // @media screen and (width <= 500px) {
-  //   & {
-  //     padding: 59px 1.04vw;
-  //   }
-  // }
+  @media screen and (width <= 500px) {
+    & {
+      padding: 59px 8px;
+    }
+  }
 }
 
 .contactLinksContainer {
@@ -82,6 +82,10 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 14px;
+
+  @media screen and (width <= 500px) {
+    margin-bottom: 13px;
+  }
 }
 
 .socialLink {
