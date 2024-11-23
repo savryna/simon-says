@@ -5,13 +5,13 @@
   @include snowBack;
 
   background-position: top, center;
-  padding: 56px 0 60px;
+  padding: 59.1px 0 59px;
   text-align: center;
   color: $static-white;
 
   @media screen and (width <= 768px) {
     & {
-      padding: 56px 0 60px;
+      padding: 59.1px 0 59px;
     }
   }
 
@@ -32,6 +32,10 @@
   @include header2;
 
   margin-bottom: 18px;
+
+  @media screen and (width <= 500px) {
+    margin-bottom: 20px;
+  }
 }
 
 .cards {
