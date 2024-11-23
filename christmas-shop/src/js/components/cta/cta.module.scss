@@ -2,7 +2,7 @@
 @use '../../../styles/variables.scss';
 
 .ctaSection {
-  padding: 60px 0;
+  padding: 60px 7px;
   // background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
   background: image-set(
       url('../../../img/bg-snow.avif') type('image/avif'),
