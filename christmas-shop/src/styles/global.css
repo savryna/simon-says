@@ -1,7 +1,11 @@
 @import url('../../node_modules/modern-normalize/modern-normalize.css');
 
 * {
-  /* outline: 5px solid black; */
+  -webkit-tap-highlight-color: transparent;
+
+  @media (hover: hover) {
+    outline: transparent;
+  }
 }
 
 html {

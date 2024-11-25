@@ -42,10 +42,11 @@
   display: flex;
   gap: 12px;
   justify-content: center;
+  padding: 0 8px;
 
   @media screen and (width < 1440px) {
     & {
-      max-width: 632px;
+      max-width: 648px;
       margin: 0 auto;
     }
   }
