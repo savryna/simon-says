@@ -4,9 +4,7 @@
 .giftsSection {
   @include snowBack;
 
-  background-position: top, center;
   padding: 59.1px 0 59px;
-  text-align: center;
   color: $static-white;
 
   @media screen and (width <= 768px) {
