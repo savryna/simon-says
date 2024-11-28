@@ -4,8 +4,8 @@ import styles from './header.module.scss';
 export class Header extends BaseElement {
   navLinks = [
     { gifts: 'gifts.html' },
-    { about: './home#about' },
-    { best: './home#gifts' },
+    { about: './home.html#about' },
+    { best: './home.html#gifts' },
     { contacts: '#contacts' },
   ];
 
