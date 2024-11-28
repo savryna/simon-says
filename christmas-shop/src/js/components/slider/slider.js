@@ -147,12 +147,10 @@ export class Slider extends BaseElement {
     this.countVariables();
     this.arrowLeft.addEventListener('click', () => this.moveLeft());
     this.arrowRight.addEventListener('click', () => this.moveRight());
-    // this.moveRight();
-    // this.moveLeft();
   }
 
   countWidthPadding() {
-    const minVW = 768;
+    const minVW = 380;
     const maxVW = 1440;
     const minPadding = 8;
     const maxPaddimg = 82;
@@ -166,7 +164,7 @@ export class Slider extends BaseElement {
   countVariables() {
     this.widthSlider = 1993 + this.countWidthPadding();
     this.currentVW = Math.min(window.innerWidth, 1440);
-    this.minVw = 768;
+    this.minVw = 380;
     this.visible = this.currentVW - this.countWidthPadding();
     this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
     this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
@@ -191,22 +189,16 @@ export class Slider extends BaseElement {
   }
 
   moveRight() {
-    // this.arrowRight.addEventListener('click', () => {
     this.moveIndex += 1;
     this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
 
-    // console.log(this.moveIndex);
     this.checkDisabledButton();
-    // });
   }
 
   moveLeft() {
-    // this.arrowLeft.addEventListener('click', () => {
-    // console.log(this.moveIndex);
     this.moveIndex -= 1;
     this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
     this.checkDisabledButton();
-    // });
   }
 
   checkDisabledButton() {
