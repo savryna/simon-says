@@ -149,16 +149,29 @@ export class Slider extends BaseElement {
     this.arrowRight.addEventListener('click', () => this.moveRight());
   }
 
+  // clamp (min, interpolation, max)
+
+  // clamp(8px, 8px + 74*(100vw - 768px) / 672, 82px);
   countWidthPadding() {
     const minVW = 380;
+    const middleVW = 768;
     const maxVW = 1440;
     const minPadding = 8;
-    const maxPaddimg = 82;
+    const maxPadding = 82;
     const currentVW = Math.min(window.innerWidth, 1440);
     const linearInterpolation =
       minPadding +
-      ((maxPaddimg - minPadding) * (currentVW - minVW)) / (maxVW - minVW);
-    return linearInterpolation;
+      ((maxPadding - minPadding) * (currentVW - middleVW)) / (maxVW - middleVW);
+    let resPadding = Math.max(
+      minPadding,
+      Math.min(linearInterpolation, maxPadding),
+    );
+    // if (minPadding < linearInterpolation) {
+    //   resPadding = minPadding
+    // } else if ()
+
+    console.log(minPadding, resPadding, maxPadding);
+    return resPadding;
   }
 
   countVariables() {
