@@ -21,9 +21,9 @@ export class Card extends BaseElement {
   imgExtension = ['avif', 'webp', 'png'];
 
   constructor() {
-    // super('article', [styles.card]);
-    super();
-    console.log(this.createCard());
+    super('article', [styles.card]);
+
+    this.createCard();
   }
 
   getRandomData() {
@@ -40,9 +40,9 @@ export class Card extends BaseElement {
 
   getDataForCard() {
     const currentCard = this.getRandomData();
-    const cardsCategory = this.findSrcToCard(currentCard);
-    const src = cardsCategory.src;
-    const category = cardsCategory.category;
+    const cardsSrcFromCategory = this.findSrcToCard(currentCard);
+    const src = cardsSrcFromCategory.src;
+    const category = cardsSrcFromCategory.category;
     const cssStyle = `${category.split(' ')[0].toLowerCase()}${category.split(' ')[1][0].toUpperCase() + category.split(' ')[1].slice(1)}`;
     const cardHeader = currentCard.name;
 
@@ -56,7 +56,7 @@ export class Card extends BaseElement {
 
   createCard() {
     const data = this.getDataForCard();
-    this.card = new BaseElement('article', [styles.card]);
+    // this.card = new BaseElement('article', [styles.card]);
     this.cardPicture = new BaseElement('picture', [styles.cardPicture]);
     this.cardImg = new BaseElement('img', [styles.cardImg], {
       src: `${data.src}.png`,
@@ -89,12 +89,12 @@ export class Card extends BaseElement {
     this.cardText.append(this.cardTag, this.cardHeader);
     this.cardPicture.append(...this.cardSources, this.cardImg);
     this.append(this.cardPicture, this.cardText);
-    return this.card;
+    return this;
   }
 
   createArrCard(cardAmount) {
     const arrCard = [];
-    // const cardAmount = number;
+    // const cardAmount = 4;
 
     for (let i = 0; i < cardAmount; i++) {
       arrCard.push(this.createCard());
