@@ -1,5 +1,9 @@
-export class BaseElement {
+import { Helper } from './helper';
+
+export class BaseElement extends Helper {
   constructor(tag, cssClasses = [], attributes = {}, innerContent = '') {
+    super();
+
     this._elem = document.createElement(tag);
     this.addClasses(cssClasses);
     this.setAttributes(attributes);

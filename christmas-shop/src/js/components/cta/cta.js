@@ -62,6 +62,7 @@ export class CTASection extends BaseElement {
           Object.keys(this.timer[idx]),
         ),
     );
+    this.timerWord = timerWord;
 
     timerItems.forEach((li, idx) =>
       li.append(this.timerNumber[idx], timerWord[idx]),
