@@ -210,6 +210,7 @@ export class Slider extends BaseElement {
   moveLeft() {
     this.moveIndex -= 1;
     this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+
     this.checkDisabledButton();
   }
 
