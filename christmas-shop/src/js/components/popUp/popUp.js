@@ -52,14 +52,19 @@ export class PopUp extends BaseElement {
 
   baubleAnimation(baseElem) {
     const newspaperSpinning = [
-      // { transform: ' scale(0)' },
-      // { transform: ' scale(1)' },
-      { transform: ' rotate(45deg) translateX(10px)' },
-      { transform: ' rotate(-45deg) translateX(-10px)' },
+      { transform: ' rotate(-10deg)' },
+      { transform: ' rotate(10deg)' },
+      { transform: ' rotate(-10deg) ' },
+      { transform: ' rotate(3deg) ' },
+      { transform: ' rotate(-3deg) ' },
+      { transform: ' rotate(3deg) ' },
+      { transform: ' rotate(-1deg) ' },
+      { transform: ' rotate(1deg) ' },
+      { transform: ' rotate(-1deg) ' },
     ];
 
     const newspaperTiming = {
-      duration: 1000,
+      duration: 2000,
       iterations: 1,
     };
     baseElem._elem.animate(newspaperSpinning, newspaperTiming);
@@ -241,6 +246,7 @@ export class PopUp extends BaseElement {
     this.modalPicture.append(...this.modalSources, this.modalImg);
     this.append(this.modalPicture, this.giftDescription, this.buttonClose);
     this.closeFromButton(this.buttonClose);
+    this.addEventListener('click', () => this.baubleAnimation(this.modalImg));
   }
 
   innerSnowflake(data) {
