@@ -37,16 +37,61 @@ export class PopUp extends BaseElement {
     this.addEventListener('keydown', (event) => this.closeKey(event));
   }
 
+  openAnimation() {
+    const newspaperSpinning = [
+      { transform: ' scale(0)' },
+      { transform: ' scale(1)' },
+    ];
+
+    const newspaperTiming = {
+      duration: 300,
+      iterations: 1,
+    };
+    this._elem.animate(newspaperSpinning, newspaperTiming);
+  }
+
+  baubleAnimation(baseElem) {
+    const newspaperSpinning = [
+      // { transform: ' scale(0)' },
+      // { transform: ' scale(1)' },
+      { transform: ' rotate(45deg) translateX(10px)' },
+      { transform: ' rotate(-45deg) translateX(-10px)' },
+    ];
+
+    const newspaperTiming = {
+      duration: 1000,
+      iterations: 1,
+    };
+    baseElem._elem.animate(newspaperSpinning, newspaperTiming);
+  }
+
+  closeAnimation() {
+    const newspaperSpinning = [
+      { transform: 'scale(1)' },
+      { transform: 'scale(0)' },
+    ];
+
+    const newspaperTiming = {
+      duration: 300,
+      iterations: 1,
+    };
+    return this._elem.animate(newspaperSpinning, newspaperTiming);
+  }
+
   showDialog() {
     this.appendTo(document.body);
+    this.openAnimation();
     document.body.classList.add(styles.noScroll);
     this._elem.showModal();
   }
 
   closeDialog() {
-    this._elem.close();
-    this.setInnerHTML('');
-    document.body.classList.remove(styles.noScroll);
+    const anim = this.closeAnimation();
+    anim.onfinish = (event) => {
+      this._elem.close();
+      this.setInnerHTML('');
+      document.body.classList.remove(styles.noScroll);
+    };
   }
 
   closeFromButton(btn) {
@@ -68,8 +113,14 @@ export class PopUp extends BaseElement {
       event.clientY < modalRect.top ||
       event.clientY > modalRect.bottom
     ) {
-      this.closeDialog();
-      this.setInnerHTML('');
+      // () => setInterval(this.closeDialog(), 1000);
+      const anim = this.closeAnimation();
+      anim.onfinish = (event) => {
+        this._elem.close();
+        this.setInnerHTML('');
+        document.body.classList.remove(styles.noScroll);
+      };
+      // this.setInnerHTML('');
     }
   }
 
