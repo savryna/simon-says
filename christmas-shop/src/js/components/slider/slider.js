@@ -168,23 +168,32 @@ export class Slider extends BaseElement {
 
   countVariables() {
     this.widthSlider = 1993 + this.countWidthPadding();
+    console.log(this.countWidthPadding());
     this.maxContentWidth = 1440;
     // this.windowWidth = window.innerWidth - this.getScrollbarWidth();
-    // this.currentVW = Math.min(window.innerWidth, this.maxContentWidth);
+    this.currentVW = Math.min(window.innerWidth, this.maxContentWidth);
     // this.currentVW = Math.min(this.windowWidth, this.maxContentWidth);
     // this.currentVW = window.clientWidth;
-    this.currentVW = window.innerWidth;
+    // this.currentVW = window.innerWidth;
 
     this.clickLargeScreen = 3;
     this.clickSmallScreen = 6;
     this.brakePointOfClick = 768;
+    // this.visible = Math.max(
+    //   this.currentVW - this.countWidthPadding() - this.getScrollbarWidth(),
+    //   this.currentVW - this.countWidthPadding(),
+    // );
     this.visible =
-      this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
+      window.clientWidth > this.maxContentWidth
+        ? this.currentVW - this.countWidthPadding()
+        : this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
+    this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
     this.numberOfClick =
       this.currentVW > this.brakePointOfClick
         ? this.clickLargeScreen
         : this.clickSmallScreen;
     this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
+    console.log(this.widthMove);
     return [
       this.widthSlider,
       this.currentVW,
