@@ -52,15 +52,15 @@ export class PopUp extends BaseElement {
 
   baubleAnimation(baseElem) {
     const newspaperSpinning = [
-      { transform: ' rotate(-10deg)' },
-      { transform: ' rotate(10deg)' },
-      { transform: ' rotate(-10deg) ' },
-      { transform: ' rotate(3deg) ' },
-      { transform: ' rotate(-3deg) ' },
-      { transform: ' rotate(3deg) ' },
-      { transform: ' rotate(-1deg) ' },
-      { transform: ' rotate(1deg) ' },
-      { transform: ' rotate(-1deg) ' },
+      { transform: ' rotate(-10deg)', transformOrigin: 'top' },
+      { transform: ' rotate(10deg)', transformOrigin: 'top' },
+      { transform: ' rotate(-10deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(3deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(-3deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(3deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(-1deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(1deg) ', transformOrigin: 'top' },
+      { transform: ' rotate(-1deg) ', transformOrigin: 'top' },
     ];
 
     const newspaperTiming = {
