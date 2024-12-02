@@ -14,8 +14,12 @@ export class BaseElement extends Helper {
     this._elem.classList.add(...cssClasses);
   }
 
-  innerHTML(innerContent) {
+  setInnerHTML(innerContent) {
     this._elem.innerHTML = innerContent;
+  }
+
+  getInnerHTML() {
+    return this._elem.innerHTML;
   }
 
   removeAttributes(attributes) {
@@ -45,6 +49,10 @@ export class BaseElement extends Helper {
     Object.entries(atrs).forEach(([key, val]) =>
       this._elem.setAttribute(key, val),
     );
+  }
+
+  getAttribute(atr) {
+    return this._elem.getAttribute(atr);
   }
 
   remove() {

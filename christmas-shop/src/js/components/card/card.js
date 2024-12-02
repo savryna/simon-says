@@ -32,9 +32,9 @@ export class Card extends BaseElement {
   //   return randomCard;
   // }
 
-  findSrcToCard(cardFromRandom) {
+  findSrcToCard(cardFromData) {
     return this.cardsContent.find(
-      (card) => card.category === cardFromRandom.category,
+      (card) => card.category === cardFromData.category,
     );
   }
 
@@ -61,7 +61,8 @@ export class Card extends BaseElement {
   createCard(dataForCard) {
     // const data = this.getDataForCard();
     const data = this.getDataForCard(dataForCard);
-
+    this.data = data;
+    // console.log(data.forEach((e) => console.log(e.description)));
     // this.card = new BaseElement('article', [styles.card]);
     this.cardPicture = new BaseElement('picture', [styles.cardPicture]);
     this.cardImg = new BaseElement('img', [styles.cardImg], {
@@ -92,6 +93,7 @@ export class Card extends BaseElement {
       data.cardHeader,
     );
     this.cardDescription = data.cardDescription;
+    this.category = data.category;
 
     this.cardText.append(this.cardTag, this.cardHeader);
     this.cardPicture.append(...this.cardSources, this.cardImg);

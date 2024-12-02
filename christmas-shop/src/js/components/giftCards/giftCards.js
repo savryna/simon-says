@@ -2,6 +2,7 @@ import { BaseElement } from '../../common/baseElem.js';
 import styles from './giftCards.module.scss';
 import { Card } from '../card/card.js';
 import data from '../../data/gifts.json';
+import { PopUp } from '../popUp/popUp.js';
 
 export class GiftCards extends BaseElement {
   tabInner = ['All', 'for work', 'for health', 'for harmony'];
@@ -42,20 +43,20 @@ export class GiftCards extends BaseElement {
     },
   };
 
-  layoutCardQueue = [
-    this.cardsContent.work,
-    this.cardsContent.health,
-    this.cardsContent.work,
-    this.cardsContent.work,
-    this.cardsContent.health,
-    this.cardsContent.harmony,
-    this.cardsContent.health,
-    this.cardsContent.harmony,
-    this.cardsContent.health,
-    this.cardsContent.work,
-    this.cardsContent.harmony,
-    this.cardsContent.harmony,
-  ];
+  // layoutCardQueue = [
+  //   this.cardsContent.work,
+  //   this.cardsContent.health,
+  //   this.cardsContent.work,
+  //   this.cardsContent.work,
+  //   this.cardsContent.health,
+  //   this.cardsContent.harmony,
+  //   this.cardsContent.health,
+  //   this.cardsContent.harmony,
+  //   this.cardsContent.health,
+  //   this.cardsContent.work,
+  //   this.cardsContent.harmony,
+  //   this.cardsContent.harmony,
+  // ];
 
   constructor() {
     super('section', [styles.giftCardsSection]);
@@ -80,26 +81,42 @@ export class GiftCards extends BaseElement {
       return new BaseElement('li', [styles.tabItem], {});
     });
 
-    const cardsContainer = new BaseElement('div', [styles.cardsContainer]);
+    this.cardsContainer = new BaseElement('div', [styles.cardsContainer]);
 
-    // const giftCardAmound = data.length;
-    cardsContainer.append(...this.createArrCard());
+    this.cardsArray = this.createArrCard();
+    this.cardsContainer.append(...this.cardsArray);
 
     this.tabItem.forEach((li, idx) => li.append(this.tabsButton[idx]));
-    const [allTab, workTab, healthTab, harmonyTab] = this.tabItem;
     tabsContainer.append(...this.tabItem);
-    this.append(title, tabsContainer, cardsContainer);
+    this.append(title, tabsContainer, this.cardsContainer);
 
     this.tabItem.forEach((tab) =>
       tab.addEventListener('click', (event) => {
         this.checkActiveTab(event.currentTarget);
-        cardsContainer.removeChildren();
-        cardsContainer.append(...this.filterGiftCards(event.currentTarget));
+        this.cardsContainer.removeChildren();
+        this.cardsArray = this.filterGiftCards(event.currentTarget);
+        this.cardsContainer.append(...this.cardsArray);
 
-        if (event.currentTarget === allTab._elem) {
-          console.log('gi');
-          cardsContainer.append(...this.createArrCard());
-        }
+        this.cardsArray.forEach((card) =>
+          card.addEventListener('click', () => {
+            // this.dataCard = this.getDataFromCard(card);
+            // popUp.getDataFromCard(this.dataCard);
+            // popUp.createPopUp(this.dataCard);
+            popUp.createPopUp(card);
+          }),
+        );
+      }),
+    );
+
+    const popUp = new PopUp();
+    this.dataCard = null;
+    this.cardsArray.forEach((card) =>
+      card.addEventListener('click', () => {
+        // this.dataCard = this.getDataFromCard(card);
+        // popUp.createPopUp(this.dataCard);
+        popUp.createPopUp(card);
+
+        // popUp.setData(this.dataCard);
       }),
     );
   }
@@ -118,17 +135,24 @@ export class GiftCards extends BaseElement {
   }
 
   filterGiftCards(filterButton) {
+    if (filterButton.innerText.toLowerCase() === 'all') {
+      return this.createArrCard();
+    }
     const filterCards = this.createArrCard().filter(
       (card) =>
         card.cardTag.getInnerText().toLowerCase() ===
         filterButton.innerText.toLowerCase(),
     );
-    console.log(filterCards);
+
     return filterCards;
   }
 
   checkActiveTab(button) {
     this.tabItem.forEach((tab) => tab.controlClass(styles.active, false));
     button.classList.add(styles.active);
+  }
+
+  getDataFromCard(card) {
+    return card;
   }
 }
