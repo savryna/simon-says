@@ -95,6 +95,7 @@ export class GiftCards extends BaseElement {
         this.checkActiveTab(event.currentTarget);
         this.cardsContainer.removeChildren();
         this.cardsArray = this.filterGiftCards(event.currentTarget);
+        this.tabAnimation(this.cardsContainer);
         this.cardsContainer.append(...this.cardsArray);
 
         this.cardsArray.forEach((card) =>
@@ -119,6 +120,26 @@ export class GiftCards extends BaseElement {
         // popUp.setData(this.dataCard);
       }),
     );
+  }
+
+  tabAnimation(baseElement) {
+    const newspaperSpinning = [
+      // { opacity: '0' },
+      // { opacity: '0' },
+      // { opacity: '1' },
+      { opacity: '0.2' },
+      { opacity: '1' },
+      // { opacity: '0.5' },
+
+      // { transform: 'rotate(0)' },
+      // { transform: 'rotate(360deg)' },
+    ];
+
+    const newspaperTiming = {
+      duration: 1000,
+      iterations: 1,
+    };
+    baseElement._elem.animate(newspaperSpinning, newspaperTiming);
   }
 
   createArrCard() {
