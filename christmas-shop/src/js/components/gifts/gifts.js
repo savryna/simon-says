@@ -2,6 +2,7 @@ import { BaseElement } from '../../common/baseElem.js';
 import styles from './gifts.module.scss';
 import data from '../../data/gifts.json';
 import { Card } from '../card/card.js';
+import { PopUp } from '../popUp/popUp.js';
 
 export class GiftsElement extends BaseElement {
   constructor() {
@@ -20,12 +21,24 @@ export class GiftsElement extends BaseElement {
       'especially for you',
     );
 
-    const cardsContainer = new BaseElement('div', [styles.cards]);
+    this.cardsContainer = new BaseElement('div', [styles.cards]);
 
     // const giftCardAmound = 4;
-    cardsContainer.append(...this.createArrCard());
+    this.cardsArray = this.createArrCard();
+    this.cardsContainer.append(...this.cardsArray);
 
-    this.append(giftsTitle, giftsDescription, cardsContainer);
+    const popUp = new PopUp();
+    this.cardsArray.forEach((card) =>
+      card.addEventListener('click', () => {
+        // this.dataCard = this.getDataFromCard(card);
+        // popUp.createPopUp(this.dataCard);
+        popUp.createPopUp(card);
+
+        // popUp.setData(this.dataCard);
+      }),
+    );
+
+    this.append(giftsTitle, giftsDescription, this.cardsContainer);
     // this.data = data;
     // this.getRandomData();
     // this.createArrCard();
