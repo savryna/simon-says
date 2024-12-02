@@ -26,8 +26,8 @@ export class PopUp extends BaseElement {
   ];
 
   snowflakePoint = {
-    active: './img/svg/snowflake-active.svg',
-    notActive: './img/svg/snowflake.svg',
+    active: './img/svg/snowflake.svg',
+    notActive: './img/svg/snowflake-not-active.svg',
   };
 
   maxPoint = 5;
@@ -98,7 +98,7 @@ export class PopUp extends BaseElement {
     const currentJSONCard = this.findInJSON(data);
     this.showDialog();
     // console.log(data);
-    console.log(currentJSONCard);
+    // console.log(currentJSONCard);
     // console.log(this.findSrcToModal(data).cssStyle);
     // console.log(data.cardImg.getAttribute('src'));
     this.modalPicture = new BaseElement('picture', [styles.modalPicture]);
@@ -169,6 +169,13 @@ export class PopUp extends BaseElement {
           Object.values(currentJSONCard.superpowers)[idxPoint],
         ),
     );
+    this.superpowersSnowflakeBlock = Array.from(
+      {
+        length: Object.keys(currentJSONCard.superpowers).length,
+      },
+      (_, idxPoint) =>
+        new BaseElement('div', [styles.superpowersSnowflakeBlock]),
+    );
     // this.superpowersLeft = new BaseElement('ul', [styles.superpowersList]);
     // this.superpowersLeftItem = Array.from(
     //   {
@@ -211,26 +218,36 @@ export class PopUp extends BaseElement {
     // this.superpowersBottom.append(this.superpowersLeft, this.superpowersRight);
 
     // this.innerSnowflake(data);
-    const snowflakePoints = Array.from(
-      {
-        length: Object.keys(currentJSONCard.superpowers).length,
-      },
-      () =>
-        Array.from({ length: this.maxPoint }, () => {
-          new BaseElement('img', [styles.snowflakeImg], {
-            src: this.snowflakePoint.active,
-          });
-        }),
-    );
-    console.log(snowflakePoints);
+    // const snowflakePoints = Array.from(
+    //   {
+    //     length: Object.keys(currentJSONCard.superpowers).length,
+    //   },
+    //   () =>
+    //     Array.from({ length: this.maxPoint }, () => {
+    //       new BaseElement('img', [styles.snowflakeImg], {
+    //         src: this.snowflakePoint.active,
+    //       });
+    //     }),
+    // );
+    // console.log(snowflakePoints);
     // this.superpowersPoint.forEach((div, idx) =>
     //   div.append(this.innerSnowflake(data)[idx]),
     // );
+
+    this.superpowersPoint.forEach((div, idx) =>
+      div.append(this.superpowersSnowflakeBlock[idx]),
+    );
+
+    console.log(this.innerSnowflake(data));
+    console.log(this.superpowersSnowflakeBlock);
+    this.superpowersSnowflakeBlock.forEach((div, idx) =>
+      div.append(...this.innerSnowflake(data)[idx]),
+    );
     this.superpowersItem.forEach((item, idx) =>
       item.append(
         this.superpowersItemName[idx],
         this.superpowersPoint[idx],
-        snowflakePoints[idx],
+        // snowflakePoints[idx],
       ),
     );
     this.superpowersBottom.append(...this.superpowersItem);
@@ -240,6 +257,7 @@ export class PopUp extends BaseElement {
     this.descriptionText.append(this.tag, this.name, this.description);
     this.modalPicture.append(...this.modalSources, this.modalImg);
     this.append(this.modalPicture, this.giftDescription);
+    // this.innerSnowflake(data);
   }
 
   innerSnowflake(data) {
@@ -247,19 +265,32 @@ export class PopUp extends BaseElement {
     const pointArray = Object.values(currentJSONCard.superpowers).map(
       (points) => +points[1],
     );
-    const snowflakePoints = Array.from(
+    const snowflakePointsList = Array.from(
       {
         length: Object.keys(currentJSONCard.superpowers).length,
       },
-      () =>
-        Array.from({ length: this.maxPoint }, () => {
-          new BaseElement('img', [styles.snowflakeImg], {
-            src: this.snowflakePoint.active,
+      (_, idxSnowFlakeArray) => {
+        return Array.from({ length: this.maxPoint }, (_, idxSnowflake) => {
+          if (idxSnowflake < pointArray[idxSnowFlakeArray]) {
+            return new BaseElement('img', [styles.snowflakeImg], {
+              src: this.snowflakePoint.active,
+            });
+          }
+          return new BaseElement('img', [styles.snowflakeImg], {
+            src: this.snowflakePoint.notActive,
           });
-        }),
+          // return pointArray[idxSnowFlakeArray];
+        });
+      },
     );
-    console.log(snowflakePoints);
-    return snowflakePoints;
+
+    // const snowflakeImgPoints = Array.from({ length: this.maxPoint }, (_, idx) => {
+    //   if (idx < )
+
+    // });
+
+    // console.log(snowflakePointsList);
+    return snowflakePointsList;
     // console.log(pointArray);
   }
 }

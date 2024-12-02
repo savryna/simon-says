@@ -96,7 +96,7 @@ export class CTASection extends BaseElement {
     const timeInterval = setInterval(() => {
       const timerBlockInner = Object.values(this.countParameters());
       this.timerNumber.forEach((timerBlock, idx) =>
-        timerBlock.innerHTML(timerBlockInner[idx + 1]),
+        timerBlock.setInnerHTML(timerBlockInner[idx + 1]),
       );
     }, 1000);
     this.stopTimer(this.remainTime, timeInterval);

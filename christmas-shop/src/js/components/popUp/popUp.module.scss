@@ -91,13 +91,18 @@
 .superpowersItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .superpowersItemName {
   @include mixins.paragraph;
 
   text-transform: capitalize;
+  flex-basis: 50%;
+}
+
+.superpowersPoint {
+  flex-basis: 50%;
 }
 
 .superpowersPoint {
@@ -107,6 +112,17 @@
 }
 
 .snowflakeImg {
+  display: block;
+}
+
+.superpowersSnowflakeBlock {
+  display: flex;
+  gap: 8px;
+}
+
+.superpowersBottom {
+  display: flex;
+  flex-direction: column;
 }
 
 // .superpowersRight {
@@ -119,7 +135,4 @@
 //   flex-direction: column;
 //   justify-content: center;
 //   gap: 12px;
-// }
-
-// .superpowersPoint {
 // }
