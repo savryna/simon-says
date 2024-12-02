@@ -33,6 +33,10 @@
   object-fit: contain;
   aspect-ratio: auto;
   margin-top: -33px;
+
+  @media screen and (width <= 400px) {
+    margin-top: -20px;
+  }
 }
 
 .giftDescription {
