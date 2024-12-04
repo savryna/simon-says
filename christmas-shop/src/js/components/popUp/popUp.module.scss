@@ -78,9 +78,6 @@
   @include mixins.paragraph;
 }
 
-.superpowers {
-}
-
 .superpowersHeader {
   @include mixins.header4;
 
@@ -88,10 +85,6 @@
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-
-// .superpowersBottom {
-//   display: flex;
-// }
 
 .superpowersItem {
   display: flex;
@@ -103,23 +96,17 @@
   @include mixins.paragraph;
 
   text-transform: capitalize;
-  // flex-basis: 50%;
   width: 50%;
 }
 
 .superpowersPoint {
-  // flex-basis: 50%;
   max-width: 50%;
-}
-
-.superpowersPoint {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .snowflakeImg {
-  // display: block;
   width: 16px;
   height: 16px;
 }
@@ -133,18 +120,6 @@
   display: flex;
   flex-direction: column;
 }
-
-// .superpowersRight {
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .superpowersRightItem {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   gap: 12px;
-// }
 
 .buttonClose {
   position: absolute;

@@ -43,21 +43,6 @@ export class GiftCards extends BaseElement {
     },
   };
 
-  // layoutCardQueue = [
-  //   this.cardsContent.work,
-  //   this.cardsContent.health,
-  //   this.cardsContent.work,
-  //   this.cardsContent.work,
-  //   this.cardsContent.health,
-  //   this.cardsContent.harmony,
-  //   this.cardsContent.health,
-  //   this.cardsContent.harmony,
-  //   this.cardsContent.health,
-  //   this.cardsContent.work,
-  //   this.cardsContent.harmony,
-  //   this.cardsContent.harmony,
-  // ];
-
   constructor() {
     super('section', [styles.giftCardsSection]);
 
@@ -100,9 +85,6 @@ export class GiftCards extends BaseElement {
 
         this.cardsArray.forEach((card) =>
           card.addEventListener('click', () => {
-            // this.dataCard = this.getDataFromCard(card);
-            // popUp.getDataFromCard(this.dataCard);
-            // popUp.createPopUp(this.dataCard);
             popUp.createPopUp(card);
           }),
         );
@@ -113,27 +95,13 @@ export class GiftCards extends BaseElement {
     this.dataCard = null;
     this.cardsArray.forEach((card) =>
       card.addEventListener('click', () => {
-        // this.dataCard = this.getDataFromCard(card);
-        // popUp.createPopUp(this.dataCard);
         popUp.createPopUp(card);
-
-        // popUp.setData(this.dataCard);
       }),
     );
   }
 
   tabAnimation(baseElement) {
-    const newspaperSpinning = [
-      // { opacity: '0' },
-      // { opacity: '0' },
-      // { opacity: '1' },
-      { opacity: '0.2' },
-      { opacity: '1' },
-      // { opacity: '0.5' },
-
-      // { transform: 'rotate(0)' },
-      // { transform: 'rotate(360deg)' },
-    ];
+    const newspaperSpinning = [{ opacity: '0.2' }, { opacity: '1' }];
 
     const newspaperTiming = {
       duration: 1000,

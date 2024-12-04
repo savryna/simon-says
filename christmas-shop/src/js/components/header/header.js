@@ -44,16 +44,11 @@ export class Header extends BaseElement {
 
     const burgerButton = new BaseElement('div', [styles.burgerButton]);
     this.burgerButton = burgerButton;
-    // const hr = Array.from({ length: 2 }, () => new BaseElement('hr'));
-
-    // burgerButton.append(...hr);
     logoDivImg.append(logoImg);
     logo.append(logoDivImg, logoText);
     navList.append(...navItem);
     navigation.append(navList);
     this.append(logo, navigation, burgerButton);
-
-    // this.isBurgerOpen = false;
     this.openBurgerMenu();
   }
 

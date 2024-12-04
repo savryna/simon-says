@@ -24,7 +24,6 @@ export class BaseElement extends Helper {
 
   removeAttributes(attributes) {
     attributes.forEach((atr) => this._elem.removeAttribute(atr));
-    // this._elem.removeAttribute(...attributes);
   }
 
   append(...children) {

@@ -36,19 +36,6 @@ export class ButtonUp extends BaseElement {
   </svg>
       `,
     );
-
-    // this.imgArrow = new BaseElement(
-    //   'svg',
-    //   [],
-    //   {
-    //     // src: './img/svg/arrow-up.svg',
-    //   },
-    //   `
-
-    // `,
-    // );
-
-    // this.append(this.imgArrow);
     this.addEventListener('click', () => this.returnTop());
   }
 

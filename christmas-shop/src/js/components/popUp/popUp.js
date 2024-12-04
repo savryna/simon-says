@@ -118,14 +118,12 @@ export class PopUp extends BaseElement {
       event.clientY < modalRect.top ||
       event.clientY > modalRect.bottom
     ) {
-      // () => setInterval(this.closeDialog(), 1000);
       const anim = this.closeAnimation();
       anim.onfinish = (event) => {
         this._elem.close();
         this.setInnerHTML('');
         document.body.classList.remove(styles.noScroll);
       };
-      // this.setInnerHTML('');
     }
   }
 

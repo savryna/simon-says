@@ -2,7 +2,6 @@ import { BaseElement } from '../../common/baseElem.js';
 import { GiftCards } from '../giftCards/giftCards.js';
 import { ButtonUp } from '../buttonUp/buttonUp.js';
 import stylesButton from '../buttonUp/buttonUp.module.scss';
-// import { PopUp } from '../popUp/popUp.js';
 
 import styles from './main.module.scss';
 export class Main2Page extends BaseElement {
@@ -11,7 +10,6 @@ export class Main2Page extends BaseElement {
 
     const giftCards = new GiftCards();
     this.buttonUp = new ButtonUp();
-    // this.popUp = new PopUp();
 
     this.append(giftCards, this.buttonUp);
 

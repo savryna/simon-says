@@ -16,6 +16,7 @@
 
 .gratitudeBottom {
   @include mixins.header2;
+
   color: variables.$static-white;
   margin-left: 4px;
   margin-bottom: 19px;
@@ -23,8 +24,6 @@
 
 .sliderContainer {
   overflow: hidden;
-
-  // scrollbar-gutter: auto stable;
 }
 
 .sliderItems {
@@ -38,13 +37,6 @@
   align-items: center;
   margin-bottom: 16.2px;
   transition: transform 0.5s ease-in;
-
-  // @media screen and (width <= 1440px) {
-  //   padding-left: 5.69vw;
-  // }
-  // @media screen and (width <= 768px) {
-  //   padding-left: 8px;
-  // }
 }
 
 .sliderImgs {
@@ -71,6 +63,7 @@
       padding: 0 5.69vw;
     }
   }
+
   @media screen and (width <= 768px) {
     & {
       padding: 0 8px;

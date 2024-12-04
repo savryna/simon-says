@@ -22,15 +22,7 @@ export class Card extends BaseElement {
 
   constructor() {
     super('article', [styles.card]);
-
-    // this.createCard();
   }
-
-  // getRandomData() {
-  //   const randomCard = this.getRandomElem(data);
-  //   const indexCardFromData = data.indexOf(randomCard);
-  //   return randomCard;
-  // }
 
   findSrcToCard(cardFromData) {
     return this.cardsContent.find(
@@ -39,7 +31,6 @@ export class Card extends BaseElement {
   }
 
   getDataForCard(dataForCard) {
-    // const currentCard = this.getRandomData();
     const currentCard = dataForCard;
 
     const cardsSrcFromCategory = this.findSrcToCard(currentCard);
@@ -48,7 +39,6 @@ export class Card extends BaseElement {
     const cssStyle = `${category.split(' ')[0].toLowerCase()}${category.split(' ')[1][0].toUpperCase() + category.split(' ')[1].slice(1)}`;
     const cardHeader = currentCard.name;
     const cardDescription = currentCard.description;
-    // console.log(cardDescription);
     return {
       src: src,
       category: category,
@@ -59,11 +49,8 @@ export class Card extends BaseElement {
   }
 
   createCard(dataForCard) {
-    // const data = this.getDataForCard();
     const data = this.getDataForCard(dataForCard);
     this.data = data;
-    // console.log(data.forEach((e) => console.log(e.description)));
-    // this.card = new BaseElement('article', [styles.card]);
     this.cardPicture = new BaseElement('picture', [styles.cardPicture]);
     this.cardImg = new BaseElement('img', [styles.cardImg], {
       src: `${data.src}.png`,
