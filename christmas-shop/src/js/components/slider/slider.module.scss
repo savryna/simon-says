@@ -2,9 +2,9 @@
 @use '../../../styles/mixins.scss';
 
 .sliderSection {
-  @include mixins.snowBack;
-
   padding: 60px 0;
+
+  @include mixins.snowBack;
 }
 
 .gratitude {

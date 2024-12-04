@@ -2,9 +2,9 @@
 @use '../../../styles/variables.scss';
 
 .aboutSection {
-  @include mixins.snowBack;
-
   padding: 60px variables.$padding;
+
+  @include mixins.snowBack;
 }
 
 .aboutContent {
