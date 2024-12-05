@@ -13,17 +13,6 @@ export class Main2Page extends BaseElement {
 
     this.append(giftCards, this.buttonUp);
 
-    this.addButtonUp();
-  }
-
-  addButtonUp() {
-    window.addEventListener('scroll', () => {
-      const buttonVisibilityHeight = 301;
-
-      this.buttonUp.controlClass(
-        stylesButton.visible,
-        window.pageYOffset >= buttonVisibilityHeight,
-      );
-    });
+    this.buttonUp.addButtonUp();
   }
 }

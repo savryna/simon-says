@@ -45,4 +45,15 @@ export class ButtonUp extends BaseElement {
       behavior: 'smooth',
     });
   }
+
+  addButtonUp() {
+    window.addEventListener('scroll', () => {
+      const buttonVisibilityHeight = 301;
+
+      this.controlClass(
+        styles.visible,
+        window.pageYOffset > buttonVisibilityHeight,
+      );
+    });
+  }
 }
