@@ -27,11 +27,7 @@
 }
 
 .sliderItems {
-  padding-left: clamp(
-    8px,
-    8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)),
-    82px
-  );
+  padding-left: variables.$padding;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -44,31 +40,23 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 20px;
+  user-select: none;
+  pointer-events: none;
 }
 
 .sliderText {
   @include mixins.slider;
 
   color: variables.$static-white;
+  user-select: none;
+  pointer-events: none;
 }
 
 .sliderControls {
   display: flex;
   gap: 20px;
-  padding: 0 82px;
+  padding: 0 variables.$padding;
   justify-content: flex-end;
-
-  @media screen and (width <= 1440px) {
-    & {
-      padding: 0 5.69vw;
-    }
-  }
-
-  @media screen and (width <= 768px) {
-    & {
-      padding: 0 8px;
-    }
-  }
 }
 
 .sliderButton {

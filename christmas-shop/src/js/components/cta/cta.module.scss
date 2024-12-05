@@ -87,3 +87,7 @@
 .timerWord {
   @include mixins.header4;
 }
+
+p.timerText {
+  font-size: 30px;
+}
