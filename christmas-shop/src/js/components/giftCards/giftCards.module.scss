@@ -81,6 +81,7 @@
   &.active {
     background-color: variables.$static-white-40;
     cursor: default;
+    pointer-events: none;
 
     & .tabButton {
       cursor: default;

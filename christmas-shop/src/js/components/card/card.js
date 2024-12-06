@@ -3,7 +3,7 @@ import styles from './card.module.scss';
 import data from '../../data/gifts.json';
 
 export class Card extends BaseElement {
-  cardsContent = [
+  #cardsContent = [
     {
       src: './img/gift-for-work',
       category: 'For Work',
@@ -17,7 +17,6 @@ export class Card extends BaseElement {
       category: 'For Harmony',
     },
   ];
-  cardsCategory = ['For Work', 'For Health', 'For Harmony'];
   imgExtension = ['avif', 'webp', 'png'];
 
   constructor() {
@@ -25,7 +24,7 @@ export class Card extends BaseElement {
   }
 
   findSrcToCard(cardFromData) {
-    return this.cardsContent.find(
+    return this.#cardsContent.find(
       (card) => card.category === cardFromData.category,
     );
   }
@@ -86,5 +85,58 @@ export class Card extends BaseElement {
     this.cardPicture.append(...this.cardSources, this.cardImg);
     this.append(this.cardPicture, this.cardText);
     return this;
+  }
+
+  getRandomData() {
+    const giftCardAmounts = 4;
+    const setIdxs = new Set();
+    while (setIdxs.size < giftCardAmounts) {
+      const randomCard = data.indexOf(this.getRandomElem(data));
+      setIdxs.add(randomCard);
+    }
+    return setIdxs;
+  }
+
+  createInstanceCard() {
+    return new Card();
+  }
+
+  createRandomCard(cardAmount) {
+    const arrCard = [];
+    this.ArrayFromSet = Array.from(this.getRandomData());
+
+    for (let i = 0; i < cardAmount; i++) {
+      this.curCard = this.createInstanceCard();
+
+      this.cardJSON = data[this.ArrayFromSet[i]];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+    }
+    return arrCard;
+  }
+
+  createJSONCard() {
+    const arrCard = [];
+
+    const cardAmount = data.length;
+
+    for (let i = 0; i < cardAmount; i++) {
+      this.curCard = this.createInstanceCard();
+      this.cardJSON = data[i];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+    }
+    return arrCard;
+  }
+
+  filterGiftCards(filterButton) {
+    if (filterButton.innerText.toLowerCase() === 'all') {
+      return this.createJSONCard();
+    }
+    const filterCards = this.createJSONCard().filter(
+      (card) =>
+        card.cardTag.getInnerText().toLowerCase() ===
+        filterButton.innerText.toLowerCase(),
+    );
+
+    return filterCards;
   }
 }

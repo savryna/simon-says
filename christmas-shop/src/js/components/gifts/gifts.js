@@ -23,7 +23,8 @@ export class GiftsElement extends BaseElement {
 
     this.cardsContainer = new BaseElement('div', [styles.cards]);
 
-    this.cardsArray = this.createArrCard();
+    this.card = new Card();
+    this.cardsArray = this.card.createRandomCard(4);
     this.cardsContainer.append(...this.cardsArray);
 
     const popUp = new PopUp();
@@ -34,30 +35,5 @@ export class GiftsElement extends BaseElement {
     );
 
     this.append(giftsTitle, giftsDescription, this.cardsContainer);
-  }
-
-  getRandomData() {
-    const giftCardAmound = 4;
-    const setIdxs = new Set();
-    while (setIdxs.size < giftCardAmound) {
-      const randomCard = data.indexOf(this.getRandomElem(data));
-      setIdxs.add(randomCard);
-    }
-    return setIdxs;
-  }
-
-  createArrCard() {
-    const arrCard = [];
-
-    const cardAmount = 4;
-    this.ArrayFromSet = Array.from(this.getRandomData());
-
-    for (let i = 0; i < cardAmount; i++) {
-      this.curCard = new Card();
-
-      this.cardJSON = data[this.ArrayFromSet[i]];
-      arrCard.push(this.curCard.createCard(this.cardJSON));
-    }
-    return arrCard;
   }
 }
