@@ -1,0 +1,1 @@
+cd simon-says npm test && npm run format && npm run stylelint
