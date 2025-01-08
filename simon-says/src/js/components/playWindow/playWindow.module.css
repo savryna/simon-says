@@ -1,14 +1,76 @@
+@font-face {
+  font-family: Solerado;
+  src: url('../../../fonts/Soledago.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .playWindow {
-  color: black;
+  color: white;
   width: 100%;
   flex-basis: 70%;
   padding: 20px;
   background: url('../../../img/svg/border.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 85%;
   display: flex;
+  gap: 20px;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gameTitle {
+  font-family: Solerado, serif;
+  font-size: clamp(1em, 8vw, 5em);
+  word-spacing: 30px;
+  letter-spacing: 5px;
+  margin: 0;
+}
+
+.selectLevel {
+  width: 80%;
+  height: 20%;
+  backdrop-filter: blur(100px);
+  display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 40px;
+}
+
+.levelInput {
+  display: none;
+}
+
+.levelLabel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1em, 2.5vw, 2em);
+  height: 100%;
+}
+
+.buttonStart {
+  color: white;
+  font-size: clamp(0.5em, 8vw, 3em);
+  width: 200px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  border: 2px solid rgba(255 255 255, 20%);
+}
+
+.buttonStart:hover {
+  backdrop-filter: blur(100px);
+  box-shadow: 0 2px 14px 12px rgba(255 255 255, 20%);
+}
+
+.active {
+  border: 1px solid rgba(255 255 255, 20%);
+  border-radius: 40px;
+  box-shadow: 0 2px 14px 12px rgba(255 255 255, 20%);
 }

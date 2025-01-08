@@ -32,6 +32,7 @@ export class PlayWindow extends BaseElement {
           `${levels[idx].toUpperCase()}`,
         ),
     );
+    levelLabels[1].toggleClass(styles.active, true);
 
     const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'start');
 

@@ -8,3 +8,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
