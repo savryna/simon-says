@@ -24,7 +24,6 @@ export default [
   {
     rules: {
       semi: 'error',
-
       'import/no-cycle': [2, { maxDepth: 1 }],
 
       curly: 'error',

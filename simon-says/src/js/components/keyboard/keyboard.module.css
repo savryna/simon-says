@@ -1,0 +1,15 @@
+.keyboardWrapper {
+  color: black;
+}
+
+.keyButton {
+  color: black;
+}
+
+.rowWrapper {
+  color: black;
+}
+
+.active {
+  background-color: red;
+}
