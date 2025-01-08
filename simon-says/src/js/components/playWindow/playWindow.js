@@ -10,7 +10,7 @@ export class PlayWindow extends BaseElement {
 
     const selectLevel = new BaseElement('div', [styles.selectLevel]);
 
-    const levelInputs = Array.from(
+    this.levelInputs = Array.from(
       { length: levels.length },
       (_, idx) =>
         new BaseElement('input', [styles.levelInput], {
@@ -20,7 +20,7 @@ export class PlayWindow extends BaseElement {
           value: levels[idx],
         }),
     );
-    const levelLabels = Array.from(
+    this.levelLabels = Array.from(
       { length: levels.length },
       (_, idx) =>
         new BaseElement(
@@ -32,11 +32,16 @@ export class PlayWindow extends BaseElement {
           `${levels[idx].toUpperCase()}`,
         ),
     );
-    levelLabels[1].toggleClass(styles.active, true);
 
     const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'start');
 
-    selectLevel.append(...levelInputs, ...levelLabels);
+    for (let i = 0; i < levels.length; i++) {
+      selectLevel.append(this.levelInputs[i]);
+      selectLevel.append(this.levelLabels[i]);
+    }
+    const pseudo = new BaseElement('div', [styles.pseudo]);
+    selectLevel.append(pseudo);
+    this.levelInputs[0].setAttributes({ checked: 'checked' });
     this.append(gameTitle, selectLevel, buttonStart);
   }
 }

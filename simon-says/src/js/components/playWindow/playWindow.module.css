@@ -63,10 +63,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.levelLabel:not(.active):hover {
-  transform: scale(110%);
-}
-
 .buttonStart {
   color: white;
   font-family: Vanity, serif;
@@ -87,8 +83,28 @@
   box-shadow: 0 2px 14px 12px rgba(255 255 255 / 20%);
 }
 
-.active {
+.input[type='radio']:not(:checked) + label:hover {
+  transform: scale(110%);
+}
+
+.pseudo {
+  position: absolute;
   border: 1px solid rgba(255 255 255 / 20%);
-  border-radius: 40px;
   box-shadow: 0 2px 14px 12px rgba(255 255 255 / 20%);
+  border-radius: 40px;
+  width: 33%;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+input[id='easy']:checked ~ .pseudo {
+  transform: translateX(-218px);
+}
+
+input[id='middle']:checked ~ .pseudo {
+  transform: translateX(0);
+}
+
+input[id='hard']:checked ~ .pseudo {
+  transform: translateX(218px);
 }
