@@ -1,5 +1,6 @@
 .keyboardWrapper {
   color: black;
+  flex: 1;
 }
 
 .keyButton {

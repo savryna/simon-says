@@ -1,0 +1,14 @@
+.playWindow {
+  color: black;
+  width: 100%;
+  flex-basis: 70%;
+  padding: 20px;
+  background: url('../../../img/svg/border.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
