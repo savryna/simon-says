@@ -12,18 +12,21 @@ export class Keyboard extends BaseElement {
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
     ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
   ];
+  isKeyPressed = false;
 
   constructor() {
     super('div', [styles.keyboardWrapper]);
 
     this.keyButtonsObject = Object.fromEntries(this.createKeyButtons());
 
-    const buttonsLetters = Object.keys(this.keyButtonsObject);
+    this.buttonsLetters = Object.keys(this.keyButtonsObject);
     const buttonsElems = Object.values(this.keyButtonsObject);
     buttonsElems.forEach((button, idx) =>
-      button.addEventListener('click', () => console.log(buttonsLetters[idx])),
+      button.addEventListener('click', () => console.log(this.buttonsLetters[idx])),
     );
     document.body.addEventListener('keydown', (event) => this.pushPhysicKeyboard(event));
+    document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
+
     this.drawKeyboard();
   }
 
@@ -47,9 +50,27 @@ export class Keyboard extends BaseElement {
   }
 
   pushPhysicKeyboard(event) {
-    for (const button in this.keyButtonsObject) {
-      if (event.code === `Key${button.toUpperCase()}` || event.key === button) {
-        this.keyButtonsObject[button].toggleClass([styles.active], true);
+    const buttonLetter = this.buttonsLetters.find(
+      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+    );
+
+    if (!buttonLetter) return;
+
+    const currentButton = this.keyButtonsObject[buttonLetter];
+
+    if (event.type === 'keydown') {
+      if (this.isKeyPressed) return;
+
+      this.isKeyPressed = true;
+      this.currentLetter = buttonLetter;
+      currentButton.toggleClass(styles.active, true);
+    }
+
+    if (event.type === 'keyup') {
+      if (this.currentLetter === buttonLetter) {
+        this.isKeyPressed = false;
+        this.currentLetter = null;
+        currentButton.toggleClass(styles.active, false);
       }
     }
   }
