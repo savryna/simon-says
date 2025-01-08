@@ -1,16 +1,80 @@
+@font-face {
+  font-family: Vanity;
+  src: url('../../../fonts/vanity.light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .keyboardWrapper {
   color: black;
   flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  gap: 20px;
+  position: relative;
 }
 
 .keyButton {
-  color: black;
+  text-shadow: 0 0 0 #fff;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  max-width: 3em;
+  max-height: 3em;
+  width: 3vw;
+  height: 3vw;
+  background: #de1300;
+  border: 2px solid rgb(255 255 255);
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: all 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+.keyButton::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background: #de13005a;
+  border-radius: inherit;
+  box-shadow: 0 2px 0 0 #fafafa;
+  transform: translate3d(0, 0.75em, -1em);
+  transition:
+    transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+.keyButton:hover {
+  transform: translate(0, 0.25em);
+  background-color: #ae0f00;
+  border-color: #ffffffb0;
+}
+
+.keyButton:hover::before {
+  transform: translate3d(0, 0.5em, -1em);
+}
+
+.keyButton:active,
+.keyButton.active {
+  transform: translate(0, 0.75em);
+  background-color: #ae0f00;
+  border-color: #ffffffb0;
+}
+
+.keyButton:active::before,
+.keyButton.active::before {
+  transform: translate3d(0, 0, -1em);
 }
 
 .rowWrapper {
-  color: black;
-}
-
-.active {
-  background-color: red;
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
 }
