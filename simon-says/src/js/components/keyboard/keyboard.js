@@ -51,14 +51,11 @@ export class Keyboard extends BaseElement {
 
   drawKeyboard(keyboardType = 'easy') {
     this.removeChildren();
-    // console.log(KEYBOARD_TYPE[keyboardType].length);
     for (let rowIdx = 0; rowIdx < KEYBOARD_TYPE[keyboardType].length; rowIdx++) {
       const rowElem = new BaseElement('div', [styles.rowWrapper]);
       for (let buttonIdx = 0; buttonIdx < KEYBOARD_TYPE[keyboardType][rowIdx].length; buttonIdx++) {
-        // console.log(KEYBOARD_TYPE[keyboardType][rowIdx][buttonIdx]);
         rowElem.append(this.keyButtonsObject[KEYBOARD_TYPE[keyboardType][rowIdx][buttonIdx]]);
       }
-      // console.log(rowElem);
       this.append(rowElem);
     }
   }

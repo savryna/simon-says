@@ -5,11 +5,11 @@ import styles from './selectLevel.module.css';
 
 export class SelectLevel extends BaseElement {
   selectLevelSetting = 'easy';
-  constructor() {
+  constructor(keyboard) {
     super('div', [styles.selectLevel]);
 
-    this.Keyboard = new Keyboard();
-
+    this.keyboard = keyboard;
+    console.log(this.keyboard);
     this.levelInputs = Array.from(
       { length: LEVELS.length },
       (_, idx) =>
@@ -37,8 +37,8 @@ export class SelectLevel extends BaseElement {
       label.addEventListener('click', (event) => {
         this.addChecked(event);
         this.returnSelectedLevel();
-        this.Keyboard.drawKeyboard(this.returnSelectedLevel());
-        console.dir(this.Keyboard._elem.innerHTML);
+        this.keyboard.drawKeyboard(this.returnSelectedLevel());
+        console.dir(this.keyboard._elem.innerHTML);
       }),
     );
     this.fillSelectLevel();

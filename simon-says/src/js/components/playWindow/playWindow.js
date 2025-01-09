@@ -3,7 +3,7 @@ import { SelectLevel } from '../selectLevel/selectLevel.js';
 import styles from './playWindow.module.css';
 
 export class PlayWindow extends BaseElement {
-  constructor() {
+  constructor(keyboard) {
     super('div', [styles.playWindow]);
 
     const gameTitle = new BaseElement('h1', [styles.gameTitle], {}, 'Simon Says');
@@ -32,7 +32,7 @@ export class PlayWindow extends BaseElement {
     //       `${LEVELS[idx].toUpperCase()}`,
     //     ),
     // );
-    const selectLevel = new SelectLevel();
+    const selectLevel = new SelectLevel(keyboard);
 
     const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'start');
 
