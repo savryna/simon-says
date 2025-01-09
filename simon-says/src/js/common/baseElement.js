@@ -47,6 +47,10 @@ export class BaseElement {
     Object.entries(atrs).forEach(([key, val]) => this._elem.setAttribute(key, val));
   }
 
+  hasAttributes(atr) {
+    return this._elem.hasAttribute(atr);
+  }
+
   getAttribute(atr) {
     return this._elem.getAttribute(atr);
   }

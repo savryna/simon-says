@@ -1,10 +1,14 @@
 import { BaseElement } from '../../common/baseElement.js';
 import { LEVELS } from '../levelSettings/levelSettings.js';
+import { Keyboard } from '../keyboard/keyboard.js';
 import styles from './selectLevel.module.css';
 
 export class SelectLevel extends BaseElement {
+  selectLevelSetting = 'easy';
   constructor() {
     super('div', [styles.selectLevel]);
+
+    this.Keyboard = new Keyboard();
 
     this.levelInputs = Array.from(
       { length: LEVELS.length },
@@ -30,7 +34,12 @@ export class SelectLevel extends BaseElement {
     );
     this.pseudo = new BaseElement('div', [styles.pseudo]);
     this.levelLabels.forEach((label) =>
-      label.addEventListener('click', (event) => this.addChecked(event)),
+      label.addEventListener('click', (event) => {
+        this.addChecked(event);
+        this.returnSelectedLevel();
+        this.Keyboard.drawKeyboard(this.returnSelectedLevel());
+        console.dir(this.Keyboard._elem.innerHTML);
+      }),
     );
     this.fillSelectLevel();
   }
@@ -50,5 +59,15 @@ export class SelectLevel extends BaseElement {
       const clickIdx = LEVELS.findIndex((elem) => elem === event.currentTarget.getAttribute('for'));
       this.levelInputs[clickIdx].setAttributes({ checked: 'checked' });
     });
+  }
+
+  returnSelectedLevel() {
+    const selectedLevel = this.levelInputs
+      .find((input) => input.hasAttributes('checked'))
+      .getAttribute('id');
+    this.selectLevelSetting = selectedLevel;
+    // console.log(selectedLevel);
+    // console.log(this.selectLevelSetting);
+    return selectedLevel;
   }
 }
