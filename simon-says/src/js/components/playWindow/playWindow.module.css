@@ -51,17 +51,19 @@
   font-family: Vanity, serif;
   font-size: clamp(0.5em, 8vw, 3em);
   width: 200px;
-  height: 55px;
+  height: 105px;
   padding: 5px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
+  background-color: #de130034;
+  border-radius: 50px;
   border: 2px solid rgba(255 255 255 / 20%);
   transition: all 0.3s ease-in-out;
 }
 
 .buttonStart:hover {
+  background-color: transparent;
   backdrop-filter: blur(100px);
   box-shadow: 0 2px 14px 12px rgba(255 255 255 / 20%);
 }
