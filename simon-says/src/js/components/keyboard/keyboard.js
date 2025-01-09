@@ -61,7 +61,7 @@ export class Keyboard extends BaseElement {
   }
 
   pushPhysicKeyboard(event) {
-    // нужно отключать hover
+    // TODO: нужно отключать hover
 
     const buttonLetter = this.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
