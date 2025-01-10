@@ -3,7 +3,6 @@ import { SelectLevel } from '../selectLevel/selectLevel.js';
 import styles from './playWindow.module.css';
 
 export class PlayWindow extends BaseElement {
-  GAME_STATUS = false;
   constructor(keyboard) {
     super('div', [styles.playWindow]);
 
@@ -40,19 +39,17 @@ export class PlayWindow extends BaseElement {
 
     this.append(gameTitle, selectLevel, buttonStart);
     buttonStart.addEventListener('click', () => {
-      this.keyboard.getGameStatus(this.toggleClass());
-
-      console.log(this.GAME_STATUS);
+      this.toggleGameStatus();
+      this.keyboard.disabledKey();
     });
   }
 
   toggleGameStatus() {
-    if (this.GAME_STATUS) {
-      this.GAME_STATUS = false;
+    if (this.keyboard.isGaming) {
+      this.keyboard.isGaming = false;
     } else {
-      this.GAME_STATUS = true;
+      this.keyboard.isGaming = true;
     }
-    console.log(this.GAME_STATUS);
-    return this.GAME_STATUS;
+    console.log(this.keyboard.isGaming);
   }
 }

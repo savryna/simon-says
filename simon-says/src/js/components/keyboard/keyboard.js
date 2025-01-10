@@ -4,6 +4,7 @@ import { KEYBOARD_TYPE, NUMBER_ROW } from '../levelSettings/levelSettings.js';
 import styles from './keyboard.module.css';
 
 export class Keyboard extends BaseElement {
+  isGaming = false;
   ASCII_EN_SHIFT = 97;
   EN_LENGTH = 26;
   EN_ALPHABET = Array.from({ length: this.EN_LENGTH }, (_, i) =>
@@ -30,13 +31,14 @@ export class Keyboard extends BaseElement {
 
     this.buttonsLetters = Object.keys(this.keyButtonsObject);
     // console.log(this.buttonsLetters);
-    const buttonsElems = Object.values(this.keyButtonsObject);
+    this.buttonsElems = Object.values(this.keyButtonsObject);
     // buttonsElems.forEach((button, idx) =>
     //   button.addEventListener('click', () => console.log(this.buttonsLetters[idx])),
     // );
     document.body.addEventListener('keydown', (event) => this.pushPhysicKeyboard(event));
     document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
     this.drawKeyboard();
+    this.disabledKey();
     // this.changeKeyboard();
   }
 
@@ -60,10 +62,6 @@ export class Keyboard extends BaseElement {
     }
   }
 
-  getGameStatus(status) {
-    return status;
-  }
-
   pushPhysicKeyboard(event) {
     // TODO: нужно отключать hover
 
@@ -77,7 +75,7 @@ export class Keyboard extends BaseElement {
 
     if (event.type === 'keydown') {
       if (this.isKeyPressed) return;
-
+      console.log(buttonLetter);
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
@@ -89,6 +87,18 @@ export class Keyboard extends BaseElement {
         this.currentLetter = null;
         currentButton.toggleClass(styles.active, false);
       }
+    }
+  }
+
+  disabledKey() {
+    if (!this.isGaming) {
+      this.buttonsElems.forEach((button) => {
+        button.toggleClass(styles.disabled, true);
+        button._elem.disabled = true;
+      });
+    } else {
+      this.buttonsElems.forEach((button) => button.toggleClass(styles.disabled, false));
+      button._elem.disabled = false;
     }
   }
 }

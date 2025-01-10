@@ -63,14 +63,16 @@
 }
 
 .keyButton:active,
-.keyButton.active {
+.keyButton.active,
+.keyButton.disabled {
   transform: translate(0, 0.75em);
   background-color: #ae0f00;
   border-color: #ffffffb0;
 }
 
 .keyButton:active::before,
-.keyButton.active::before {
+.keyButton.active::before,
+.keyButton.disabled::before {
   transform: translate3d(0, 0, -1em);
 }
 
