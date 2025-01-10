@@ -35,7 +35,21 @@ export class PlayWindow extends BaseElement {
     // );
     const selectLevel = new SelectLevel(keyboard);
 
-    const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'start');
+    const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'START');
+
+    //round block
+    const roundBlock = new BaseElement('div', [styles.roundBlock]);
+    const currentRound = new BaseElement('span', [styles.round], {}, '01');
+    const currentLevel = new BaseElement('span', [styles.currentLevel], {}, 'EASY');
+    const amountRounds = new BaseElement('span', [styles.round], {}, '05');
+    roundBlock.append(currentRound, currentLevel, amountRounds);
+
+    // input block
+    this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
+    this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, '8f8s5c');
+    this.buttonNewGame = new BaseElement('button', [styles.buttonNew], {}, 'NEW GAME');
+    this.gameButtons = new BaseElement('div', [styles.gameButtons]);
+    this.gameButtons.append(this.buttonRestart, this.inputSequence, this.buttonNewGame);
 
     this.append(gameTitle, selectLevel, buttonStart);
     buttonStart.addEventListener('click', () => {

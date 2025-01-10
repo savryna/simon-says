@@ -78,4 +78,8 @@ export class BaseElement {
   getInnerText() {
     return this._elem.innerText;
   }
+
+  setInnerText(textContent) {
+    this._elem.textContent = textContent;
+  }
 }

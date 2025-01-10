@@ -9,7 +9,8 @@ body {
   align-items: center;
 }
 
-button {
+button,
+input {
   background-color: transparent;
   border: none;
   outline: none;
