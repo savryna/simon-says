@@ -40,7 +40,7 @@
 }
 
 input[id='easy']:checked ~ .pseudo {
-  transform: translateX(-218px);
+  transform: translateX(-206px);
 }
 
 input[id='middle']:checked ~ .pseudo {
@@ -48,5 +48,5 @@ input[id='middle']:checked ~ .pseudo {
 }
 
 input[id='hard']:checked ~ .pseudo {
-  transform: translateX(218px);
+  transform: translateX(206px);
 }
