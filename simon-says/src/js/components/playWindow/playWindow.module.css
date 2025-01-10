@@ -50,9 +50,10 @@
   color: white;
   font-family: Vanity, serif;
   font-size: clamp(0.5em, 8vw, 3em);
+  font-weight: 800;
   width: 200px;
   height: 105px;
-  padding: 5px 0 0;
+  padding: 12px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
