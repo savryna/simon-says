@@ -63,6 +63,15 @@ export class BaseElement {
     this._elem.innerHTML = '';
   }
 
+  removeThisChild(child) {
+    this._elem.removeChild(child._elem);
+  }
+
+  switchChildren(removedChild, addedChild) {
+    this.removeThisChild(removedChild);
+    this.append(addedChild);
+  }
+
   toggleClass(style, option) {
     this._elem.classList.toggle(style, option);
   }

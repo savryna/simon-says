@@ -97,8 +97,10 @@ export class Keyboard extends BaseElement {
         button._elem.disabled = true;
       });
     } else {
-      this.buttonsElems.forEach((button) => button.toggleClass(styles.disabled, false));
-      button._elem.disabled = false;
+      this.buttonsElems.forEach((button) => {
+        button.toggleClass(styles.disabled, false);
+        button._elem.disabled = false;
+      });
     }
   }
 }

@@ -33,16 +33,16 @@ export class PlayWindow extends BaseElement {
     //       `${LEVELS[idx].toUpperCase()}`,
     //     ),
     // );
-    const selectLevel = new SelectLevel(keyboard);
+    this.selectLevel = new SelectLevel(keyboard);
 
-    const buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'START');
+    this.buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'START');
 
     //round block
-    const roundBlock = new BaseElement('div', [styles.roundBlock]);
+    this.roundBlock = new BaseElement('div', [styles.roundBlock]);
     const currentRound = new BaseElement('span', [styles.round], {}, '01');
     const currentLevel = new BaseElement('span', [styles.currentLevel], {}, 'EASY');
     const amountRounds = new BaseElement('span', [styles.round], {}, '05');
-    roundBlock.append(currentRound, currentLevel, amountRounds);
+    this.roundBlock.append(currentRound, currentLevel, amountRounds);
 
     // input block
     this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
@@ -51,10 +51,14 @@ export class PlayWindow extends BaseElement {
     this.gameButtons = new BaseElement('div', [styles.gameButtons]);
     this.gameButtons.append(this.buttonRestart, this.inputSequence, this.buttonNewGame);
 
-    this.append(gameTitle, selectLevel, buttonStart);
-    buttonStart.addEventListener('click', () => {
+    this.append(gameTitle, this.selectLevel, this.buttonStart);
+    this.buttonStart.addEventListener('click', () => {
       this.toggleGameStatus();
       this.keyboard.disabledKey();
+    });
+    this.buttonStart.addEventListener('click', () => {
+      this.selectLvlAnimation();
+      this.startBtnAnimation();
     });
   }
 
@@ -65,5 +69,52 @@ export class PlayWindow extends BaseElement {
       this.keyboard.isGaming = true;
     }
     console.log(this.keyboard.isGaming);
+  }
+
+  selectLvlAnimation() {
+    this.selectLevel.pseudo.remove();
+
+    const resizeWidth = new KeyframeEffect(this.selectLevel._elem, [{ width: '30%' }], {
+      duration: 1000,
+      direction: 'normal',
+      easing: 'ease-in-out',
+    });
+    const resizeWidthAnimation = new Animation(resizeWidth, document.timeline);
+    resizeWidthAnimation.play();
+
+    const opacity = new KeyframeEffect(this.selectLevel._elem, [{ opacity: '0' }], {
+      delay: 500,
+      duration: 300,
+      direction: 'normal',
+      easing: 'ease-in-out',
+    });
+    const opacityAnimantion = new Animation(opacity, document.timeline);
+    opacityAnimantion.play();
+
+    opacityAnimantion.finished.then(() => this.switchChildren(this.selectLevel, this.roundBlock));
+  }
+
+  startBtnAnimation() {
+    const resizeWidth = new KeyframeEffect(
+      this.buttonStart._elem,
+      { width: '80%' },
+      {
+        duration: 1000,
+        direction: 'normal',
+        easing: 'ease-in-out',
+      },
+    );
+    const resizeWidthAnimation = new Animation(resizeWidth, document.timeline);
+    resizeWidthAnimation.play();
+
+    const opacity = new KeyframeEffect(this.buttonStart._elem, [{ opacity: '0' }], {
+      delay: 500,
+      duration: 300,
+      direction: 'normal',
+      easing: 'ease-in-out',
+    });
+    const opacityAnimantion = new Animation(opacity, document.timeline);
+    opacityAnimantion.play();
+    opacityAnimantion.finished.then(() => this.switchChildren(this.buttonStart, this.gameButtons));
   }
 }
