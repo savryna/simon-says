@@ -60,6 +60,10 @@ export class Keyboard extends BaseElement {
     }
   }
 
+  getGameStatus(status) {
+    return status;
+  }
+
   pushPhysicKeyboard(event) {
     // TODO: нужно отключать hover
 
