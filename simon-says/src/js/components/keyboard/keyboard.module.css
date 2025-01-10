@@ -68,6 +68,7 @@
   transform: translate(0, 0.75em);
   background-color: #ae0f00;
   border-color: #ffffffb0;
+  cursor: default;
 }
 
 .keyButton:active::before,
