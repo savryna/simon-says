@@ -9,7 +9,6 @@ export class SelectLevel extends BaseElement {
     super('div', [styles.selectLevel]);
 
     this.keyboard = keyboard;
-    // console.log(this.keyboard);
     this.levelInputs = Array.from(
       { length: LEVELS.length },
       (_, idx) =>
@@ -66,8 +65,8 @@ export class SelectLevel extends BaseElement {
       .find((input) => input.hasAttributes('checked'))
       .getAttribute('id');
     this.selectLevelSetting = selectedLevel;
-    console.log(selectedLevel);
-    console.log(this.selectLevelSetting);
+    // console.log(selectedLevel);
+    // console.log(this.selectLevelSetting);
     return selectedLevel;
   }
 }

@@ -1,5 +1,6 @@
 import { BaseElement } from '../../common/baseElement.js';
 import { SelectLevel } from '../selectLevel/selectLevel.js';
+import { getRandomElem } from '../../common/helper.js';
 import styles from './playWindow.module.css';
 
 export class PlayWindow extends BaseElement {
@@ -62,9 +63,12 @@ export class PlayWindow extends BaseElement {
       this.keyboard.disabledKey();
     });
     this.buttonStart.addEventListener('click', () => {
+      // console.log(this.selectLevel.selectLevelSetting);
+      // this.keyboard = this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
       this.selectLvlAnimation();
       this.startBtnAnimation();
-      console.log(this.selectLevel.selectLevelSetting);
+      // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
+      // console.log(this.selectLevel.currentKeyboard);
     });
   }
 
@@ -74,7 +78,7 @@ export class PlayWindow extends BaseElement {
     } else {
       this.keyboard.isGaming = true;
     }
-    console.log(this.keyboard.isGaming);
+    // console.log(this.keyboard.isGaming);
   }
 
   selectLvlAnimation() {
@@ -125,6 +129,19 @@ export class PlayWindow extends BaseElement {
     });
     const opacityAnimantion = new Animation(opacity, document.timeline);
     opacityAnimantion.play();
-    opacityAnimantion.finished.then(() => this.switchChildren(this.buttonStart, this.gameButtons));
+    opacityAnimantion.finished
+      .then(() => this.switchChildren(this.buttonStart, this.gameButtons))
+      .then(() =>
+        this.keyboard.animateButtonSequence(
+          // [
+          //   this.keyboard.keyButtonsObject['2'],
+          //   this.keyboard.keyButtonsObject['2'],
+          //   this.keyboard.keyButtonsObject['2'],
+          //   this.keyboard.keyButtonsObject['2'],
+          // ],
+
+          this.keyboard.createSequence(2, this.selectLevel.selectLevelSetting),
+        ),
+      );
   }
 }

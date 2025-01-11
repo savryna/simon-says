@@ -1,5 +1,8 @@
 import { BaseElement } from '../../common/baseElement.js';
 import { SelectLevel } from '../selectLevel/selectLevel.js';
+export { KEYBOARD_TYPE } from '../levelSettings/levelSettings.js';
+import { getRandomElem } from '../../common/helper.js';
+
 import { KEYBOARD_TYPE, NUMBER_ROW } from '../levelSettings/levelSettings.js';
 import styles from './keyboard.module.css';
 
@@ -39,6 +42,7 @@ export class Keyboard extends BaseElement {
     document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
     this.drawKeyboard();
     this.disabledKey();
+
     // this.changeKeyboard();
   }
 
@@ -60,6 +64,19 @@ export class Keyboard extends BaseElement {
       }
       this.append(rowElem);
     }
+    return this;
+  }
+
+  filterKeyboard(keyboardType = 'easy') {
+    const filter = this.buttonsLetters.filter((elem) =>
+      KEYBOARD_TYPE[keyboardType].flat().includes(elem),
+    );
+    const buttonElems = Array.from(
+      { length: filter.length },
+      (_, idx) => this.keyButtonsObject[filter[idx]],
+    );
+    console.log(buttonElems);
+    return buttonElems;
   }
 
   pushPhysicKeyboard(event) {
@@ -102,5 +119,32 @@ export class Keyboard extends BaseElement {
         button._elem.disabled = false;
       });
     }
+  }
+
+  animateButton(button) {
+    return new Promise((resolve) => {
+      button.toggleClass(styles.active, true);
+      setTimeout(() => {
+        button.toggleClass(styles.active, false);
+        setTimeout(() => resolve(), 300);
+      }, 1000);
+    });
+  }
+
+  createSequence(levelNum, keyboardType) {
+    const sequence = [];
+    for (let i = 0; i < levelNum * 2; i++) {
+      sequence.push(getRandomElem(this.filterKeyboard(keyboardType)));
+    }
+    console.log(sequence);
+    return sequence;
+  }
+
+  animateButtonSequence(buttons) {
+    buttons
+      .reduce((promise, button) => {
+        return promise.then(() => this.animateButton(button));
+      }, Promise.resolve())
+      .then(() => console.log('done'));
   }
 }
