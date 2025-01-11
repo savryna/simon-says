@@ -4,6 +4,8 @@ import { getRandomElem } from '../../common/helper.js';
 import styles from './playWindow.module.css';
 
 export class PlayWindow extends BaseElement {
+  roundNumber = 1;
+
   constructor(keyboard) {
     super('div', [styles.playWindow]);
 
@@ -40,7 +42,7 @@ export class PlayWindow extends BaseElement {
 
     //round block
     this.roundBlock = new BaseElement('div', [styles.roundBlock]);
-    const currentRound = new BaseElement('span', [styles.round], {}, '01');
+    this.currentRound = new BaseElement('span', [styles.round], {}, `0${this.roundNumber}`);
     this.currentLevel = new BaseElement(
       'span',
       [styles.currentLevel],
@@ -48,7 +50,7 @@ export class PlayWindow extends BaseElement {
       this.selectLevel.selectLevelSetting,
     );
     const amountRounds = new BaseElement('span', [styles.round], {}, '05');
-    this.roundBlock.append(currentRound, this.currentLevel, amountRounds);
+    this.roundBlock.append(this.currentRound, this.currentLevel, amountRounds);
 
     // input block
     this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
@@ -143,5 +145,14 @@ export class PlayWindow extends BaseElement {
           this.keyboard.createSequence(2, this.selectLevel.selectLevelSetting),
         ),
       );
+  }
+
+  addRoundNumber() {
+    this.roundNumber += 1;
+    this.currentRound.setInnerText(`0${this.roundNumber}`);
+    if (this.roundNumber >= 5) {
+      console.log('You win');
+      this.roundNumber = 0;
+    }
   }
 }
