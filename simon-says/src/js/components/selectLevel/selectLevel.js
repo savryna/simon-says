@@ -9,7 +9,7 @@ export class SelectLevel extends BaseElement {
     super('div', [styles.selectLevel]);
 
     this.keyboard = keyboard;
-    console.log(this.keyboard);
+    // console.log(this.keyboard);
     this.levelInputs = Array.from(
       { length: LEVELS.length },
       (_, idx) =>
@@ -38,7 +38,7 @@ export class SelectLevel extends BaseElement {
         this.addChecked(event);
         this.returnSelectedLevel();
         this.keyboard.drawKeyboard(this.returnSelectedLevel());
-        console.dir(this.keyboard._elem.innerHTML);
+        // console.dir(this.keyboard._elem.innerHTML);
       }),
     );
     this.fillSelectLevel();
@@ -66,8 +66,8 @@ export class SelectLevel extends BaseElement {
       .find((input) => input.hasAttributes('checked'))
       .getAttribute('id');
     this.selectLevelSetting = selectedLevel;
-    // console.log(selectedLevel);
-    // console.log(this.selectLevelSetting);
+    console.log(selectedLevel);
+    console.log(this.selectLevelSetting);
     return selectedLevel;
   }
 }

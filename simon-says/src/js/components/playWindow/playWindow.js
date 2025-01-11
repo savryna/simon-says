@@ -40,9 +40,14 @@ export class PlayWindow extends BaseElement {
     //round block
     this.roundBlock = new BaseElement('div', [styles.roundBlock]);
     const currentRound = new BaseElement('span', [styles.round], {}, '01');
-    const currentLevel = new BaseElement('span', [styles.currentLevel], {}, 'EASY');
+    this.currentLevel = new BaseElement(
+      'span',
+      [styles.currentLevel],
+      {},
+      this.selectLevel.selectLevelSetting,
+    );
     const amountRounds = new BaseElement('span', [styles.round], {}, '05');
-    this.roundBlock.append(currentRound, currentLevel, amountRounds);
+    this.roundBlock.append(currentRound, this.currentLevel, amountRounds);
 
     // input block
     this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
@@ -59,6 +64,7 @@ export class PlayWindow extends BaseElement {
     this.buttonStart.addEventListener('click', () => {
       this.selectLvlAnimation();
       this.startBtnAnimation();
+      console.log(this.selectLevel.selectLevelSetting);
     });
   }
 
@@ -91,7 +97,11 @@ export class PlayWindow extends BaseElement {
     const opacityAnimantion = new Animation(opacity, document.timeline);
     opacityAnimantion.play();
 
-    opacityAnimantion.finished.then(() => this.switchChildren(this.selectLevel, this.roundBlock));
+    const currentLetterText = this.selectLevel.selectLevelSetting;
+    opacityAnimantion.finished.then(() => {
+      this.switchChildren(this.selectLevel, this.roundBlock);
+      this.currentLevel.setInnerText(currentLetterText.toUpperCase());
+    });
   }
 
   startBtnAnimation() {
