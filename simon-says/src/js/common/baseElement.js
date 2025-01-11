@@ -91,4 +91,8 @@ export class BaseElement {
   setInnerText(textContent) {
     this._elem.textContent = textContent;
   }
+
+  addInnerText(textContent) {
+    this._elem.textContent += textContent;
+  }
 }

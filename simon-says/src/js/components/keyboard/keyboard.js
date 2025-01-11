@@ -41,7 +41,7 @@ export class Keyboard extends BaseElement {
     document.body.addEventListener('keydown', (event) => this.pushPhysicKeyboard(event));
     document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
     this.drawKeyboard();
-    this.disabledKey();
+    this.disabledKeyReal();
 
     // this.changeKeyboard();
   }
@@ -50,7 +50,7 @@ export class Keyboard extends BaseElement {
     return Array.from({ length: this.ALL_KEY.length }, (_, idx) => {
       return [
         this.ALL_KEY[idx],
-        new BaseElement('button', [styles.keyButton], {}, this.ALL_KEY[idx]),
+        new BaseElement('button', [styles.keyButton, styles.active], {}, this.ALL_KEY[idx]),
       ];
     });
   }
@@ -75,7 +75,7 @@ export class Keyboard extends BaseElement {
       { length: filter.length },
       (_, idx) => this.keyButtonsObject[filter[idx]],
     );
-    console.log(buttonElems);
+    // console.log(buttonElems);
     return buttonElems;
   }
 
@@ -91,8 +91,8 @@ export class Keyboard extends BaseElement {
     const currentButton = this.keyButtonsObject[buttonLetter];
 
     if (event.type === 'keydown') {
-      if (this.isKeyPressed) return;
-      console.log(buttonLetter);
+      if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
+      console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
@@ -107,18 +107,20 @@ export class Keyboard extends BaseElement {
     }
   }
 
-  disabledKey() {
+  disabledKeyReal() {
     if (!this.isGaming) {
       this.buttonsElems.forEach((button) => {
-        button.toggleClass(styles.disabled, true);
-        button._elem.disabled = true;
+        button.setAttributes({ disabled: 'disabled' });
       });
     } else {
       this.buttonsElems.forEach((button) => {
-        button.toggleClass(styles.disabled, false);
-        button._elem.disabled = false;
+        button.removeAttributes(['disabled']);
       });
     }
+  }
+
+  upButtons() {
+    this.buttonsElems.forEach((button) => button.toggleClass(styles.active, false));
   }
 
   animateButton(button) {
@@ -127,7 +129,7 @@ export class Keyboard extends BaseElement {
       setTimeout(() => {
         button.toggleClass(styles.active, false);
         setTimeout(() => resolve(), 300);
-      }, 1000);
+      }, 500);
     });
   }
 
@@ -136,15 +138,26 @@ export class Keyboard extends BaseElement {
     for (let i = 0; i < levelNum * 2; i++) {
       sequence.push(getRandomElem(this.filterKeyboard(keyboardType)));
     }
-    console.log(sequence);
+    // console.log(sequence);
     return sequence;
   }
 
   animateButtonSequence(buttons) {
-    buttons
-      .reduce((promise, button) => {
-        return promise.then(() => this.animateButton(button));
-      }, Promise.resolve())
-      .then(() => console.log('done'));
+    return buttons.reduce((promise, button) => {
+      return promise.then(() => this.animateButton(button));
+    }, Promise.resolve());
+    // .then(() => console.log('done'));
+  }
+
+  fillInputSequence(event, inputElem) {
+    const buttonLetter = this.buttonsLetters.find(
+      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+    );
+
+    const currentButton = this.keyButtonsObject[buttonLetter];
+
+    if (!buttonLetter || currentButton.hasAttributes('disabled')) return;
+
+    inputElem.addInnerText(buttonLetter.toUpperCase());
   }
 }

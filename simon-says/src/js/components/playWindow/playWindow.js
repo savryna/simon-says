@@ -54,17 +54,15 @@ export class PlayWindow extends BaseElement {
 
     // input block
     this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
-    this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, '8f8s5c');
+    this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, '');
     this.buttonNewGame = new BaseElement('button', [styles.buttonNew], {}, 'NEW GAME');
     this.gameButtons = new BaseElement('div', [styles.gameButtons]);
     this.gameButtons.append(this.buttonRestart, this.inputSequence, this.buttonNewGame);
 
     this.append(gameTitle, this.selectLevel, this.buttonStart);
     this.buttonStart.addEventListener('click', () => {
-      this.toggleGameStatus();
-      this.keyboard.disabledKey();
-    });
-    this.buttonStart.addEventListener('click', () => {
+      this.upKeyboard();
+      this.keyboard.upButtons();
       // console.log(this.selectLevel.selectLevelSetting);
       // this.keyboard = this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
       this.selectLvlAnimation();
@@ -72,6 +70,10 @@ export class PlayWindow extends BaseElement {
       // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
       // console.log(this.selectLevel.currentKeyboard);
     });
+
+    document.addEventListener('keydown', (event) =>
+      this.keyboard.fillInputSequence(event, this.inputSequence),
+    );
   }
 
   toggleGameStatus() {
@@ -81,6 +83,14 @@ export class PlayWindow extends BaseElement {
       this.keyboard.isGaming = true;
     }
     // console.log(this.keyboard.isGaming);
+  }
+
+  upKeyboard() {
+    if (this.keyboard.isKeyUp) {
+      this.keyboard.isKeyUp = false;
+    } else {
+      this.keyboard.isKeyUp = true;
+    }
   }
 
   selectLvlAnimation() {
@@ -142,9 +152,24 @@ export class PlayWindow extends BaseElement {
           //   this.keyboard.keyButtonsObject['2'],
           // ],
 
-          this.keyboard.createSequence(2, this.selectLevel.selectLevelSetting),
+          this.returnCurrentSequence().sequenceElem,
         ),
-      );
+      )
+      .then(() => this.toggleGameStatus())
+      .then(() => this.keyboard.disabledKeyReal());
+  }
+
+  returnCurrentSequence() {
+    const sequenceElem = this.keyboard.createSequence(
+      this.roundNumber,
+      this.selectLevel.selectLevelSetting,
+    );
+    const sequenceStr = sequenceElem
+      .map((btnElem) => {
+        return btnElem.getInnerText();
+      })
+      .join('');
+    return { sequenceElem, sequenceStr };
   }
 
   addRoundNumber() {
@@ -155,4 +180,6 @@ export class PlayWindow extends BaseElement {
       this.roundNumber = 0;
     }
   }
+
+  compareInputSequence() {}
 }
