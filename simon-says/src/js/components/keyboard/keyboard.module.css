@@ -30,7 +30,7 @@
   max-height: 3em;
   width: 3vw;
   height: 3vw;
-  background: #de1300;
+  background: #ae0f00;
   border: 2px solid rgb(255 255 255);
   border-radius: 0.75em;
   transform-style: preserve-3d;
@@ -54,7 +54,7 @@
 
 .keyButton:hover {
   transform: translate(0, 0.25em);
-  background-color: #ae0f00;
+  background-color: #ff4e3e;
   border-color: #ffffffb0;
 }
 
@@ -66,9 +66,13 @@
 .keyButton.active,
 .keyButton.disabled {
   transform: translate(0, 0.75em);
-  background-color: #ae0f00;
+  background-color: #ff4e3e;
   border-color: #ffffffb0;
   cursor: default;
+}
+
+.keyButton.disabled {
+  background: #ae0e0000;
 }
 
 .keyButton:active::before,

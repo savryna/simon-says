@@ -17,6 +17,7 @@
   font-family: Vanity, serif;
   font-weight: 800;
   padding: 7px 0 0;
+  color: rgba(255 255 255 / 44.7%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,14 +26,18 @@
   transition: all 0.3s ease-in-out;
 }
 
-.input[type='radio']:not(:checked) + label:hover {
-  transform: scale(110%);
+label:hover {
+  color: #fff;
+}
+
+input:checked + label {
+  color: #fff;
 }
 
 .pseudo {
   position: absolute;
-  border: 1px solid rgba(255 255 255 / 20%);
-  box-shadow: 0 2px 14px 12px rgba(255 255 255 / 20%);
+  border: 1px solid rgb(80 80 80 / 20%);
+  box-shadow: 0 2px 14px 9px rgb(80 80 80 / 20%);
   border-radius: 40px;
   width: 33%;
   height: 100%;
