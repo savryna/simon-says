@@ -53,12 +53,14 @@ export class PlayWindow extends BaseElement {
     this.roundBlock.append(this.currentRound, this.currentLevel, amountRounds);
 
     // input block
-    this.buttonRestart = new BaseElement('button', [styles.buttonRestart], {}, 'RESTART');
-    this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, '');
-    this.buttonNewGame = new BaseElement('button', [styles.buttonNew], {}, 'NEW GAME');
+    this.buttonRestart = new BaseElement('button', [styles.controlButton], {}, 'RESTART');
+    this.buttonNext = new BaseElement('button', [styles.controlButton], {}, 'NEXT');
+    this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, ' ');
+    this.buttonNewGame = new BaseElement('button', [styles.controlButton], {}, 'NEW GAME');
     this.gameButtons = new BaseElement('div', [styles.gameButtons]);
-    this.gameButtons.append(this.buttonRestart, this.inputSequence, this.buttonNewGame);
+    this.gameButtons.append(this.buttonNewGame, this.inputSequence, this.buttonRestart);
 
+    this.curSequence = '';
     this.append(gameTitle, this.selectLevel, this.buttonStart);
     this.buttonStart.addEventListener('click', () => {
       this.upKeyboard();
@@ -67,13 +69,20 @@ export class PlayWindow extends BaseElement {
       // this.keyboard = this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
       this.selectLvlAnimation();
       this.startBtnAnimation();
+      this.newSequence();
+      console.log(this.curSequence);
       // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
       // console.log(this.selectLevel.currentKeyboard);
     });
 
-    document.addEventListener('keydown', (event) =>
-      this.keyboard.fillInputSequence(event, this.inputSequence),
-    );
+    document.addEventListener('keydown', (event) => {
+      this.keyboard.fillInputSequence(event, this.inputSequence);
+      this.compareInputSequence();
+    });
+
+    this.buttonNext.addEventListener('click', () => {
+      this.moveNextRound();
+    });
   }
 
   toggleGameStatus() {
@@ -144,32 +153,23 @@ export class PlayWindow extends BaseElement {
     opacityAnimantion.finished
       .then(() => this.switchChildren(this.buttonStart, this.gameButtons))
       .then(() =>
-        this.keyboard.animateButtonSequence(
-          // [
-          //   this.keyboard.keyButtonsObject['2'],
-          //   this.keyboard.keyButtonsObject['2'],
-          //   this.keyboard.keyButtonsObject['2'],
-          //   this.keyboard.keyButtonsObject['2'],
-          // ],
-
-          this.returnCurrentSequence().sequenceElem,
-        ),
+        this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence)),
       )
+      // .then(() =>
+      //   this.keyboard
+      //     .animateButtonSequence
+      //     // [
+      //     //   this.keyboard.keyButtonsObject['2'],
+      //     //   this.keyboard.keyButtonsObject['2'],
+      //     //   this.keyboard.keyButtonsObject['2'],
+      //     //   this.keyboard.keyButtonsObject['2'],
+      //     // ],
+
+      //     // this.returnCurrentSequence().sequenceElem,
+      //     (),
+      // )
       .then(() => this.toggleGameStatus())
       .then(() => this.keyboard.disabledKeyReal());
-  }
-
-  returnCurrentSequence() {
-    const sequenceElem = this.keyboard.createSequence(
-      this.roundNumber,
-      this.selectLevel.selectLevelSetting,
-    );
-    const sequenceStr = sequenceElem
-      .map((btnElem) => {
-        return btnElem.getInnerText();
-      })
-      .join('');
-    return { sequenceElem, sequenceStr };
   }
 
   addRoundNumber() {
@@ -181,5 +181,45 @@ export class PlayWindow extends BaseElement {
     }
   }
 
-  compareInputSequence() {}
+  newSequence() {
+    this.curSequence = this.keyboard.createSequence(
+      this.roundNumber,
+      // 2,
+      this.selectLevel.selectLevelSetting,
+    );
+    console.log(this.curSequence);
+  }
+
+  compareInputSequence() {
+    const curSequence = this.curSequence;
+    const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
+
+    for (let i = 0; i < userInputSequence.length; i++) {
+      console.log(userInputSequence[i], curSequence[i]);
+      if (userInputSequence[i] !== curSequence[i]) {
+        console.log('error');
+        this.keyboard.isGaming = false;
+        this.keyboard.disabledKeyReal();
+      }
+    }
+    if (userInputSequence === curSequence) {
+      console.log('game end');
+      this.keyboard.isGaming = false;
+      this.keyboard.disabledKeyReal();
+      this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
+      return;
+    }
+    return;
+  }
+
+  moveNextRound() {
+    this.addRoundNumber();
+    this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
+    this.inputSequence.setInnerText('');
+    this.newSequence();
+    this.keyboard
+      .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
+      .then(() => this.toggleGameStatus())
+      .then(() => this.keyboard.disabledKeyReal());
+  }
 }

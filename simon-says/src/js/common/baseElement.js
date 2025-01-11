@@ -64,12 +64,20 @@ export class BaseElement {
   }
 
   removeThisChild(child) {
-    this._elem.removeChild(child._elem);
+    if (this._elem.contains(child._elem)) {
+      this._elem.removeChild(child._elem);
+    } else {
+      return;
+    }
   }
 
   switchChildren(removedChild, addedChild) {
-    this.removeThisChild(removedChild);
-    this.append(addedChild);
+    if (this._elem.contains(removedChild._elem)) {
+      this.removeThisChild(removedChild);
+      this.append(addedChild);
+    } else {
+      return;
+    }
   }
 
   toggleClass(style, option) {

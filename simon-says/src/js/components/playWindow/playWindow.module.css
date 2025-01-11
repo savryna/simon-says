@@ -78,8 +78,7 @@
   border: 1px solid #c1121f;
 }
 
-.buttonRestart,
-.buttonNew {
+.controlButton {
   padding-top: 10px;
   font-family: Vanity, serif;
   font-weight: 800;
@@ -128,4 +127,6 @@
   font-family: Vanity, serif;
   font-weight: 800;
   font-size: clamp(1em, 3vw, 2em);
+  min-width: 35px;
+  text-align: center;
 }

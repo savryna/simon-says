@@ -71,12 +71,12 @@ export class Keyboard extends BaseElement {
     const filter = this.buttonsLetters.filter((elem) =>
       KEYBOARD_TYPE[keyboardType].flat().includes(elem),
     );
-    const buttonElems = Array.from(
-      { length: filter.length },
-      (_, idx) => this.keyButtonsObject[filter[idx]],
-    );
+    // const buttonElems = Array.from(
+    //   { length: filter.length },
+    //   (_, idx) => this.keyButtonsObject[filter[idx]],
+    // );
     // console.log(buttonElems);
-    return buttonElems;
+    return filter;
   }
 
   pushPhysicKeyboard(event) {
@@ -134,12 +134,25 @@ export class Keyboard extends BaseElement {
   }
 
   createSequence(levelNum, keyboardType) {
-    const sequence = [];
+    // const sequence = [];
+    // for (let i = 0; i < levelNum * 2; i++) {
+    //   sequence.push(getRandomElem(this.filterKeyboard(keyboardType)));
+    // }
+    // // console.log(sequence);
+    // return sequence;
+    let sequence = '';
     for (let i = 0; i < levelNum * 2; i++) {
-      sequence.push(getRandomElem(this.filterKeyboard(keyboardType)));
+      sequence += getRandomElem(this.filterKeyboard(keyboardType));
     }
-    // console.log(sequence);
     return sequence;
+  }
+
+  buttonElemsSequence(sequenceStr) {
+    const sequenceElem = [];
+    for (let i = 0; i < sequenceStr.length; i++) {
+      sequenceElem.push(this.keyButtonsObject[sequenceStr[i]]);
+    }
+    return sequenceElem;
   }
 
   animateButtonSequence(buttons) {
