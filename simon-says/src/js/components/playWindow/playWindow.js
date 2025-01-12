@@ -246,7 +246,7 @@ export class PlayWindow extends BaseElement {
       // 2,
       this.selectLevel.selectLevelSetting,
     );
-    // console.log(this.curSequence);
+    console.log(this.curSequence);
   }
 
   compareInputSequence(keyboardType, event) {
@@ -285,6 +285,8 @@ export class PlayWindow extends BaseElement {
       if (this.roundNumber === 5) {
         // console.log('You win');
         this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
+        this.opacityAnimation(this.inputSequence);
+        this.inputSequence.setInnerText('You win!');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {
@@ -292,6 +294,7 @@ export class PlayWindow extends BaseElement {
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
+        this.opacityAnimation(this.inputSequence);
         this.inputSequence.setInnerText('Cool!');
         return;
       }
@@ -313,6 +316,15 @@ export class PlayWindow extends BaseElement {
     };
     this.inputSequence.toggleClass(styles.error, true);
     this.gameButtons._elem.animate(errorShaking, errorShakingTiming);
+  }
+
+  opacityAnimation(baseElement) {
+    const opacityAnim = [{ opacity: '0' }, { opacity: '1' }];
+    const opacityAnimTiming = {
+      duration: 500,
+      iterations: 1,
+    };
+    baseElement._elem.animate(opacityAnim, opacityAnimTiming);
   }
 
   moveNextRound() {
