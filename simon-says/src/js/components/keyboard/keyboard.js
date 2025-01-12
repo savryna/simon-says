@@ -166,10 +166,19 @@ export class Keyboard extends BaseElement {
   fillInputSequence(event, inputElem, keyboardType) {
     const curKeyboard = this.filterKeyboard(keyboardType);
     console.log(curKeyboard);
+    let buttonLetter = null;
 
-    const buttonLetter = this.buttonsLetters.find(
-      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
-    );
+    if (event.type === 'keydown') {
+      buttonLetter = this.buttonsLetters.find(
+        (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+      );
+    }
+    if (event.type === 'click') {
+      console.log(event);
+      buttonLetter = this.buttonsLetters.find(
+        (letter) => event.currentTarget.innerText.toLowerCase() === letter.toLowerCase(),
+      );
+    }
 
     const currentButton = this.keyButtonsObject[buttonLetter];
 

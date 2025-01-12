@@ -75,6 +75,17 @@ export class PlayWindow extends BaseElement {
       // console.log(this.selectLevel.currentKeyboard);
     });
 
+    this.keyboard.buttonsElems.forEach((button) =>
+      button.addEventListener('click', (event) => {
+        this.keyboard.fillInputSequence(
+          event,
+          this.inputSequence,
+          this.selectLevel.selectLevelSetting,
+        );
+        this.compareInputSequence();
+      }),
+    );
+
     document.addEventListener('keydown', (event) => {
       this.keyboard.fillInputSequence(
         event,
