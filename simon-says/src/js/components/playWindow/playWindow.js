@@ -255,11 +255,13 @@ export class PlayWindow extends BaseElement {
     const keyArray = KEYBOARD_TYPE[keyboardType];
     console.log(keyArray);
 
-    const buttonLetter = this.keyboard.buttonsLetters.find(
-      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
-    );
-    console.log(buttonLetter);
-    if (!keyArray.flat().includes(buttonLetter)) return;
+    if (event.type === 'keydown') {
+      const buttonLetter = this.keyboard.buttonsLetters.find(
+        (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+      );
+      console.log(buttonLetter);
+      if (!keyArray.flat().includes(buttonLetter)) return;
+    }
 
     for (let i = 0; i < userInputSequence.length; i++) {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
