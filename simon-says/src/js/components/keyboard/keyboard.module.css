@@ -65,7 +65,7 @@
 .keyButton:active,
 .keyButton.active {
   transform: translate(0, 0.75em);
-  background-color: #ff4e3e;
+  background-color: #e6514300;
   border-color: #ffffffb0;
   cursor: default;
 }

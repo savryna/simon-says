@@ -83,7 +83,7 @@ export class Keyboard extends BaseElement {
     const filter = this.buttonsLetters.filter((elem) =>
       KEYBOARD_TYPE[keyboardType].flat().includes(elem),
     );
-    console.log(KEYBOARD_TYPE[keyboardType]);
+    // console.log(KEYBOARD_TYPE[keyboardType]);
     // const buttonElems = Array.from(
     //   { length: filter.length },
     //   (_, idx) => this.keyButtonsObject[filter[idx]],
@@ -106,7 +106,7 @@ export class Keyboard extends BaseElement {
     if (event.type === 'keydown' || event.type === 'mouseover') {
       // this.buttonHovered(event);
       if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
-      console.log(currentButton.hasAttributes('disabled'));
+      // console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
@@ -185,7 +185,7 @@ export class Keyboard extends BaseElement {
 
   fillInputSequence(event, inputElem, keyboardType) {
     const curKeyboard = this.filterKeyboard(keyboardType);
-    console.log(curKeyboard);
+    // console.log(curKeyboard);
     let buttonLetter = null;
 
     if (event.type === 'keydown') {
@@ -194,7 +194,7 @@ export class Keyboard extends BaseElement {
       );
     }
     if (event.type === 'click') {
-      console.log(event);
+      // console.log(event);
       buttonLetter = this.buttonsLetters.find(
         (letter) => event.currentTarget.innerText.toLowerCase() === letter.toLowerCase(),
       );

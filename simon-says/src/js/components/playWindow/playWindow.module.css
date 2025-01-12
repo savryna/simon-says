@@ -57,7 +57,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #de130034;
+  background-color: #de130052;
   border-radius: 50px;
   border: 2px solid rgba(255 255 255 / 20%);
   transition: all 0.3s ease-in-out;
@@ -66,7 +66,7 @@
 
 .buttonStart:hover {
   background-color: transparent;
-  backdrop-filter: blur(100px);
+  box-shadow: 0 2px 14px 9px rgba(163 163 163 / 20%);
 }
 
 .gameButtons {
@@ -91,6 +91,11 @@
   border: 2px solid #c1121f;
   backdrop-filter: blur(100px);
   background: #c1121f;
+  transition: all 0.3s ease-in-out;
+}
+
+.controlButton:hover {
+  background-color: #a60e00;
 }
 
 .inputSequence {
@@ -139,4 +144,8 @@
 
 .disabled {
   background: #c1121e58;
+}
+
+.error {
+  color: #c1121f;
 }

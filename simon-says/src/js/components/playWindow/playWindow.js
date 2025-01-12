@@ -84,10 +84,10 @@ export class PlayWindow extends BaseElement {
       this.newSequence();
       this.selectLvlAnimation();
       this.startBtnAnimation();
-      console.log(this.keyboard.isGaming);
+      // console.log(this.keyboard.isGaming);
       // this.keyboard.isGaming = true;
       // this.keyboard.disabledKeyReal();
-      console.log(this.curSequence);
+      // console.log(this.curSequence);
       // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
       // console.log(this.selectLevel.currentKeyboard);
     });
@@ -99,7 +99,7 @@ export class PlayWindow extends BaseElement {
           this.inputSequence,
           this.selectLevel.selectLevelSetting,
         );
-        this.compareInputSequence(this.selectLevel.selectLevelSetting);
+        this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
       }),
     );
 
@@ -109,7 +109,7 @@ export class PlayWindow extends BaseElement {
         this.inputSequence,
         this.selectLevel.selectLevelSetting,
       );
-      this.compareInputSequence(this.selectLevel.selectLevelSetting);
+      this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
     });
 
     this.buttonNext.addEventListener('click', () => {
@@ -246,24 +246,31 @@ export class PlayWindow extends BaseElement {
       // 2,
       this.selectLevel.selectLevelSetting,
     );
-    console.log(this.curSequence);
+    // console.log(this.curSequence);
   }
 
-  compareInputSequence(keyboardType) {
+  compareInputSequence(keyboardType, event) {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
     const keyArray = KEYBOARD_TYPE[keyboardType];
-    console.log(keyboardType);
+    console.log(keyArray);
+
+    const buttonLetter = this.keyboard.buttonsLetters.find(
+      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+    );
+    console.log(buttonLetter);
+    if (!keyArray.flat().includes(buttonLetter)) return;
 
     for (let i = 0; i < userInputSequence.length; i++) {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
-      console.log(this.incorrectAttempt);
+      // console.log(this.incorrectAttempt);
       // console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
+        this.errorAnimation();
         this.incorrectAttempt -= 1;
-        console.log(userInputSequence[i], curSequence[i]);
-        console.log('error');
+        // console.log(userInputSequence[i], curSequence[i]);
+        // console.log('error');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         // if (this.incorrectAttempt <= 0) {
@@ -276,12 +283,12 @@ export class PlayWindow extends BaseElement {
     }
     if (userInputSequence === curSequence) {
       if (this.roundNumber === 5) {
-        console.log('You win');
+        // console.log('You win');
         this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {
-        console.log('correct');
+        // console.log('correct');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
@@ -292,7 +299,24 @@ export class PlayWindow extends BaseElement {
     return;
   }
 
+  errorAnimation() {
+    const errorShaking = [
+      { transform: 'rotate(0deg)' },
+      { transform: 'rotate(5deg)' },
+      { transform: 'rotate(0deg)' },
+      { transform: 'rotate(-5deg)' },
+      { transform: 'rotate(0deg)' },
+    ];
+    const errorShakingTiming = {
+      duration: 300,
+      iterations: 1,
+    };
+    this.inputSequence.toggleClass(styles.error, true);
+    this.gameButtons._elem.animate(errorShaking, errorShakingTiming);
+  }
+
   moveNextRound() {
+    this.inputSequence.toggleClass(styles.error, false);
     this.addRoundNumber();
     this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
     this.buttonRestart.toggleClass(styles.disabled, false);
@@ -314,6 +338,7 @@ export class PlayWindow extends BaseElement {
 
   repeatSequence() {
     this.incorrectAttempt--;
+    this.inputSequence.toggleClass(styles.error, false);
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
@@ -330,6 +355,7 @@ export class PlayWindow extends BaseElement {
 
   newGame() {
     this.inputSequence.setInnerText('');
+    this.inputSequence.toggleClass(styles.error, false);
     this.incorrectAttempt = 2;
     this.roundNumber = 1;
     this.switchChildren(this.roundBlock, this.selectLevel);
