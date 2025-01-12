@@ -55,10 +55,20 @@ export class PlayWindow extends BaseElement {
     this.roundBlock.append(this.currentRound, this.currentLevel, amountRounds);
 
     // input block
-    this.buttonRestart = new BaseElement('button', [styles.controlButton], {}, 'RESTART');
+    this.buttonRestart = new BaseElement(
+      'button',
+      [styles.controlButton, styles.pointerEvents],
+      {},
+      'RESTART',
+    );
     this.buttonNext = new BaseElement('button', [styles.controlButton], {}, 'NEXT');
     this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, ' ');
-    this.buttonNewGame = new BaseElement('button', [styles.controlButton], {}, 'NEW GAME');
+    this.buttonNewGame = new BaseElement(
+      'button',
+      [styles.controlButton, styles.pointerEvents],
+      {},
+      'NEW GAME',
+    );
     this.gameButtons = new BaseElement('div', [styles.gameButtons]);
     this.gameButtons.append(this.buttonNewGame, this.inputSequence, this.buttonRestart);
 
@@ -74,6 +84,9 @@ export class PlayWindow extends BaseElement {
       this.newSequence();
       this.selectLvlAnimation();
       this.startBtnAnimation();
+      console.log(this.keyboard.isGaming);
+      // this.keyboard.isGaming = true;
+      // this.keyboard.disabledKeyReal();
       console.log(this.curSequence);
       // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
       // console.log(this.selectLevel.currentKeyboard);
@@ -204,7 +217,11 @@ export class PlayWindow extends BaseElement {
       //     (),
       // )
       .then(() => this.toggleGameStatus())
-      .then(() => this.keyboard.disabledKeyReal());
+      .then(() => this.keyboard.disabledKeyReal())
+      .then(() => {
+        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+        this.buttonRestart.toggleClass(styles.pointerEvents, false);
+      });
     // .then(() => this.buttonRestart.toggleClass(styles.pointerEvents, false));
 
     // if (clickBtn === this.buttonNewGame) {
@@ -283,15 +300,28 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.incorrectAttempt = 2;
+    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
+    this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => this.toggleGameStatus())
-      .then(() => this.keyboard.disabledKeyReal());
+      .then(() => this.keyboard.disabledKeyReal())
+      .then(() => {
+        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+        this.buttonRestart.toggleClass(styles.pointerEvents, false);
+      });
   }
 
   repeatSequence() {
     this.incorrectAttempt--;
-    this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence));
+    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
+    this.buttonRestart.toggleClass(styles.pointerEvents, true);
+    this.keyboard
+      .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
+      .then(() => {
+        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+        this.buttonRestart.toggleClass(styles.pointerEvents, false);
+      });
     this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
     this.inputSequence.setInnerText('');
     this.keyboard.isGaming = true;
@@ -307,5 +337,9 @@ export class PlayWindow extends BaseElement {
     this.buttonRestart.toggleClass(styles.disabled, false);
     this.buttonRestart.toggleClass(styles.pointerEvents, false);
     this.selectLevel.append(this.selectLevel.pseudo);
+    // this.toggleGameStatus();
+    this.keyboard.isGaming = false;
+    this.keyboard.disabledKeyReal();
+    this.keyboard.downButtons();
   }
 }

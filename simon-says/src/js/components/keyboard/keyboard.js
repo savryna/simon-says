@@ -140,6 +140,10 @@ export class Keyboard extends BaseElement {
     this.buttonsElems.forEach((button) => button.toggleClass(styles.active, false));
   }
 
+  downButtons() {
+    this.buttonsElems.forEach((button) => button.toggleClass(styles.active, true));
+  }
+
   animateButton(button) {
     return new Promise((resolve) => {
       button.toggleClass(styles.active, true);
