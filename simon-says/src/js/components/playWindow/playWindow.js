@@ -243,7 +243,7 @@ export class PlayWindow extends BaseElement {
   newSequence() {
     this.curSequence = this.keyboard.createSequence(
       this.roundNumber,
-      // 2,
+      // 2
       this.selectLevel.selectLevelSetting,
     );
     console.log(this.curSequence);
@@ -261,6 +261,11 @@ export class PlayWindow extends BaseElement {
       );
       // console.log(buttonLetter);
       if (!keyArray.flat().includes(buttonLetter)) return;
+    }
+    if (this.incorrectAttempt <= 0) {
+      this.buttonRestart.toggleClass(styles.pointerEvents, true);
+      this.buttonRestart.toggleClass(styles.disabled, true);
+      this.buttonRestart.setAttributes({ disabled: 'disabled' });
     }
 
     for (let i = 0; i < userInputSequence.length; i++) {
@@ -335,6 +340,7 @@ export class PlayWindow extends BaseElement {
     this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
     this.buttonRestart.toggleClass(styles.disabled, false);
     this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    this.buttonRestart.removeAttributes(['disabled']);
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.incorrectAttempt = 2;
@@ -372,10 +378,12 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.toggleClass(styles.error, false);
     this.incorrectAttempt = 2;
     this.roundNumber = 1;
+    this.currentRound.setInnerHTML(`0${this.roundNumber}`);
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);
     this.buttonRestart.toggleClass(styles.disabled, false);
     this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
     // this.toggleGameStatus();
     this.keyboard.isGaming = false;
