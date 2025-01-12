@@ -130,3 +130,11 @@
   min-width: 35px;
   text-align: center;
 }
+
+.pointerEvents {
+  pointer-events: none;
+}
+
+.disabled {
+  background: #c1121e58;
+}

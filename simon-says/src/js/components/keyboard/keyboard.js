@@ -40,6 +40,13 @@ export class Keyboard extends BaseElement {
     // );
     document.body.addEventListener('keydown', (event) => this.pushPhysicKeyboard(event));
     document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
+    this.buttonsElems.forEach((button) =>
+      button.addEventListener('mouseover', (event) => this.pushPhysicKeyboard(event)),
+    );
+    this.buttonsElems.forEach((button) =>
+      button.addEventListener('mouseup', (event) => this.pushPhysicKeyboard(event)),
+    );
+
     this.drawKeyboard();
     this.disabledKeyReal();
 
@@ -91,7 +98,8 @@ export class Keyboard extends BaseElement {
 
     const currentButton = this.keyButtonsObject[buttonLetter];
 
-    if (event.type === 'keydown') {
+    if (event.type === 'keydown' || event.type === 'mouseover') {
+      this.buttonHovered(event);
       if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
       console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
@@ -99,7 +107,8 @@ export class Keyboard extends BaseElement {
       currentButton.toggleClass(styles.active, true);
     }
 
-    if (event.type === 'keyup') {
+    if (event.type === 'keyup' || event.type === 'moseup') {
+      this.buttonHovered(event);
       if (this.currentLetter === buttonLetter) {
         this.isKeyPressed = false;
         this.currentLetter = null;
@@ -190,5 +199,13 @@ export class Keyboard extends BaseElement {
       return;
 
     inputElem.addInnerText(buttonLetter.toUpperCase());
+  }
+  buttonHovered(event) {
+    if (event.type === 'mouseover') {
+      event.currentTarget.classList.add('hovered');
+    }
+    if (event.type === 'mouseup') {
+      event.currentTarget.classList.remove('hovered');
+    }
   }
 }

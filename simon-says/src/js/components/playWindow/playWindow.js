@@ -5,6 +5,7 @@ import styles from './playWindow.module.css';
 
 export class PlayWindow extends BaseElement {
   roundNumber = 1;
+  incorrectAttempt = 2;
 
   constructor(keyboard) {
     super('div', [styles.playWindow]);
@@ -98,6 +99,10 @@ export class PlayWindow extends BaseElement {
     this.buttonNext.addEventListener('click', () => {
       this.moveNextRound();
     });
+
+    this.buttonRestart.addEventListener('click', () => {
+      this.repeatSequence();
+    });
   }
 
   toggleGameStatus() {
@@ -185,6 +190,7 @@ export class PlayWindow extends BaseElement {
       // )
       .then(() => this.toggleGameStatus())
       .then(() => this.keyboard.disabledKeyReal());
+    // .then(() => this.buttonRestart.toggleClass(styles.pointerEvents, false));
   }
 
   addRoundNumber() {
@@ -212,9 +218,16 @@ export class PlayWindow extends BaseElement {
     for (let i = 0; i < userInputSequence.length; i++) {
       console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
+        this.incorrectAttempt--;
         console.log(userInputSequence[i], curSequence[i]);
         console.log('error');
         this.keyboard.isGaming = false;
+        this.keyboard.disabledKeyReal();
+        break;
+      }
+      if (this.incorrectAttempt <= 0) {
+        this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
+        this.keyboard.isGaming = true;
         this.keyboard.disabledKeyReal();
       }
     }
@@ -231,11 +244,22 @@ export class PlayWindow extends BaseElement {
   moveNextRound() {
     this.addRoundNumber();
     this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
+    this.buttonRestart.toggleClass(styles.disabled, false);
+    this.buttonRestart.toggleClass(styles.pointerEvents, false);
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => this.toggleGameStatus())
       .then(() => this.keyboard.disabledKeyReal());
+  }
+
+  repeatSequence() {
+    this.incorrectAttempt--;
+    this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence));
+    this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
+    this.inputSequence.setInnerText('');
+    this.keyboard.isGaming = true;
+    this.keyboard.disabledKeyReal();
   }
 }
