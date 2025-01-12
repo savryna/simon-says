@@ -52,8 +52,7 @@
     box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-/* .keyButton:hover */
-.keyButton.hover {
+.keyButton:hover {
   transform: translate(0, 0.25em);
   background-color: #ff4e3e;
   border-color: #ffffffb0;
@@ -64,8 +63,7 @@
 }
 
 .keyButton:active,
-.keyButton.active,
-.keyButton.disabled {
+.keyButton.active {
   transform: translate(0, 0.75em);
   background-color: #ff4e3e;
   border-color: #ffffffb0;
@@ -73,12 +71,11 @@
 }
 
 .keyButton.disabled {
-  background: #ae0e0000;
+  pointer-events: none;
 }
 
 .keyButton:active::before,
-.keyButton.active::before,
-.keyButton.disabled::before {
+.keyButton.active::before {
   transform: translate3d(0, 0, -1em);
 }
 

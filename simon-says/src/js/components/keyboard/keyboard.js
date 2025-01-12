@@ -57,7 +57,12 @@ export class Keyboard extends BaseElement {
     return Array.from({ length: this.ALL_KEY.length }, (_, idx) => {
       return [
         this.ALL_KEY[idx],
-        new BaseElement('button', [styles.keyButton, styles.active], {}, this.ALL_KEY[idx]),
+        new BaseElement(
+          'button',
+          [styles.keyButton, styles.active, styles.disabled],
+          {},
+          this.ALL_KEY[idx],
+        ),
       ];
     });
   }
@@ -99,7 +104,7 @@ export class Keyboard extends BaseElement {
     const currentButton = this.keyButtonsObject[buttonLetter];
 
     if (event.type === 'keydown' || event.type === 'mouseover') {
-      this.buttonHovered(event);
+      // this.buttonHovered(event);
       if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
       console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
@@ -108,7 +113,7 @@ export class Keyboard extends BaseElement {
     }
 
     if (event.type === 'keyup' || event.type === 'moseup') {
-      this.buttonHovered(event);
+      // this.buttonHovered(event);
       if (this.currentLetter === buttonLetter) {
         this.isKeyPressed = false;
         this.currentLetter = null;
@@ -121,10 +126,12 @@ export class Keyboard extends BaseElement {
     if (!this.isGaming) {
       this.buttonsElems.forEach((button) => {
         button.setAttributes({ disabled: 'disabled' });
+        button.toggleClass(styles.disabled, true);
       });
     } else {
       this.buttonsElems.forEach((button) => {
         button.removeAttributes(['disabled']);
+        button.toggleClass(styles.disabled, false);
       });
     }
   }
@@ -200,12 +207,12 @@ export class Keyboard extends BaseElement {
 
     inputElem.addInnerText(buttonLetter.toUpperCase());
   }
-  buttonHovered(event) {
-    if (event.type === 'mouseover') {
-      event.currentTarget.classList.add('hovered');
-    }
-    if (event.type === 'mouseup') {
-      event.currentTarget.classList.remove('hovered');
-    }
-  }
+  // buttonHovered(event) {
+  //   if (event.type === 'mouseover') {
+  //     event.currentTarget.classList.add('hovered');
+  //   }
+  //   if (event.type === 'mouseup') {
+  //     event.currentTarget.classList.remove('hovered');
+  //   }
+  // }
 }
