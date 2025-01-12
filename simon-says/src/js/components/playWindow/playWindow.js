@@ -253,13 +253,13 @@ export class PlayWindow extends BaseElement {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
     const keyArray = KEYBOARD_TYPE[keyboardType];
-    console.log(keyArray);
+    // console.log(keyArray);
 
     if (event.type === 'keydown') {
       const buttonLetter = this.keyboard.buttonsLetters.find(
         (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
       );
-      console.log(buttonLetter);
+      // console.log(buttonLetter);
       if (!keyArray.flat().includes(buttonLetter)) return;
     }
 
