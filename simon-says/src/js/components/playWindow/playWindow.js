@@ -76,7 +76,11 @@ export class PlayWindow extends BaseElement {
     });
 
     document.addEventListener('keydown', (event) => {
-      this.keyboard.fillInputSequence(event, this.inputSequence);
+      this.keyboard.fillInputSequence(
+        event,
+        this.inputSequence,
+        this.selectLevel.selectLevelSetting,
+      );
       this.compareInputSequence();
     });
 
@@ -197,13 +201,14 @@ export class PlayWindow extends BaseElement {
     for (let i = 0; i < userInputSequence.length; i++) {
       console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
+        console.log(userInputSequence[i], curSequence[i]);
         console.log('error');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       }
     }
     if (userInputSequence === curSequence) {
-      console.log('game end');
+      console.log('correct');
       this.keyboard.isGaming = false;
       this.keyboard.disabledKeyReal();
       this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);

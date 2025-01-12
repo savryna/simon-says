@@ -67,10 +67,11 @@ export class Keyboard extends BaseElement {
     return this;
   }
 
-  filterKeyboard(keyboardType = 'easy') {
+  filterKeyboard(keyboardType) {
     const filter = this.buttonsLetters.filter((elem) =>
       KEYBOARD_TYPE[keyboardType].flat().includes(elem),
     );
+    console.log(KEYBOARD_TYPE[keyboardType]);
     // const buttonElems = Array.from(
     //   { length: filter.length },
     //   (_, idx) => this.keyButtonsObject[filter[idx]],
@@ -162,14 +163,22 @@ export class Keyboard extends BaseElement {
     // .then(() => console.log('done'));
   }
 
-  fillInputSequence(event, inputElem) {
+  fillInputSequence(event, inputElem, keyboardType) {
+    const curKeyboard = this.filterKeyboard(keyboardType);
+    console.log(curKeyboard);
+
     const buttonLetter = this.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
     );
 
     const currentButton = this.keyButtonsObject[buttonLetter];
 
-    if (!buttonLetter || currentButton.hasAttributes('disabled')) return;
+    if (
+      !buttonLetter ||
+      currentButton.hasAttributes('disabled') ||
+      !curKeyboard.includes(buttonLetter)
+    )
+      return;
 
     inputElem.addInnerText(buttonLetter.toUpperCase());
   }
