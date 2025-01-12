@@ -2,7 +2,7 @@ import { BaseElement } from '../../common/baseElement.js';
 import { SelectLevel } from '../selectLevel/selectLevel.js';
 import { getRandomElem } from '../../common/helper.js';
 import styles from './playWindow.module.css';
-import { Keyboard } from '../keyboard/keyboard.js';
+import { Keyboard, KEYBOARD_TYPE } from '../keyboard/keyboard.js';
 
 export class PlayWindow extends BaseElement {
   roundNumber = 1;
@@ -86,7 +86,7 @@ export class PlayWindow extends BaseElement {
           this.inputSequence,
           this.selectLevel.selectLevelSetting,
         );
-        this.compareInputSequence();
+        this.compareInputSequence(this.selectLevel.selectLevelSetting);
       }),
     );
 
@@ -96,7 +96,7 @@ export class PlayWindow extends BaseElement {
         this.inputSequence,
         this.selectLevel.selectLevelSetting,
       );
-      this.compareInputSequence();
+      this.compareInputSequence(this.selectLevel.selectLevelSetting);
     });
 
     this.buttonNext.addEventListener('click', () => {
@@ -236,24 +236,29 @@ export class PlayWindow extends BaseElement {
     console.log(this.curSequence);
   }
 
-  compareInputSequence() {
+  compareInputSequence(keyboardType) {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
+    const keyArray = KEYBOARD_TYPE[keyboardType];
+    console.log(keyboardType);
 
     for (let i = 0; i < userInputSequence.length; i++) {
-      console.log(userInputSequence[i], curSequence[i]);
+      if (!keyArray.flat().includes(userInputSequence[i])) return;
+      if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
+      console.log(this.incorrectAttempt);
+      // console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
-        this.incorrectAttempt--;
+        this.incorrectAttempt -= 1;
         console.log(userInputSequence[i], curSequence[i]);
         console.log('error');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
+        // if (this.incorrectAttempt <= 0) {
+        //   this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
+        //   this.keyboard.isGaming = true;
+        //   this.keyboard.disabledKeyReal();
+        // }
         break;
-      }
-      if (this.incorrectAttempt <= 0) {
-        this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
-        this.keyboard.isGaming = true;
-        this.keyboard.disabledKeyReal();
       }
     }
     if (userInputSequence === curSequence) {
@@ -274,6 +279,7 @@ export class PlayWindow extends BaseElement {
     this.buttonRestart.toggleClass(styles.pointerEvents, false);
     this.inputSequence.setInnerText('');
     this.newSequence();
+    this.incorrectAttempt = 2;
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => this.toggleGameStatus())
