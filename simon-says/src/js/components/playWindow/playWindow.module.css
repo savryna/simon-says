@@ -61,12 +61,12 @@
   border-radius: 50px;
   border: 2px solid rgba(255 255 255 / 20%);
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 14px 9px rgb(80 80 80 / 20%);
 }
 
 .buttonStart:hover {
   background-color: transparent;
   backdrop-filter: blur(100px);
-  box-shadow: 0 2px 14px 9px rgb(80 80 80 / 20%);
 }
 
 .gameButtons {
