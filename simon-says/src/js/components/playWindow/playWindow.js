@@ -2,6 +2,7 @@ import { BaseElement } from '../../common/baseElement.js';
 import { SelectLevel } from '../selectLevel/selectLevel.js';
 import { getRandomElem } from '../../common/helper.js';
 import styles from './playWindow.module.css';
+import { Keyboard } from '../keyboard/keyboard.js';
 
 export class PlayWindow extends BaseElement {
   roundNumber = 1;
@@ -65,12 +66,14 @@ export class PlayWindow extends BaseElement {
     this.append(gameTitle, this.selectLevel, this.buttonStart);
     this.buttonStart.addEventListener('click', () => {
       this.upKeyboard();
+
       this.keyboard.upButtons();
       // console.log(this.selectLevel.selectLevelSetting);
       // this.keyboard = this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
+      this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
+      this.newSequence();
       this.selectLvlAnimation();
       this.startBtnAnimation();
-      this.newSequence();
       console.log(this.curSequence);
       // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
       // console.log(this.selectLevel.currentKeyboard);
@@ -102,6 +105,16 @@ export class PlayWindow extends BaseElement {
 
     this.buttonRestart.addEventListener('click', () => {
       this.repeatSequence();
+    });
+
+    this.buttonNewGame.addEventListener('click', () => {
+      this.newGame();
+      this.switchChildren(
+        this.keyboard,
+        this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting),
+      );
+
+      // this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
     });
   }
 
@@ -149,7 +162,7 @@ export class PlayWindow extends BaseElement {
     });
   }
 
-  startBtnAnimation() {
+  startBtnAnimation(status = 'active') {
     const resizeWidth = new KeyframeEffect(
       this.buttonStart._elem,
       { width: '80%' },
@@ -160,7 +173,6 @@ export class PlayWindow extends BaseElement {
       },
     );
     const resizeWidthAnimation = new Animation(resizeWidth, document.timeline);
-    resizeWidthAnimation.play();
 
     const opacity = new KeyframeEffect(this.buttonStart._elem, [{ opacity: '0' }], {
       delay: 500,
@@ -169,7 +181,10 @@ export class PlayWindow extends BaseElement {
       easing: 'ease-in-out',
     });
     const opacityAnimantion = new Animation(opacity, document.timeline);
+
+    resizeWidthAnimation.play();
     opacityAnimantion.play();
+
     opacityAnimantion.finished
       .then(() => this.switchChildren(this.buttonStart, this.gameButtons))
       .then(() =>
@@ -191,6 +206,16 @@ export class PlayWindow extends BaseElement {
       .then(() => this.toggleGameStatus())
       .then(() => this.keyboard.disabledKeyReal());
     // .then(() => this.buttonRestart.toggleClass(styles.pointerEvents, false));
+
+    // if (clickBtn === this.buttonNewGame) {
+    //   // if (opacityAnimantion.playState === 'running' || opacityAnimantion.playState === 'pending') {
+    //   //   opacityAnimantion.cancel();
+    //   // }
+
+    //   // console.log(opacityAnimantion.playState); // Должно быть 'running' или 'pending'
+
+    //   opacityAnimantion.finish();
+    //   // return;
   }
 
   addRoundNumber() {
@@ -236,6 +261,7 @@ export class PlayWindow extends BaseElement {
       this.keyboard.isGaming = false;
       this.keyboard.disabledKeyReal();
       this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
+      this.inputSequence.setInnerText('Cool!');
       return;
     }
     return;
@@ -261,5 +287,16 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.setInnerText('');
     this.keyboard.isGaming = true;
     this.keyboard.disabledKeyReal();
+  }
+
+  newGame() {
+    this.inputSequence.setInnerText('');
+    this.incorrectAttempt = 2;
+    this.roundNumber = 1;
+    this.switchChildren(this.roundBlock, this.selectLevel);
+    this.switchChildren(this.gameButtons, this.buttonStart);
+    this.buttonRestart.toggleClass(styles.disabled, false);
+    this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    this.selectLevel.append(this.selectLevel.pseudo);
   }
 }
