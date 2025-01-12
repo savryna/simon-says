@@ -221,10 +221,6 @@ export class PlayWindow extends BaseElement {
   addRoundNumber() {
     this.roundNumber += 1;
     this.currentRound.setInnerText(`0${this.roundNumber}`);
-    if (this.roundNumber >= 5) {
-      console.log('You win');
-      this.roundNumber = 0;
-    }
   }
 
   newSequence() {
@@ -262,12 +258,19 @@ export class PlayWindow extends BaseElement {
       }
     }
     if (userInputSequence === curSequence) {
-      console.log('correct');
-      this.keyboard.isGaming = false;
-      this.keyboard.disabledKeyReal();
-      this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
-      this.inputSequence.setInnerText('Cool!');
-      return;
+      if (this.roundNumber === 5) {
+        console.log('You win');
+        this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
+        this.keyboard.isGaming = false;
+        this.keyboard.disabledKeyReal();
+      } else if (this.roundNumber < 5) {
+        console.log('correct');
+        this.keyboard.isGaming = false;
+        this.keyboard.disabledKeyReal();
+        this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
+        this.inputSequence.setInnerText('Cool!');
+        return;
+      }
     }
     return;
   }
