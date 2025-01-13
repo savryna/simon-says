@@ -4,6 +4,11 @@
   width: 100%;
   min-height: 50em;
   background-image: url('../../../img/gradient_bg.png');
+  background-image: image-set(
+    url('../../../img/gradient-1000.avif') type('image/avif'),
+    url('../../../img/gradient-1000.webp') type('image/webp'),
+    url('../../../img/gradient-1000.png') type('image/png')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
