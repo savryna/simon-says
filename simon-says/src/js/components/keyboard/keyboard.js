@@ -49,9 +49,6 @@ export class Keyboard extends BaseElement {
     this.buttonsElems.forEach((button) =>
       button.addEventListener('mouseup', (event) => this.pushPhysicKeyboard(event)),
     );
-    this.buttonsElems.forEach((button) =>
-      button.addEventListener('mousedown', (event) => this.pushPhysicKeyboard(event)),
-    );
 
     this.drawKeyboard();
     this.disabledKeyReal();
@@ -118,7 +115,7 @@ export class Keyboard extends BaseElement {
 
     const currentButton = this.keyButtonsObject[buttonLetter];
 
-    if (event.type === 'keydown' || event.type === 'mouseover') {
+    if (event.type === 'keydown' || event.type === 'mouseover' || event.type === 'mousedown') {
       if (this.isKeyPressed || currentButton.hasAttributes('disabled') || this.isGaming) return;
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
@@ -204,8 +201,9 @@ export class Keyboard extends BaseElement {
       buttonLetter = this.buttonsLetters.find(
         (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
       );
-    }
-    if (event.type === 'click') {
+    } else {
+      // }
+      // if (event.type === 'click' || event.type === 'mouseover') {
       // console.log(event);
       buttonLetter = this.buttonsLetters.find(
         (letter) => event.currentTarget.innerText.toLowerCase() === letter.toLowerCase(),

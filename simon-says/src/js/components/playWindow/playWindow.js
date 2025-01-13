@@ -72,6 +72,17 @@ export class PlayWindow extends BaseElement {
         this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
       }),
     );
+    // this.keyboard.buttonsElems.forEach((button) =>
+    //   button.addEventListener('mousedown', (event) => {
+    //     if (this.incorrectAttempt <= 0 && this.replicability) return;
+    //     this.keyboard.fillInputSequence(
+    //       event,
+    //       this.inputSequence,
+    //       this.selectLevel.selectLevelSetting,
+    //     );
+    //     this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
+    //   }),
+    // );
 
     document.addEventListener('keydown', (event) => {
       if (this.incorrectAttempt <= 0 && this.replicability) return;
