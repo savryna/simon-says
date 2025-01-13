@@ -63,6 +63,7 @@ export class PlayWindow extends BaseElement {
 
     this.keyboard.buttonsElems.forEach((button) =>
       button.addEventListener('click', (event) => {
+        if (this.incorrectAttempt <= 0 && this.replicability) return;
         this.keyboard.fillInputSequence(
           event,
           this.inputSequence,
@@ -73,6 +74,7 @@ export class PlayWindow extends BaseElement {
     );
 
     document.addEventListener('keydown', (event) => {
+      if (this.incorrectAttempt <= 0 && this.replicability) return;
       this.keyboard.fillInputSequence(
         event,
         this.inputSequence,
@@ -205,7 +207,10 @@ export class PlayWindow extends BaseElement {
 
     for (let i = 0; i < userInputSequence.length; i++) {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
+      // должно проверять что в поле уже ошибка, но не проверяет
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
+
+      // if (this.inputSequence.getInnerText())
       if (userInputSequence[i] !== curSequence[i]) {
         if (this.incorrectAttempt <= 0 || this.replicability <= 0) {
           this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -216,7 +221,11 @@ export class PlayWindow extends BaseElement {
           this.opacityAnimation(this.inputSequence);
           this.inputSequence.setInnerText('wah-wah-wah');
         }
-        if (this.incorrectAttempt >= 1) {
+        // if (this.incorrectAttempt >= 1) {
+        //   this.errorAnimation();
+        // }
+        if (!this.inputSequence.getAttribute() && this.incorrectAttempt >= 1) {
+          console.log('has error');
           this.errorAnimation();
         }
         this.inputSequence.toggleClass(styles.error, true);
@@ -289,7 +298,7 @@ export class PlayWindow extends BaseElement {
     this.buttonRestart.removeAttributes(['disabled']);
     this.inputSequence.setInnerText('');
     this.newSequence();
-    this.incorrectAttempt = 2;
+    this.incorrectAttempt = 1;
     this.replicability = 1;
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -326,7 +335,7 @@ export class PlayWindow extends BaseElement {
   newGame() {
     this.inputSequence.setInnerText('');
     this.inputSequence.toggleClass(styles.error, false);
-    this.incorrectAttempt = 2;
+    this.incorrectAttempt = 1;
     this.roundNumber = 1;
     this.replicability = 1;
     this.currentRound.setInnerHTML(`0${this.roundNumber}`);
