@@ -342,7 +342,7 @@ export class PlayWindow extends BaseElement {
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);
     this.buttonRestart.toggleClass(styles.disabled, false);
-    this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
     this.keyboard.isGaming = false;
