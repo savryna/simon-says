@@ -38,13 +38,19 @@ export class Keyboard extends BaseElement {
     // buttonsElems.forEach((button, idx) =>
     //   button.addEventListener('click', () => console.log(this.buttonsLetters[idx])),
     // );
-    document.body.addEventListener('keydown', (event) => this.pushPhysicKeyboard(event));
+    document.body.addEventListener('keydown', (event) => {
+      if (event.type === 'mousedown') return;
+      this.pushPhysicKeyboard(event);
+    });
     document.body.addEventListener('keyup', (event) => this.pushPhysicKeyboard(event));
     this.buttonsElems.forEach((button) =>
       button.addEventListener('mouseover', (event) => this.pushPhysicKeyboard(event)),
     );
     this.buttonsElems.forEach((button) =>
       button.addEventListener('mouseup', (event) => this.pushPhysicKeyboard(event)),
+    );
+    this.buttonsElems.forEach((button) =>
+      button.addEventListener('mousedown', (event) => this.pushPhysicKeyboard(event)),
     );
 
     this.drawKeyboard();
@@ -93,7 +99,10 @@ export class Keyboard extends BaseElement {
   }
 
   pushPhysicKeyboard(event) {
-    // TODO: нужно отключать hover
+    console.log('event type:', event.type);
+    // if (this.isKeyPressed && event.type === 'keydown') {
+    //   return;
+    // }
 
     const buttonLetter = this.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
@@ -101,19 +110,22 @@ export class Keyboard extends BaseElement {
 
     if (!buttonLetter) return;
 
+    // НЕ РАБОТАЕТ
+    // if (event.type === 'mousedown') {
+    //   this.isKeyPressed = true;
+    //   return;
+    // }
+
     const currentButton = this.keyButtonsObject[buttonLetter];
 
     if (event.type === 'keydown' || event.type === 'mouseover') {
-      // this.buttonHovered(event);
       if (this.isKeyPressed || currentButton.hasAttributes('disabled') || this.isGaming) return;
-      // console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
     }
 
     if (event.type === 'keyup' || event.type === 'moseup') {
-      // this.buttonHovered(event);
       if (this.currentLetter === buttonLetter) {
         this.isKeyPressed = false;
         this.currentLetter = null;

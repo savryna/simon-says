@@ -334,5 +334,6 @@ export class PlayWindow extends BaseElement {
     this.keyboard.isGaming = false;
     this.keyboard.disabledKeyReal();
     this.keyboard.downButtons();
+    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
   }
 }
