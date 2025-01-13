@@ -7,7 +7,7 @@ import { Keyboard, KEYBOARD_TYPE } from '../keyboard/keyboard.js';
 export class PlayWindow extends BaseElement {
   roundNumber = 1;
   replicability = 1;
-  incorrectAttempt = 2;
+  incorrectAttempt = 1;
 
   constructor(keyboard) {
     super('div', [styles.playWindow]);
@@ -188,7 +188,7 @@ export class PlayWindow extends BaseElement {
       // 2
       this.selectLevel.selectLevelSetting,
     );
-    console.log(this.curSequence);
+    console.log('sequence:', this.curSequence);
   }
 
   compareInputSequence(keyboardType, event) {
@@ -207,14 +207,16 @@ export class PlayWindow extends BaseElement {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
       if (userInputSequence[i] !== curSequence[i]) {
-        if (this.incorrectAttempt <= 0) {
+        if (this.incorrectAttempt <= 0 || this.replicability <= 0) {
           this.buttonRestart.toggleClass(styles.pointerEvents, true);
           this.buttonRestart.toggleClass(styles.disabled, true);
           this.buttonRestart.setAttributes({ disabled: 'disabled' });
+          this.inputSequence.toggleClass(styles.error, true);
+
           this.opacityAnimation(this.inputSequence);
           this.inputSequence.setInnerText('wah-wah-wah');
         }
-        if (this.incorrectAttempt >= 2) {
+        if (this.incorrectAttempt >= 1) {
           this.errorAnimation();
         }
         this.inputSequence.toggleClass(styles.error, true);
@@ -242,14 +244,14 @@ export class PlayWindow extends BaseElement {
       }
     }
 
-    console.log(this.incorrectAttempt);
-    if (this.incorrectAttempt <= 0) {
-      this.buttonRestart.toggleClass(styles.pointerEvents, true);
-      this.buttonRestart.toggleClass(styles.disabled, true);
-      this.buttonRestart.setAttributes({ disabled: 'disabled' });
-      this.opacityAnimation(this.inputSequence);
-      this.inputSequence.setInnerText('wah-wah-wah');
-    }
+    // console.log('incorrect atm', this.incorrectAttempt);
+    // if (this.incorrectAttempt <= 0) {
+    //   this.buttonRestart.toggleClass(styles.pointerEvents, true);
+    //   this.buttonRestart.toggleClass(styles.disabled, true);
+    //   this.buttonRestart.setAttributes({ disabled: 'disabled' });
+    //   this.opacityAnimation(this.inputSequence);
+    //   this.inputSequence.setInnerText('wah-wah-wah');
+    // }
     return;
   }
 
@@ -304,9 +306,8 @@ export class PlayWindow extends BaseElement {
   repeatSequence() {
     if (this.replicability <= 0) return;
 
-    this.incorrectAttempt -= 1;
+    // this.incorrectAttempt -= 1;
     this.replicability -= 1;
-    console.log(this.incorrectAttempt);
     this.inputSequence.toggleClass(styles.error, false);
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -335,7 +336,6 @@ export class PlayWindow extends BaseElement {
     this.buttonRestart.toggleClass(styles.pointerEvents, false);
     this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
-    // this.toggleGameStatus();
     this.keyboard.isGaming = false;
     this.keyboard.disabledKeyReal();
     this.keyboard.downButtons();
