@@ -16,7 +16,7 @@
   color: white;
   width: 100%;
   flex-basis: 70%;
-  padding: 55px;
+  padding: 55px clamp(1px, 3vw, 55px);
   background: url('../../../img/svg/top.svg'), url('../../../img/svg/bottom.svg');
   background-position: top, bottom;
   background-repeat: no-repeat;
@@ -36,23 +36,13 @@
   margin: 0;
 }
 
-/* .selectLevel {
-  width: 80%;
-  height: 20%;
-  backdrop-filter: blur(100px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 40px;
-} */
-
 .buttonStart {
   color: white;
   font-family: Vanity, serif;
   font-size: clamp(0.5em, 8vw, 3em);
   font-weight: 800;
-  width: 200px;
   height: 105px;
+  width: 200px;
   padding: 12px 0 0;
   display: flex;
   justify-content: center;
@@ -71,6 +61,7 @@
 
 .gameButtons {
   width: 100%;
+  height: 10vw;
   height: 105px;
   display: flex;
   justify-content: space-between;
@@ -116,6 +107,7 @@
   align-items: center;
   width: 30%;
   height: 20%;
+  height: 80px;
   gap: 10px;
 }
 
@@ -123,7 +115,7 @@
   border-radius: 40px;
   font-family: Solerado, serif;
   font-weight: 400;
-  font-size: clamp(1em, 4vw, 2em);
+  font-size: clamp(1em, 6vw, 2.5em);
   border: 1px solid white;
   padding: 20px 30px;
 }
@@ -133,8 +125,8 @@
   padding-top: 20px;
   font-family: Vanity, serif;
   font-weight: 800;
-  font-size: clamp(1em, 3vw, 2em);
-  min-width: 35px;
+  font-size: clamp(1em, 5vw, 2em);
+  width: 35px;
   text-align: center;
 }
 
@@ -149,4 +141,40 @@
 
 .error {
   color: #c1121f;
+}
+
+@media screen and (width <= 950px) {
+  .buttonStart {
+    font-size: clamp(0.5em, 5vw, 3em);
+  }
+}
+
+@media screen and (width <= 700px) {
+  .playWindow {
+    padding-top: 5vw;
+    padding-bottom: 6vw;
+    gap: 1vw;
+  }
+
+  .roundBlock {
+    height: clamp(58px, 14vw, 80px);
+  }
+
+  .gameButtons {
+    flex-direction: column;
+    height: 141px;
+  }
+
+  .controlButton {
+    height: 44px;
+    width: 170px;
+  }
+
+  .buttonStart {
+    margin: 18px 0;
+  }
+
+  .currentLevel {
+    padding: 14px 30px;
+  }
 }

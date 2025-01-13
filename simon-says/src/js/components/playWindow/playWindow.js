@@ -143,10 +143,10 @@ export class PlayWindow extends BaseElement {
     });
   }
 
-  startBtnAnimation(status = 'active') {
+  startBtnAnimation() {
     const resizeWidth = new KeyframeEffect(
       this.buttonStart._elem,
-      { width: '80%' },
+      { width: '100%' },
       {
         duration: 1000,
         direction: 'normal',
@@ -210,7 +210,6 @@ export class PlayWindow extends BaseElement {
       // должно проверять что в поле уже ошибка, но не проверяет
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
 
-      // if (this.inputSequence.getInnerText())
       if (userInputSequence[i] !== curSequence[i]) {
         if (this.incorrectAttempt <= 0 || this.replicability <= 0) {
           this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -221,9 +220,6 @@ export class PlayWindow extends BaseElement {
           this.opacityAnimation(this.inputSequence);
           this.inputSequence.setInnerText('wah-wah-wah');
         }
-        // if (this.incorrectAttempt >= 1) {
-        //   this.errorAnimation();
-        // }
         if (!this.inputSequence.getAttribute() && this.incorrectAttempt >= 1) {
           console.log('has error');
           this.errorAnimation();
@@ -252,15 +248,6 @@ export class PlayWindow extends BaseElement {
         return;
       }
     }
-
-    // console.log('incorrect atm', this.incorrectAttempt);
-    // if (this.incorrectAttempt <= 0) {
-    //   this.buttonRestart.toggleClass(styles.pointerEvents, true);
-    //   this.buttonRestart.toggleClass(styles.disabled, true);
-    //   this.buttonRestart.setAttributes({ disabled: 'disabled' });
-    //   this.opacityAnimation(this.inputSequence);
-    //   this.inputSequence.setInnerText('wah-wah-wah');
-    // }
     return;
   }
 
@@ -315,7 +302,6 @@ export class PlayWindow extends BaseElement {
   repeatSequence() {
     if (this.replicability <= 0) return;
 
-    // this.incorrectAttempt -= 1;
     this.replicability -= 1;
     this.inputSequence.toggleClass(styles.error, false);
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);

@@ -8,13 +8,15 @@
 .keyboardWrapper {
   color: black;
   flex: 1;
-  padding: 20px;
+  padding: 20px 2px;
   display: flex;
   flex-direction: column;
-  width: min-content;
   min-height: 295px;
   gap: 20px;
+  gap: clamp(1vw, 2.5vw, 1.5em);
   position: relative;
+  width: 100%;
+  transition: all 0.5s ease;
 }
 
 .keyButton {
@@ -26,10 +28,8 @@
   font-weight: 800;
   color: white;
   text-transform: uppercase;
-  max-width: 3em;
-  max-height: 3em;
-  width: 3vw;
-  height: 3vw;
+  width: 3em;
+  height: 3em;
   background: #ae0f00;
   border: 2px solid rgb(255 255 255);
   border-radius: 0.75em;
@@ -82,5 +82,35 @@
 .rowWrapper {
   display: flex;
   justify-content: center;
-  gap: 0.5em;
+  gap: clamp(0.2vw, 1.5vw, 0.5em);
+  flex-wrap: wrap;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+@media screen and (width <= 620px) {
+  .keyboardWrapper {
+    width: 290px;
+  }
+
+  .keyButton {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (width <= 415px) {
+  .keyboardWrapper {
+    width: 255px;
+    padding: 0 2px;
+  }
+
+  .keyButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .rowWrapper {
+    gap: clamp(2.2vw, 10.5vw, 0.5em);
+  }
 }
