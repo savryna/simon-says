@@ -201,7 +201,7 @@ export class PlayWindow extends BaseElement {
       // 2
       this.selectLevel.selectLevelSetting,
     );
-    console.log('sequence:', this.curSequence);
+    console.log('Cross-check hint:', this.curSequence.toUpperCase());
   }
 
   compareInputSequence(keyboardType, event) {

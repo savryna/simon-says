@@ -96,7 +96,7 @@ export class Keyboard extends BaseElement {
   }
 
   pushPhysicKeyboard(event) {
-    console.log('event type:', event.type);
+    // console.log('event type:', event.type);
     // if (this.isKeyPressed && event.type === 'keydown') {
     //   return;
     // }

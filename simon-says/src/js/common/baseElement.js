@@ -6,7 +6,7 @@ export class BaseElement {
 
     this.setAttributes(attributes);
 
-    this._elem.innerHTML = innerContent;
+    this._elem.innerText = innerContent;
   }
 
   addClasses(cssClasses) {
@@ -14,7 +14,7 @@ export class BaseElement {
   }
 
   setInnerHTML(innerContent) {
-    this._elem.innerHTML = innerContent;
+    this._elem.innerText = innerContent;
   }
 
   getInnerHTML() {
@@ -60,7 +60,7 @@ export class BaseElement {
   }
 
   removeChildren() {
-    this._elem.innerHTML = '';
+    this._elem.replaceChildren();
   }
 
   removeThisChild(child) {
