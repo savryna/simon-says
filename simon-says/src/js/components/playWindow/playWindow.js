@@ -15,30 +15,6 @@ export class PlayWindow extends BaseElement {
     this.keyboard = keyboard;
     const gameTitle = new BaseElement('h1', [styles.gameTitle], {}, 'Simon Says');
 
-    // const selectLevel = new BaseElement('div', [styles.selectLevel]);
-
-    // this.levelInputs = Array.from(
-    //   { length: LEVELS.length },
-    //   (_, idx) =>
-    //     new BaseElement('input', [styles.levelInput], {
-    //       type: 'radio',
-    //       id: LEVELS[idx],
-    //       name: 'game_level',
-    //       value: LEVELS[idx],
-    //     }),
-    // );
-    // this.levelLabels = Array.from(
-    //   { length: LEVELS.length },
-    //   (_, idx) =>
-    //     new BaseElement(
-    //       'label',
-    //       [styles.levelLabel],
-    //       {
-    //         for: LEVELS[idx],
-    //       },
-    //       `${LEVELS[idx].toUpperCase()}`,
-    //     ),
-    // );
     this.selectLevel = new SelectLevel(keyboard);
 
     this.buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'START');
@@ -79,18 +55,10 @@ export class PlayWindow extends BaseElement {
       this.upKeyboard();
 
       this.keyboard.upButtons();
-      // console.log(this.selectLevel.selectLevelSetting);
-      // this.keyboard = this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
       this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
       this.newSequence();
       this.selectLvlAnimation();
       this.startBtnAnimation();
-      // console.log(this.keyboard.isGaming);
-      // this.keyboard.isGaming = true;
-      // this.keyboard.disabledKeyReal();
-      // console.log(this.curSequence);
-      // this.keyboard.filterKeyboard(this.selectLevel.selectLevelSetting);
-      // console.log(this.selectLevel.currentKeyboard);
     });
 
     this.keyboard.buttonsElems.forEach((button) =>
@@ -127,8 +95,6 @@ export class PlayWindow extends BaseElement {
         this.keyboard,
         this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting),
       );
-
-      // this.keyboard.drawKeyboard(this.selectLevel.selectLevelSetting);
     });
   }
 
@@ -138,7 +104,6 @@ export class PlayWindow extends BaseElement {
     } else {
       this.keyboard.isGaming = true;
     }
-    // console.log(this.keyboard.isGaming);
   }
 
   upKeyboard() {
@@ -204,36 +169,12 @@ export class PlayWindow extends BaseElement {
       .then(() =>
         this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence)),
       )
-      // .then(() =>
-      //   this.keyboard
-      //     .animateButtonSequence
-      //     // [
-      //     //   this.keyboard.keyButtonsObject['2'],
-      //     //   this.keyboard.keyButtonsObject['2'],
-      //     //   this.keyboard.keyButtonsObject['2'],
-      //     //   this.keyboard.keyButtonsObject['2'],
-      //     // ],
-
-      //     // this.returnCurrentSequence().sequenceElem,
-      //     (),
-      // )
       .then(() => this.toggleGameStatus())
       .then(() => this.keyboard.disabledKeyReal())
       .then(() => {
         this.buttonNewGame.toggleClass(styles.pointerEvents, false);
         this.buttonRestart.toggleClass(styles.pointerEvents, false);
       });
-    // .then(() => this.buttonRestart.toggleClass(styles.pointerEvents, false));
-
-    // if (clickBtn === this.buttonNewGame) {
-    //   // if (opacityAnimantion.playState === 'running' || opacityAnimantion.playState === 'pending') {
-    //   //   opacityAnimantion.cancel();
-    //   // }
-
-    //   // console.log(opacityAnimantion.playState); // Должно быть 'running' или 'pending'
-
-    //   opacityAnimantion.finish();
-    //   // return;
   }
 
   addRoundNumber() {
@@ -254,54 +195,44 @@ export class PlayWindow extends BaseElement {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
     const keyArray = KEYBOARD_TYPE[keyboardType];
-    // console.log(keyArray);
 
     const buttonLetter = this.keyboard.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
     );
     if (event.type === 'keydown') {
-      // console.log(buttonLetter);
       if (!keyArray.flat().includes(buttonLetter)) return;
     }
 
     for (let i = 0; i < userInputSequence.length; i++) {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
-      // console.log(this.incorrectAttempt);
-      // console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
+        if (this.incorrectAttempt <= 0) {
+          this.buttonRestart.toggleClass(styles.pointerEvents, true);
+          this.buttonRestart.toggleClass(styles.disabled, true);
+          this.buttonRestart.setAttributes({ disabled: 'disabled' });
+          this.opacityAnimation(this.inputSequence);
+          this.inputSequence.setInnerText('wah-wah-wah');
+        }
         if (this.incorrectAttempt >= 2) {
           this.errorAnimation();
         }
-        // console.log(userInputSequence[i], curSequence[i]);
-        // console.log('error');
         this.inputSequence.toggleClass(styles.error, true);
 
         this.incorrectAttempt -= 1;
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
-        // if (this.incorrectAttempt <= 0) {
-        //   this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
-        //   this.keyboard.isGaming = true;
-        //   this.keyboard.disabledKeyReal();
-        // }
-        // if (event.type === 'keydown') {
-        //   // console.log(buttonLetter);
-        //   if (!keyArray.flat().includes(buttonLetter)) return;
-        // }
         return;
       }
     }
     if (userInputSequence === curSequence) {
       if (this.roundNumber === 5) {
-        // console.log('You win');
         this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
         this.opacityAnimation(this.inputSequence);
         this.inputSequence.setInnerText('You win!');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {
-        // console.log('correct');
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
@@ -318,7 +249,6 @@ export class PlayWindow extends BaseElement {
       this.buttonRestart.setAttributes({ disabled: 'disabled' });
       this.opacityAnimation(this.inputSequence);
       this.inputSequence.setInnerText('wah-wah-wah');
-      // this.buttonNewGame.toggleClass(styles.bigButton, true);
     }
     return;
   }
