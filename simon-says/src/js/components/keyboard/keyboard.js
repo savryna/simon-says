@@ -105,7 +105,7 @@ export class Keyboard extends BaseElement {
 
     if (event.type === 'keydown' || event.type === 'mouseover') {
       // this.buttonHovered(event);
-      if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
+      if (this.isKeyPressed || currentButton.hasAttributes('disabled') || this.isGaming) return;
       // console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;

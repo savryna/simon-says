@@ -6,6 +6,7 @@ import { Keyboard, KEYBOARD_TYPE } from '../keyboard/keyboard.js';
 
 export class PlayWindow extends BaseElement {
   roundNumber = 1;
+  replicability = 1;
   incorrectAttempt = 2;
 
   constructor(keyboard) {
@@ -59,7 +60,7 @@ export class PlayWindow extends BaseElement {
       'button',
       [styles.controlButton, styles.pointerEvents],
       {},
-      'RESTART',
+      'REPEAT',
     );
     this.buttonNext = new BaseElement('button', [styles.controlButton], {}, 'NEXT');
     this.inputSequence = new BaseElement('p', [styles.inputSequence], {}, ' ');
@@ -255,17 +256,12 @@ export class PlayWindow extends BaseElement {
     const keyArray = KEYBOARD_TYPE[keyboardType];
     // console.log(keyArray);
 
+    const buttonLetter = this.keyboard.buttonsLetters.find(
+      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+    );
     if (event.type === 'keydown') {
-      const buttonLetter = this.keyboard.buttonsLetters.find(
-        (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
-      );
       // console.log(buttonLetter);
       if (!keyArray.flat().includes(buttonLetter)) return;
-    }
-    if (this.incorrectAttempt <= 0) {
-      this.buttonRestart.toggleClass(styles.pointerEvents, true);
-      this.buttonRestart.toggleClass(styles.disabled, true);
-      this.buttonRestart.setAttributes({ disabled: 'disabled' });
     }
 
     for (let i = 0; i < userInputSequence.length; i++) {
@@ -274,10 +270,14 @@ export class PlayWindow extends BaseElement {
       // console.log(this.incorrectAttempt);
       // console.log(userInputSequence[i], curSequence[i]);
       if (userInputSequence[i] !== curSequence[i]) {
-        this.errorAnimation();
-        this.incorrectAttempt -= 1;
+        if (this.incorrectAttempt >= 2) {
+          this.errorAnimation();
+        }
         // console.log(userInputSequence[i], curSequence[i]);
         // console.log('error');
+        this.inputSequence.toggleClass(styles.error, true);
+
+        this.incorrectAttempt -= 1;
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         // if (this.incorrectAttempt <= 0) {
@@ -285,7 +285,11 @@ export class PlayWindow extends BaseElement {
         //   this.keyboard.isGaming = true;
         //   this.keyboard.disabledKeyReal();
         // }
-        break;
+        // if (event.type === 'keydown') {
+        //   // console.log(buttonLetter);
+        //   if (!keyArray.flat().includes(buttonLetter)) return;
+        // }
+        return;
       }
     }
     if (userInputSequence === curSequence) {
@@ -305,6 +309,16 @@ export class PlayWindow extends BaseElement {
         this.inputSequence.setInnerText('Cool!');
         return;
       }
+    }
+
+    console.log(this.incorrectAttempt);
+    if (this.incorrectAttempt <= 0) {
+      this.buttonRestart.toggleClass(styles.pointerEvents, true);
+      this.buttonRestart.toggleClass(styles.disabled, true);
+      this.buttonRestart.setAttributes({ disabled: 'disabled' });
+      this.opacityAnimation(this.inputSequence);
+      this.inputSequence.setInnerText('wah-wah-wah');
+      // this.buttonNewGame.toggleClass(styles.bigButton, true);
     }
     return;
   }
@@ -344,6 +358,7 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.incorrectAttempt = 2;
+    this.replicability = 1;
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
@@ -357,7 +372,11 @@ export class PlayWindow extends BaseElement {
   }
 
   repeatSequence() {
-    this.incorrectAttempt--;
+    if (this.replicability <= 0) return;
+
+    this.incorrectAttempt -= 1;
+    this.replicability -= 1;
+    console.log(this.incorrectAttempt);
     this.inputSequence.toggleClass(styles.error, false);
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -378,6 +397,7 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.toggleClass(styles.error, false);
     this.incorrectAttempt = 2;
     this.roundNumber = 1;
+    this.replicability = 1;
     this.currentRound.setInnerHTML(`0${this.roundNumber}`);
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);

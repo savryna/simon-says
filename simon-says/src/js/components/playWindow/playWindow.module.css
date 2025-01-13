@@ -142,8 +142,9 @@
   pointer-events: none;
 }
 
-.disabled {
+.controlButton.disabled {
   background: #c1121e58;
+  cursor: default;
 }
 
 .error {
