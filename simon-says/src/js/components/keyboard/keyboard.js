@@ -96,10 +96,7 @@ export class Keyboard extends BaseElement {
   }
 
   pushPhysicKeyboard(event) {
-    // console.log('event type:', event.type);
-    // if (this.isKeyPressed && event.type === 'keydown') {
-    //   return;
-    // }
+    // TODO: нужно отключать hover
 
     const buttonLetter = this.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
@@ -107,22 +104,19 @@ export class Keyboard extends BaseElement {
 
     if (!buttonLetter) return;
 
-    // НЕ РАБОТАЕТ
-    // if (event.type === 'mousedown') {
-    //   this.isKeyPressed = true;
-    //   return;
-    // }
-
     const currentButton = this.keyButtonsObject[buttonLetter];
 
-    if (event.type === 'keydown' || event.type === 'mouseover' || event.type === 'mousedown') {
-      if (this.isKeyPressed || currentButton.hasAttributes('disabled') || this.isGaming) return;
+    if (event.type === 'keydown' || event.type === 'mouseover') {
+      // this.buttonHovered(event);
+      if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
+      console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
     }
 
-    if (event.type === 'keyup' || event.type === 'moseup') {
+    if (event.type === 'keyup' || event.type === 'mouseup') {
+      // this.buttonHovered(event);
       if (this.currentLetter === buttonLetter) {
         this.isKeyPressed = false;
         this.currentLetter = null;
