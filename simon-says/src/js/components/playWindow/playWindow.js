@@ -231,7 +231,7 @@ export class PlayWindow extends BaseElement {
           this.opacityAnimation(this.inputSequence);
           this.inputSequence.setInnerText('wah-wah-wah');
         }
-        if (!this.inputSequence.getAttribute() && this.incorrectAttempt >= 1) {
+        if (!this.inputSequence.getInnerText() && this.incorrectAttempt >= 1) {
           // console.log('has error');
           this.errorAnimation();
         }
@@ -318,22 +318,18 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.toggleClass(styles.error, false);
     this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
     this.toggleGameStatus();
+    // this.keyboard.isGaming = false;
     this.keyboard.disabledKeyReal();
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
-    this.keyboard.buttonsElems.forEach((btn) => {
-      btn.setAttributes({ disabled: 'disabled' });
-      btn.toggleClass(styles.disabled, true);
-    });
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => {
+        // this.keyboard.isGaming = true;
+        this.toggleGameStatus();
+        this.keyboard.disabledKeyReal();
         this.buttonNewGame.toggleClass(styles.pointerEvents, false);
         this.buttonRestart.toggleClass(styles.pointerEvents, false);
-        this.keyboard.buttonsElems.forEach((btn) => {
-          btn.removeAttributes(['disabled']);
-          btn.toggleClass(styles.disabled, false);
-        });
       });
 
     // this.inputSequence.toggleClass(styles.error, false);

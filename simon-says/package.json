@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "stylelint": "stylelint **/*.css **/*.scss",
     "deploy": "npm run build && gh-pages -d dist -e simon-says",
+    "stylelint": "stylelint **/*.css **/*.scss",
     "prepare": "cd .. && husky simon-says/.husky"
   },
   "devDependencies": {
