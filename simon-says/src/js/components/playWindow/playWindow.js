@@ -198,7 +198,7 @@ export class PlayWindow extends BaseElement {
   newSequence() {
     this.curSequence = this.keyboard.createSequence(
       this.roundNumber,
-      // 3,
+      // 2,
       this.selectLevel.selectLevelSetting,
     );
     console.log('Cross-check hint:', this.curSequence.toUpperCase());
@@ -231,7 +231,7 @@ export class PlayWindow extends BaseElement {
           this.opacityAnimation(this.inputSequence);
           this.inputSequence.setInnerText('wah-wah-wah');
         }
-        if (!this.inputSequence.getInnerText() && this.incorrectAttempt >= 1) {
+        if (this.inputSequence.getInnerText() && this.incorrectAttempt >= 0) {
           // console.log('has error');
           this.errorAnimation();
         }
@@ -317,8 +317,8 @@ export class PlayWindow extends BaseElement {
     this.inputSequence.setInnerText('');
     this.inputSequence.toggleClass(styles.error, false);
     this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
-    this.toggleGameStatus();
-    // this.keyboard.isGaming = false;
+    // this.toggleGameStatus();
+    this.keyboard.isGaming = false;
     this.keyboard.disabledKeyReal();
     this.buttonNewGame.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.toggleClass(styles.pointerEvents, true);
