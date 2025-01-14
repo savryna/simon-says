@@ -19,7 +19,6 @@ export class PlayWindow extends BaseElement {
 
     this.buttonStart = new BaseElement('button', [styles.buttonStart], {}, 'START');
 
-    //round block
     this.roundBlock = new BaseElement('div', [styles.roundBlock]);
     this.currentRound = new BaseElement('span', [styles.round], {}, `0${this.roundNumber}`);
     this.currentLevel = new BaseElement(
@@ -31,7 +30,6 @@ export class PlayWindow extends BaseElement {
     const amountRounds = new BaseElement('span', [styles.round], {}, '05');
     this.roundBlock.append(this.currentRound, this.currentLevel, amountRounds);
 
-    // input block
     this.buttonRestart = new BaseElement(
       'button',
       [styles.controlButton, styles.pointerEvents],
@@ -72,17 +70,6 @@ export class PlayWindow extends BaseElement {
         this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
       }),
     );
-    // this.keyboard.buttonsElems.forEach((button) =>
-    //   button.addEventListener('mousedown', (event) => {
-    //     if (this.incorrectAttempt <= 0 && this.replicability) return;
-    //     this.keyboard.fillInputSequence(
-    //       event,
-    //       this.inputSequence,
-    //       this.selectLevel.selectLevelSetting,
-    //     );
-    //     this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
-    //   }),
-    // );
 
     document.addEventListener('keydown', (event) => {
       if (this.incorrectAttempt <= 0 && this.replicability) return;
@@ -198,7 +185,6 @@ export class PlayWindow extends BaseElement {
   newSequence() {
     this.curSequence = this.keyboard.createSequence(
       this.roundNumber,
-      // 2,
       this.selectLevel.selectLevelSetting,
     );
     console.log('Cross-check hint:', this.curSequence.toUpperCase());
@@ -218,7 +204,6 @@ export class PlayWindow extends BaseElement {
 
     for (let i = 0; i < userInputSequence.length; i++) {
       if (!keyArray.flat().includes(userInputSequence[i])) return;
-      // должно проверять что в поле уже ошибка, но не проверяет
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
 
       if (userInputSequence[i] !== curSequence[i]) {
@@ -232,7 +217,6 @@ export class PlayWindow extends BaseElement {
           this.inputSequence.setInnerText('wah-wah-wah');
         }
         if (this.inputSequence.getInnerText() && this.incorrectAttempt >= 0) {
-          // console.log('has error');
           this.errorAnimation();
         }
         this.inputSequence.toggleClass(styles.error, true);
@@ -331,19 +315,6 @@ export class PlayWindow extends BaseElement {
         this.buttonNewGame.toggleClass(styles.pointerEvents, false);
         this.buttonRestart.toggleClass(styles.pointerEvents, false);
       });
-
-    // this.inputSequence.toggleClass(styles.error, false);
-    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
-    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
-    // this.keyboard
-    //   .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
-    //   .then(() => {
-    //     this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-    //     this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    //   });
-    // this.inputSequence.setInnerText('');
-    // this.keyboard.isGaming = true;
-    // this.keyboard.disabledKeyReal();
   }
 
   newGame() {

@@ -12,6 +12,3 @@ export const KEYBOARD_TYPE = {
   middle: [...QWERTY],
   hard: [NUMBER_ROW, ...QWERTY],
 };
-// export const EASY_KEYBOARD = [NUMBER_ROW];
-// export const MIDDLE_KEYBOARD = [...QWERTY];
-// export const HARD_KEYBOARD = [NUMBER_ROW, ...QWERTY];

@@ -24,19 +24,10 @@ export class Keyboard extends BaseElement {
   constructor() {
     super('div', [styles.keyboardWrapper]);
 
-    // this.selectedLevel = new SelectLevel();
-    // this.keyboardType = this.selectedLevel.returnSelectedLevel();
-    // this.selectedLevel.levelLabels.forEach((label) =>
-    //   label.addEventListener('click', this.drawKeyboard(this.keyboardType)),
-    // );
-
     this.keyButtonsObject = Object.fromEntries(this.createKeyButtons());
 
     this.buttonsLetters = Object.keys(this.keyButtonsObject);
-    // console.log(this.buttonsLetters);
     this.buttonsElems = Object.values(this.keyButtonsObject);
-    // buttonsElems.forEach((button, idx) =>
-    //   button.addEventListener('click', () => console.log(this.buttonsLetters[idx])),
     // );
     document.body.addEventListener('keydown', (event) => {
       if (event.type === 'mousedown') return;
@@ -52,8 +43,6 @@ export class Keyboard extends BaseElement {
 
     this.drawKeyboard();
     this.disabledKeyReal();
-
-    // this.changeKeyboard();
   }
 
   createKeyButtons() {
@@ -86,18 +75,10 @@ export class Keyboard extends BaseElement {
     const filter = this.buttonsLetters.filter((elem) =>
       KEYBOARD_TYPE[keyboardType].flat().includes(elem),
     );
-    // console.log(KEYBOARD_TYPE[keyboardType]);
-    // const buttonElems = Array.from(
-    //   { length: filter.length },
-    //   (_, idx) => this.keyButtonsObject[filter[idx]],
-    // );
-    // console.log(buttonElems);
     return filter;
   }
 
   pushPhysicKeyboard(event) {
-    // TODO: нужно отключать hover
-
     const buttonLetter = this.buttonsLetters.find(
       (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
     );
@@ -107,16 +88,13 @@ export class Keyboard extends BaseElement {
     const currentButton = this.keyButtonsObject[buttonLetter];
 
     if (event.type === 'keydown' || event.type === 'mouseover') {
-      // this.buttonHovered(event);
       if (this.isKeyPressed || currentButton.hasAttributes('disabled')) return;
-      // console.log(currentButton.hasAttributes('disabled'));
       this.isKeyPressed = true;
       this.currentLetter = buttonLetter;
       currentButton.toggleClass(styles.active, true);
     }
 
     if (event.type === 'keyup' || event.type === 'mouseup') {
-      // this.buttonHovered(event);
       if (this.currentLetter === buttonLetter) {
         this.isKeyPressed = false;
         this.currentLetter = null;
@@ -158,12 +136,6 @@ export class Keyboard extends BaseElement {
   }
 
   createSequence(levelNum, keyboardType) {
-    // const sequence = [];
-    // for (let i = 0; i < levelNum * 2; i++) {
-    //   sequence.push(getRandomElem(this.filterKeyboard(keyboardType)));
-    // }
-    // // console.log(sequence);
-    // return sequence;
     let sequence = '';
     for (let i = 0; i < levelNum * 2; i++) {
       sequence += getRandomElem(this.filterKeyboard(keyboardType));
@@ -183,12 +155,10 @@ export class Keyboard extends BaseElement {
     return buttons.reduce((promise, button) => {
       return promise.then(() => this.animateButton(button));
     }, Promise.resolve());
-    // .then(() => console.log('done'));
   }
 
   fillInputSequence(event, inputElem, keyboardType) {
     const curKeyboard = this.filterKeyboard(keyboardType);
-    // console.log(curKeyboard);
     let buttonLetter = null;
 
     if (event.type === 'keydown') {
@@ -196,9 +166,6 @@ export class Keyboard extends BaseElement {
         (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
       );
     } else {
-      // }
-      // if (event.type === 'click' || event.type === 'mouseover') {
-      // console.log(event);
       buttonLetter = this.buttonsLetters.find(
         (letter) => event.currentTarget.innerText.toLowerCase() === letter.toLowerCase(),
       );
@@ -215,12 +182,4 @@ export class Keyboard extends BaseElement {
 
     inputElem.addInnerText(buttonLetter.toUpperCase());
   }
-  // buttonHovered(event) {
-  //   if (event.type === 'mouseover') {
-  //     event.currentTarget.classList.add('hovered');
-  //   }
-  //   if (event.type === 'mouseup') {
-  //     event.currentTarget.classList.remove('hovered');
-  //   }
-  // }
 }
