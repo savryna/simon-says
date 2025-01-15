@@ -9,6 +9,10 @@ export class PlayWindow extends BaseElement {
   replicability = 1;
   incorrectAttempt = 1;
 
+  strLose = 'wah-wah-wah';
+  strWinLvl = 'Cool!';
+  strWinGame = 'You win!';
+
   constructor(keyboard) {
     super('div', [styles.playWindow]);
 
@@ -188,17 +192,38 @@ export class PlayWindow extends BaseElement {
   compareInputSequence(keyboardType, event) {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
+    // let userInputSequenceStr = '';
+    // массив массивов
     const keyArray = KEYBOARD_TYPE[keyboardType];
 
-    const buttonLetter = this.keyboard.buttonsLetters.find(
-      (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
-    );
-    if (event.type === 'keydown') {
-      if (!keyArray.flat().includes(buttonLetter)) return;
-    }
+    // кажется мне этот код не нужен, он уже есть в филл
+    // const buttonLetter = this.keyboard.buttonsLetters.find(
+    //   (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
+    // );
+    // if (event.type === 'keydown') {
+    //   if (!keyArray.flat().includes(buttonLetter)) {
+    //     console.log('not includes');
+    //     return;
+    //   }
+    // }
 
     for (let i = 0; i < userInputSequence.length; i++) {
-      if (!keyArray.flat().includes(userInputSequence[i])) return;
+      //что оно тут делает?? вроде тоже не надо
+      // ПРОЗРЕЛА
+      // console.log('flat', keyArray.flat());
+      // console.log('input', userInputSequence[i]);
+      // if (!keyArray.flat().includes(userInputSequence[i])) {
+      //   console.log('wtf');
+      //   return;
+      // }
+      // if (!this.incorrectAttempt && !this.replicability) return;
+      // if (this.userInputSequence === this.strLose || this.userInputSequence === this.strWinGame) {
+      //   return;
+      // }
+      if (userInputSequence === this.strLose || userInputSequence === this.strWinGame) {
+        return;
+      }
+
       if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
 
       if (userInputSequence[i] !== curSequence[i]) {
@@ -209,8 +234,9 @@ export class PlayWindow extends BaseElement {
           this.inputSequence.toggleClass(styles.error, true);
 
           this.opacityAnimation(this.inputSequence);
-          this.inputSequence.setInnerText('wah-wah-wah');
+          this.inputSequence.setInnerText(this.strLose);
         }
+
         if (this.inputSequence.getInnerText() && this.incorrectAttempt >= 0) {
           this.errorAnimation();
         }
@@ -226,15 +252,15 @@ export class PlayWindow extends BaseElement {
       if (this.roundNumber === 5) {
         this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
         this.opacityAnimation(this.inputSequence);
-        this.inputSequence.setInnerText('You win!');
+        this.inputSequence.setInnerText(this.strLose.strWinGame);
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {
+        this.inputSequence.setInnerText(this.strWinLvl);
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
         this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
         this.opacityAnimation(this.inputSequence);
-        this.inputSequence.setInnerText('Cool!');
         return;
       }
       return;
@@ -322,13 +348,7 @@ export class PlayWindow extends BaseElement {
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);
     this.disableInteraction();
-    // this.buttonRestart.toggleClass(styles.disabled, false);
-    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
-    // this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
-    // this.keyboard.isGaming = false;
-    // this.keyboard.disabledKeyReal();
     this.keyboard.downButtons();
-    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
   }
 }
