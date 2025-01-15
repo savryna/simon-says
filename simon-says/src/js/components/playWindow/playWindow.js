@@ -170,12 +170,6 @@ export class PlayWindow extends BaseElement {
         this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence)),
       )
       .then(() => this.enabledInteraction());
-    // .then(() => this.toggleGameStatus())
-    // .then(() => this.keyboard.disabledKeyReal())
-    // .then(() => {
-    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    // });
   }
 
   addRoundNumber() {
