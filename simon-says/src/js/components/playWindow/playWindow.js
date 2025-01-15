@@ -296,9 +296,11 @@ export class PlayWindow extends BaseElement {
   }
 
   enabledInteraction() {
-    this.buttonRestart.removeClasses([styles.pointerEvents, styles.disabled]);
     this.buttonNewGame.removeClasses([styles.pointerEvents, styles.disabled]);
-    this.buttonRestart.removeAttributes(['disabled']);
+    if (this.replicability >= 1) {
+      this.buttonRestart.removeAttributes(['disabled']);
+      this.buttonRestart.removeClasses([styles.pointerEvents, styles.disabled]);
+    }
     this.buttonNewGame.removeAttributes(['disabled']);
     this.keyboard.isGaming = true;
     this.keyboard.disabledKeyReal();
@@ -306,25 +308,26 @@ export class PlayWindow extends BaseElement {
 
   repeatSequence() {
     if (this.replicability <= 0) return;
-
     this.replicability -= 1;
+    this.disableInteraction();
     this.inputSequence.setInnerText('');
     this.inputSequence.toggleClass(styles.error, false);
-    this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
+    // this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
     // this.toggleGameStatus();
-    this.keyboard.isGaming = false;
-    this.keyboard.disabledKeyReal();
-    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
-    this.buttonRestart.toggleClass(styles.pointerEvents, true);
+    // this.keyboard.isGaming = false;
+    // this.keyboard.disabledKeyReal();
+    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
+    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
-      .then(() => {
-        // this.keyboard.isGaming = true;
-        this.toggleGameStatus();
-        this.keyboard.disabledKeyReal();
-        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-        this.buttonRestart.toggleClass(styles.pointerEvents, false);
-      });
+      .then(() => this.enabledInteraction());
+    // .then(() => {
+    //   // this.keyboard.isGaming = true;
+    //   this.toggleGameStatus();
+    //   this.keyboard.disabledKeyReal();
+    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    // });
   }
 
   newGame() {
