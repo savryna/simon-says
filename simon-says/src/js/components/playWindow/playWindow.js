@@ -51,7 +51,7 @@ export class PlayWindow extends BaseElement {
     this.append(gameTitle, this.selectLevel, this.buttonStart);
     this.buttonStart.addEventListener('click', () => {
       this.upKeyboard();
-
+      this.disableInteraction();
       this.keyboard.upButtons();
       this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
       this.newSequence();
@@ -169,12 +169,13 @@ export class PlayWindow extends BaseElement {
       .then(() =>
         this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence)),
       )
-      .then(() => this.toggleGameStatus())
-      .then(() => this.keyboard.disabledKeyReal())
-      .then(() => {
-        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-        this.buttonRestart.toggleClass(styles.pointerEvents, false);
-      });
+      .then(() => this.enabledInteraction());
+    // .then(() => this.toggleGameStatus())
+    // .then(() => this.keyboard.disabledKeyReal())
+    // .then(() => {
+    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    // });
   }
 
   addRoundNumber() {
@@ -326,12 +327,13 @@ export class PlayWindow extends BaseElement {
     this.currentRound.setInnerHTML(`0${this.roundNumber}`);
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);
-    this.buttonRestart.toggleClass(styles.disabled, false);
+    this.disableInteraction();
+    // this.buttonRestart.toggleClass(styles.disabled, false);
     // this.buttonRestart.toggleClass(styles.pointerEvents, true);
-    this.buttonRestart.removeAttributes(['disabled']);
+    // this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
-    this.keyboard.isGaming = false;
-    this.keyboard.disabledKeyReal();
+    // this.keyboard.isGaming = false;
+    // this.keyboard.disabledKeyReal();
     this.keyboard.downButtons();
     // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
   }
