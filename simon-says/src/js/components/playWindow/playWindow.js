@@ -242,6 +242,7 @@ export class PlayWindow extends BaseElement {
         this.inputSequence.setInnerText('Cool!');
         return;
       }
+      return;
     }
     return;
   }
@@ -272,26 +273,47 @@ export class PlayWindow extends BaseElement {
   }
 
   moveNextRound() {
+    this.disableInteraction();
+
     this.inputSequence.toggleClass(styles.error, false);
     this.addRoundNumber();
     this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
-    this.buttonRestart.toggleClass(styles.disabled, false);
-    this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    this.buttonRestart.removeAttributes(['disabled']);
+    // this.buttonRestart.toggleClass(styles.disabled, false);
+    // this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    // this.buttonRestart.removeAttributes(['disabled']);
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.incorrectAttempt = 1;
     this.replicability = 1;
-    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
-    this.buttonRestart.toggleClass(styles.pointerEvents, true);
+    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
+    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
-      .then(() => this.toggleGameStatus())
-      .then(() => this.keyboard.disabledKeyReal())
-      .then(() => {
-        this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-        this.buttonRestart.toggleClass(styles.pointerEvents, false);
-      });
+      .then(() => this.enabledInteraction());
+    // .then(() => this.toggleGameStatus())
+    // .then(() => this.keyboard.disabledKeyReal())
+    // .then(() => {
+    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
+    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
+    // });
+  }
+
+  disableInteraction() {
+    this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
+    this.buttonNewGame.addClasses([styles.pointerEvents, styles.disabled]);
+    this.buttonNewGame.setAttributes({ disabled: 'disabled' });
+    this.buttonRestart.setAttributes({ disabled: 'disabled' });
+    this.keyboard.isGaming = false;
+    this.keyboard.disabledKeyReal();
+  }
+
+  enabledInteraction() {
+    this.buttonRestart.removeClasses([styles.pointerEvents, styles.disabled]);
+    this.buttonNewGame.removeClasses([styles.pointerEvents, styles.disabled]);
+    this.buttonRestart.removeAttributes(['disabled']);
+    this.buttonNewGame.removeAttributes(['disabled']);
+    this.keyboard.isGaming = true;
+    this.keyboard.disabledKeyReal();
   }
 
   repeatSequence() {
@@ -327,12 +349,12 @@ export class PlayWindow extends BaseElement {
     this.switchChildren(this.roundBlock, this.selectLevel);
     this.switchChildren(this.gameButtons, this.buttonStart);
     this.buttonRestart.toggleClass(styles.disabled, false);
-    this.buttonRestart.toggleClass(styles.pointerEvents, true);
+    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.buttonRestart.removeAttributes(['disabled']);
     this.selectLevel.append(this.selectLevel.pseudo);
     this.keyboard.isGaming = false;
     this.keyboard.disabledKeyReal();
     this.keyboard.downButtons();
-    this.buttonNewGame.toggleClass(styles.pointerEvents, true);
+    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
   }
 }

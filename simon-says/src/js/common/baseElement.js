@@ -13,6 +13,10 @@ export class BaseElement {
     this._elem.classList.add(...cssClasses);
   }
 
+  removeClasses(cssClasses) {
+    this._elem.classList.remove(...cssClasses);
+  }
+
   setInnerHTML(innerContent) {
     this._elem.innerText = innerContent;
   }
