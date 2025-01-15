@@ -312,22 +312,9 @@ export class PlayWindow extends BaseElement {
     this.disableInteraction();
     this.inputSequence.setInnerText('');
     this.inputSequence.toggleClass(styles.error, false);
-    // this.buttonRestart.addClasses([styles.pointerEvents, styles.disabled]);
-    // this.toggleGameStatus();
-    // this.keyboard.isGaming = false;
-    // this.keyboard.disabledKeyReal();
-    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
-    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => this.enabledInteraction());
-    // .then(() => {
-    //   // this.keyboard.isGaming = true;
-    //   this.toggleGameStatus();
-    //   this.keyboard.disabledKeyReal();
-    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    // });
   }
 
   newGame() {
