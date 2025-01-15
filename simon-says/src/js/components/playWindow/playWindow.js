@@ -274,28 +274,16 @@ export class PlayWindow extends BaseElement {
 
   moveNextRound() {
     this.disableInteraction();
-
     this.inputSequence.toggleClass(styles.error, false);
     this.addRoundNumber();
     this.gameButtons.switchChildren(this.buttonNext, this.buttonRestart);
-    // this.buttonRestart.toggleClass(styles.disabled, false);
-    // this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    // this.buttonRestart.removeAttributes(['disabled']);
     this.inputSequence.setInnerText('');
     this.newSequence();
     this.incorrectAttempt = 1;
     this.replicability = 1;
-    // this.buttonNewGame.toggleClass(styles.pointerEvents, true);
-    // this.buttonRestart.toggleClass(styles.pointerEvents, true);
     this.keyboard
       .animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence))
       .then(() => this.enabledInteraction());
-    // .then(() => this.toggleGameStatus())
-    // .then(() => this.keyboard.disabledKeyReal())
-    // .then(() => {
-    //   this.buttonNewGame.toggleClass(styles.pointerEvents, false);
-    //   this.buttonRestart.toggleClass(styles.pointerEvents, false);
-    // });
   }
 
   disableInteraction() {
