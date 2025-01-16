@@ -77,6 +77,7 @@ export class PlayWindow extends BaseElement {
 
     document.addEventListener('keydown', (event) => {
       if (this.incorrectAttempt <= 0 && this.replicability) return;
+      this.keyboard.pushPhysicKeyboard(event);
       this.keyboard.fillInputSequence(
         event,
         this.inputSequence,
