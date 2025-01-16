@@ -1,4 +1,4 @@
-export const LEVELS = ['easy', 'middle', 'hard'];
+export const LEVELS = ['easy', 'medium', 'hard'];
 
 export const NUMBER_ROW = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const QWERTY = [
@@ -9,6 +9,6 @@ const QWERTY = [
 
 export const KEYBOARD_TYPE = {
   easy: [NUMBER_ROW],
-  middle: [...QWERTY],
+  medium: [...QWERTY],
   hard: [NUMBER_ROW, ...QWERTY],
 };
