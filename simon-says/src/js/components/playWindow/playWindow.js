@@ -10,8 +10,8 @@ export class PlayWindow extends BaseElement {
   incorrectAttempt = 1;
 
   strLose = 'wah-wah-wah';
-  strWinLvl = 'Cool!';
-  strWinGame = 'You win!';
+  strWinLvl = 'cool!';
+  strWinGame = 'you win!';
 
   constructor(keyboard) {
     super('div', [styles.playWindow]);
@@ -223,10 +223,21 @@ export class PlayWindow extends BaseElement {
       if (userInputSequence === this.strLose || userInputSequence === this.strWinGame) {
         return;
       }
+      // console.log('user', userInputSequence);
+      // console.log('cur', curSequence);
 
-      if (userInputSequence[i - 1] !== curSequence[i - 1]) return;
+      if (userInputSequence[i - 1] !== curSequence[i - 1]) {
+        console.log('1');
+        // console.log('user', userInputSequence);
+        // console.log('cur', curSequence);
+        return;
+      }
 
       if (userInputSequence[i] !== curSequence[i]) {
+        console.log('внутри', userInputSequence);
+        // console.log('текущая', curSequence);
+        console.log('сравниваю', this.strWinLvl);
+        if (userInputSequence === this.strWinLvl) return;
         if (this.incorrectAttempt <= 0 || this.replicability <= 0) {
           this.buttonRestart.toggleClass(styles.pointerEvents, true);
           this.buttonRestart.toggleClass(styles.disabled, true);
@@ -241,7 +252,6 @@ export class PlayWindow extends BaseElement {
           this.errorAnimation();
         }
         this.inputSequence.toggleClass(styles.error, true);
-
         this.incorrectAttempt -= 1;
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
@@ -256,11 +266,11 @@ export class PlayWindow extends BaseElement {
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {
+        this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
+        this.opacityAnimation(this.inputSequence);
         this.inputSequence.setInnerText(this.strWinLvl);
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
-        this.gameButtons.switchChildren(this.buttonRestart, this.buttonNext);
-        this.opacityAnimation(this.inputSequence);
         return;
       }
       return;
