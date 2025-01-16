@@ -176,7 +176,8 @@ export class Keyboard extends BaseElement {
     if (
       !buttonLetter ||
       currentButton.hasAttributes('disabled') ||
-      !curKeyboard.includes(buttonLetter)
+      !curKeyboard.includes(buttonLetter) ||
+      event.repeat
     )
       return;
 
