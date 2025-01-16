@@ -167,13 +167,18 @@ export class PlayWindow extends BaseElement {
 
     resizeWidthAnimation.play();
     opacityAnimantion.play();
-
+    this.buttonStart.setAttributes({ disabled: 'disabled' });
+    this.buttonStart.addClasses([styles.disabled, styles.pointerEvents]);
     opacityAnimantion.finished
       .then(() => this.switchChildren(this.buttonStart, this.gameButtons))
       .then(() =>
         this.keyboard.animateButtonSequence(this.keyboard.buttonElemsSequence(this.curSequence)),
       )
-      .then(() => this.enabledInteraction());
+      .then(() => {
+        this.enabledInteraction();
+        this.buttonStart.removeAttributes(['disabled']);
+        this.buttonStart.removeClasses([styles.disabled, styles.pointerEvents]);
+      });
   }
 
   addRoundNumber() {
