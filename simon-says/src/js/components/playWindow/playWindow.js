@@ -71,7 +71,7 @@ export class PlayWindow extends BaseElement {
           this.inputSequence,
           this.selectLevel.selectLevelSetting,
         );
-        this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
+        this.compareInputSequence();
       }),
     );
 
@@ -82,7 +82,7 @@ export class PlayWindow extends BaseElement {
         this.inputSequence,
         this.selectLevel.selectLevelSetting,
       );
-      this.compareInputSequence(this.selectLevel.selectLevelSetting, event);
+      this.compareInputSequence();
     });
 
     this.buttonNext.addEventListener('click', () => {
@@ -189,54 +189,21 @@ export class PlayWindow extends BaseElement {
     console.log('Cross-check hint:', this.curSequence.toUpperCase());
   }
 
-  compareInputSequence(keyboardType, event) {
+  compareInputSequence() {
     const curSequence = this.curSequence;
     const userInputSequence = this.inputSequence.getInnerText().toLowerCase();
-    // let userInputSequenceStr = '';
-    // массив массивов
-    const keyArray = KEYBOARD_TYPE[keyboardType];
-
-    // кажется мне этот код не нужен, он уже есть в филл
-    // const buttonLetter = this.keyboard.buttonsLetters.find(
-    //   (letter) => event.code === `Key${letter.toUpperCase()}` || event.key === letter,
-    // );
-    // if (event.type === 'keydown') {
-    //   if (!keyArray.flat().includes(buttonLetter)) {
-    //     console.log('not includes');
-    //     return;
-    //   }
-    // }
 
     for (let i = 0; i < userInputSequence.length; i++) {
-      //что оно тут делает?? вроде тоже не надо
-      // ПРОЗРЕЛА
-      // console.log('flat', keyArray.flat());
-      // console.log('input', userInputSequence[i]);
-      // if (!keyArray.flat().includes(userInputSequence[i])) {
-      //   console.log('wtf');
-      //   return;
-      // }
-      // if (!this.incorrectAttempt && !this.replicability) return;
-      // if (this.userInputSequence === this.strLose || this.userInputSequence === this.strWinGame) {
-      //   return;
-      // }
       if (userInputSequence === this.strLose || userInputSequence === this.strWinGame) {
         return;
       }
-      // console.log('user', userInputSequence);
-      // console.log('cur', curSequence);
 
       if (userInputSequence[i - 1] !== curSequence[i - 1]) {
         console.log('1');
-        // console.log('user', userInputSequence);
-        // console.log('cur', curSequence);
         return;
       }
 
       if (userInputSequence[i] !== curSequence[i]) {
-        console.log('внутри', userInputSequence);
-        // console.log('текущая', curSequence);
-        console.log('сравниваю', this.strWinLvl);
         if (userInputSequence === this.strWinLvl) return;
         if (this.incorrectAttempt <= 0 || this.replicability <= 0) {
           this.buttonRestart.toggleClass(styles.pointerEvents, true);
@@ -262,7 +229,7 @@ export class PlayWindow extends BaseElement {
       if (this.roundNumber === 5) {
         this.buttonRestart.addClasses([styles.disabled, styles.pointerEvents]);
         this.opacityAnimation(this.inputSequence);
-        this.inputSequence.setInnerText(this.strLose.strWinGame);
+        this.inputSequence.setInnerText(this.strWinGame);
         this.keyboard.isGaming = false;
         this.keyboard.disabledKeyReal();
       } else if (this.roundNumber < 5) {

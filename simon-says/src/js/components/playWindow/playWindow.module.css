@@ -99,6 +99,7 @@
   line-height: normal;
   letter-spacing: 10px;
   cursor: default;
+  text-transform: capitalize;
 }
 
 .roundBlock {
@@ -149,7 +150,7 @@
   }
 }
 
-@media screen and (width <= 700px) {
+@media screen and (width <= 790px) {
   .playWindow {
     padding-top: 5vw;
     padding-bottom: 6vw;
