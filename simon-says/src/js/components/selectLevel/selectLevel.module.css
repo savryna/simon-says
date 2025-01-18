@@ -52,7 +52,7 @@ input[id='easy']:checked ~ .pseudo {
   left: 0;
 }
 
-input[id='middle']:checked ~ .pseudo {
+input[id='medium']:checked ~ .pseudo {
   left: 33.5%;
 }
 
