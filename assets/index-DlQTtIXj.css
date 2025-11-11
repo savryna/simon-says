@@ -1,0 +1,631 @@
+/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
+
+/*
+Document
+========
+*/
+
+/**
+Use a better box model (opinionated).
+*/
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+html {
+	/* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
+	font-family:
+		system-ui,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+	line-height: 1.15; /* 1. Correct the line height in all browsers. */
+	-webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+	tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+}
+
+/*
+Sections
+========
+*/
+
+body {
+	margin: 0; /* Remove the margin in all browsers. */
+}
+
+/*
+Text-level semantics
+====================
+*/
+
+/**
+Add the correct font weight in Chrome and Safari.
+*/
+
+b,
+strong {
+	font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		'Liberation Mono',
+		Menlo,
+		monospace; /* 1 */
+	font-size: 1em; /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+
+small {
+	font-size: 80%;
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+/*
+Tabular data
+============
+*/
+
+/**
+Correct table border color inheritance in Chrome and Safari. (https://issues.chromium.org/issues/40615503, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+
+table {
+	border-color: currentcolor;
+}
+
+/*
+Forms
+=====
+*/
+
+/**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: inherit; /* 1 */
+	font-size: 100%; /* 1 */
+	line-height: 1.15; /* 1 */
+	margin: 0; /* 2 */
+}
+
+/**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+	-webkit-appearance: button;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+
+legend {
+	padding: 0;
+}
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+	vertical-align: baseline;
+}
+
+/**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+	height: auto;
+}
+
+/**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+	-webkit-appearance: textfield; /* 1 */
+	outline-offset: -2px; /* 2 */
+}
+
+/**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button; /* 1 */
+	font: inherit; /* 2 */
+}
+
+/*
+Interactive
+===========
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+	display: list-item;
+}
+
+body {
+  min-height: 100dvh;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button,
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+}
+
+@media screen and (width <= 790px) {
+  body {
+    padding: 0;
+  }
+}
+._selectLevel_jfwko_1 {
+  width: 100%;
+  height: 20%;
+  height: 80px;
+  backdrop-filter: blur(100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: #e83c2c52;
+  position: relative;
+}
+
+._levelInput_jfwko_14 {
+  display: none;
+}
+
+._levelLabel_jfwko_18 {
+  flex: 1;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  padding: 7px 0 0;
+  color: rgba(255 255 255 / 44.7%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1em, 5vw, 2em);
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  width: 33%;
+}
+
+label:hover {
+  color: #fff;
+}
+
+input:checked + label {
+  color: #fff;
+}
+
+._pseudo_jfwko_41 {
+  position: absolute;
+  border: 1px solid rgb(80 80 80 / 20%);
+  box-shadow: 0 2px 14px 9px rgb(80 80 80 / 20%);
+  border-radius: 40px;
+  width: 33%;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+input[id='easy']:checked ~ ._pseudo_jfwko_41 {
+  left: 0;
+}
+
+input[id='medium']:checked ~ ._pseudo_jfwko_41 {
+  left: 33.5%;
+}
+
+input[id='hard']:checked ~ ._pseudo_jfwko_41 {
+  left: 67%;
+}
+
+@media screen and (width <= 700px) {
+  ._selectLevel_jfwko_1 {
+    height: clamp(58px, 14vw, 80px);
+  }
+}
+@font-face {
+  font-family: Vanity;
+  src: url('./vanity.light-DXvVVOIf.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+._keyboardWrapper_112ci_8 {
+  color: black;
+  flex: 1;
+  padding: 20px 2px;
+  display: flex;
+  flex-direction: column;
+  min-height: 295px;
+  gap: 20px;
+  gap: clamp(1vw, 2.5vw, 1.5em);
+  position: relative;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+._keyButton_112ci_22 {
+  text-shadow: 0 0 0 #fff;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  width: 3em;
+  height: 3em;
+  background: #ae0f00;
+  border: 2px solid rgb(255 255 255);
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: all 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+._keyButton_112ci_22::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background: #de13005a;
+  border-radius: inherit;
+  box-shadow: 0 2px 0 0 #fafafa;
+  transform: translate3d(0, 0.75em, -1em);
+  transition:
+    transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+._keyButton_112ci_22:hover {
+  transform: translate(0, 0.25em);
+  background-color: #ff4e3e;
+  border-color: #ffffffb0;
+}
+
+._keyButton_112ci_22:hover::before {
+  transform: translate3d(0, 0.5em, -1em);
+}
+
+._keyButton_112ci_22:active,
+._keyButton_112ci_22._active_112ci_66 {
+  transform: translate(0, 0.75em);
+  background-color: #e6514300;
+  border-color: #ffffffb0;
+  cursor: default;
+}
+
+._keyButton_112ci_22._disabled_112ci_73 {
+  pointer-events: none;
+}
+
+._keyButton_112ci_22:active::before,
+._keyButton_112ci_22._active_112ci_66::before {
+  transform: translate3d(0, 0, -1em);
+}
+
+._rowWrapper_112ci_82 {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.2vw, 1.5vw, 0.5em);
+  flex-wrap: wrap;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+@media screen and (width <= 620px) {
+  ._keyboardWrapper_112ci_8 {
+    width: 290px;
+  }
+
+  ._keyButton_112ci_22 {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (width <= 415px) {
+  ._keyboardWrapper_112ci_8 {
+    width: 255px;
+    padding: 0 2px;
+  }
+
+  ._keyButton_112ci_22 {
+    width: 35px;
+    height: 35px;
+  }
+
+  ._rowWrapper_112ci_82 {
+    gap: clamp(2.2vw, 10.5vw, 0.5em);
+  }
+}
+@font-face {
+  font-family: Solerado;
+  src: url('./Soledago-CHVDDSbm.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Vanity;
+  src: url('./vanity.light-DXvVVOIf.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+._playWindow_18azk_15 {
+  color: white;
+  width: 100%;
+  flex-basis: 70%;
+  padding: 55px clamp(1px, 3vw, 55px);
+  background: url("data:image/svg+xml,%3csvg%20width='798'%20height='53'%20viewBox='0%200%20798%2053'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cline%20x1='798'%20y1='27.5'%20x2='0.00129882'%20y2='26.8555'%20stroke='white'/%3e%3ccircle%20cx='45'%20cy='26'%20r='9.5'%20transform='rotate(-90%2045%2026)'%20stroke='white'/%3e%3ccircle%20cx='57'%20cy='26'%20r='9.5'%20transform='rotate(-90%2057%2026)'%20stroke='white'/%3e%3ccircle%20cx='5'%20cy='27'%20r='4.5'%20transform='rotate(-90%205%2027)'%20fill='white'%20stroke='white'/%3e%3cpath%20d='M148.495%2044.1607C148.255%2045.2244%20148.064%2046.2327%20147.912%2047.1304C147.77%2046.2327%20147.589%2045.2251%20147.36%2044.1634C146.564%2040.476%20145.17%2036.029%20142.761%2033.3195C140.153%2030.3865%20135.551%2028.6694%20131.695%2027.6807C130.557%2027.3889%20129.473%2027.1581%20128.51%2026.9776C129.458%2026.8345%20130.523%2026.6475%20131.643%2026.4042C135.495%2025.5675%20140.118%2024.0431%20142.837%2021.2611C145.733%2018.2981%20147.192%2013.1963%20147.938%208.93841C148.04%208.36083%20148.128%207.79637%20148.205%207.25197C148.272%207.77943%20148.349%208.32563%20148.438%208.88425C149.109%2013.1186%20150.467%2018.1995%20153.269%2021.1674C154.755%2022.742%20156.79%2023.8744%20158.97%2024.6937C161.155%2025.5145%20163.517%2026.0324%20165.687%2026.3593C166.409%2026.4681%20167.111%2026.5559%20167.779%2026.6267C167.079%2026.7545%20166.342%2026.9034%20165.583%2027.0769C161.242%2028.0692%20156.074%2029.8894%20153.163%2033.2361C150.756%2036.0028%20149.326%2040.4657%20148.495%2044.1607Z'%20fill='white'%20stroke='white'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg%20width='798'%20height='53'%20viewBox='0%200%20798%2053'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cline%20x1='0.000403842'%20y1='25.2754'%20x2='797.999'%20y2='25.9199'%20stroke='white'/%3e%3ccircle%20cx='753'%20cy='26.7754'%20r='9.5'%20transform='rotate(90%20753%2026.7754)'%20stroke='white'/%3e%3ccircle%20cx='741'%20cy='26.7754'%20r='9.5'%20transform='rotate(90%20741%2026.7754)'%20stroke='white'/%3e%3ccircle%20cx='793'%20cy='25.7754'%20r='4.5'%20transform='rotate(90%20793%2025.7754)'%20fill='white'%20stroke='white'/%3e%3cpath%20d='M649.505%208.61465C649.745%207.551%20649.936%206.54269%20650.088%205.64498C650.23%206.54268%20650.411%207.55026%20650.64%208.61194C651.436%2012.2994%20652.83%2016.7464%20655.239%2019.4559C657.847%2022.3889%20662.449%2024.106%20666.305%2025.0947C667.443%2025.3865%20668.527%2025.6173%20669.49%2025.7978C668.542%2025.9409%20667.477%2026.1279%20666.357%2026.3712C662.505%2027.2079%20657.882%2028.7323%20655.163%2031.5143C652.267%2034.4773%20650.808%2039.5791%20650.062%2043.837C649.96%2044.4146%20649.872%2044.979%20649.795%2045.5234C649.728%2044.996%20649.651%2044.4498%20649.562%2043.8911C648.891%2039.6568%20647.533%2034.5759%20644.731%2031.608C643.245%2030.0334%20641.21%2028.901%20639.03%2028.0817C636.845%2027.2609%20634.483%2026.743%20632.313%2026.4161C631.591%2026.3073%20630.889%2026.2195%20630.221%2026.1487C630.921%2026.0209%20631.658%2025.872%20632.417%2025.6985C636.758%2024.7062%20641.926%2022.886%20644.837%2019.5393C647.244%2016.7726%20648.674%2012.3096%20649.505%208.61465Z'%20fill='white'%20stroke='white'/%3e%3c/svg%3e");
+  background-position: top, bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+._gameTitle_18azk_31 {
+  font-family: Solerado, serif;
+  font-size: clamp(1em, 8vw, 5em);
+  word-spacing: 30px;
+  letter-spacing: 5px;
+  margin: 0;
+}
+
+._buttonStart_18azk_39 {
+  color: white;
+  font-family: Vanity, serif;
+  font-size: clamp(0.5em, 8vw, 3em);
+  font-weight: 800;
+  height: 105px;
+  width: 200px;
+  padding: 12px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #de130052;
+  border-radius: 50px;
+  border: 2px solid rgba(255 255 255 / 20%);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 14px 9px rgb(80 80 80 / 20%);
+}
+
+._buttonStart_18azk_39:hover {
+  background-color: transparent;
+  box-shadow: 0 2px 14px 9px rgba(163 163 163 / 20%);
+}
+
+._gameButtons_18azk_62 {
+  width: 100%;
+  height: 10vw;
+  height: 105px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #c1121f;
+}
+
+._controlButton_18azk_73 {
+  padding-top: 10px;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  font-size: clamp(1em, 4vw, 2em);
+  width: 30%;
+  height: 100%;
+  color: white;
+  border-radius: 50px;
+  border: 2px solid #c1121f;
+  backdrop-filter: blur(100px);
+  background: #c1121f;
+  transition: all 0.3s ease-in-out;
+}
+
+._controlButton_18azk_73:hover {
+  background-color: #a60e00;
+}
+
+._inputSequence_18azk_92 {
+  padding: 10px;
+  color: white;
+  text-align: center;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  font-size: clamp(1em, 3vw, 1.8em);
+  line-height: normal;
+  letter-spacing: 10px;
+  cursor: default;
+  text-transform: capitalize;
+}
+
+._roundBlock_18azk_105 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 20%;
+  height: 80px;
+  gap: 10px;
+}
+
+._currentLevel_18azk_115 {
+  border-radius: 40px;
+  font-family: Solerado, serif;
+  font-weight: 400;
+  font-size: clamp(1em, 6vw, 2.5em);
+  border: 1px solid white;
+  padding: 20px 30px;
+}
+
+._round_18azk_105 {
+  color: rgba(255 255 255 / 53.8%);
+  padding-top: 20px;
+  font-family: Vanity, serif;
+  font-weight: 800;
+  font-size: clamp(1em, 5vw, 2em);
+  width: 35px;
+  text-align: center;
+}
+
+._pointerEvents_18azk_134 {
+  pointer-events: none;
+}
+
+._controlButton_18azk_73._disabled_18azk_138 {
+  background: #c1121e58;
+  cursor: default;
+}
+
+._error_18azk_143 {
+  color: #c1121f;
+}
+
+@media screen and (width <= 950px) {
+  ._buttonStart_18azk_39 {
+    font-size: clamp(0.5em, 5vw, 3em);
+  }
+}
+
+@media screen and (width <= 790px) {
+  ._playWindow_18azk_15 {
+    padding-top: 5vw;
+    padding-bottom: 6vw;
+    gap: 1vw;
+  }
+
+  ._roundBlock_18azk_105 {
+    height: clamp(58px, 14vw, 80px);
+  }
+
+  ._gameButtons_18azk_62 {
+    flex-direction: column;
+    height: 141px;
+  }
+
+  ._controlButton_18azk_73 {
+    height: 44px;
+    width: 170px;
+  }
+
+  ._buttonStart_18azk_39 {
+    margin: 18px 0;
+  }
+
+  ._currentLevel_18azk_115 {
+    padding: 14px 30px;
+  }
+}
+._root_1an27_1 {
+  max-width: 57em;
+  max-height: 50em;
+  width: 100%;
+  min-height: 50em;
+  background-image: url('./gradient_bg-iL8-PbQ3.png');
+  background-image: image-set(url('data:image/avif;base64,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') type('image/avif'), url('./gradient-1000-cS95wJ1O.webp') type('image/webp'), url('./gradient-1000-C9gKEvrT.png') type('image/png'));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+@media screen and (width <= 790px) {
+  ._root_1an27_1 {
+    border-radius: 0;
+    min-height: 100dvh;
+  }
+}
